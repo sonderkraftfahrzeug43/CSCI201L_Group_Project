@@ -36,33 +36,33 @@
 			<h1 class = center_p>Schedule Builder</h1>
 			<form method="POST" action="Login">
             <center>
-            <table class = table border="1" cellpadding="5" cellspacing="2" >
+            <table class = table>
                 <tbody>
                     <tr>
-                        <td style="color: white;">Username:</td>
-                        <td ><input type="text" name="username" required/></td>
+                        <td style="color: white; font-size: 30px">Username:</td>
+                        <td ><input type="text" name="username" style="width:200px;" required/></td>
                     </tr>
                     	
                     <tr>
-                        <td style="color: white;">Password:</td>
-                        <td><input type="password" name="password" required/></td>
+                        <td style="color: white; font-size: 30px;">Password:</td>
+                        <td><input type="password" name="password" style="width:200px;" required/></td>
                     </tr>
                     	<div><%= wpError  %></div>
                     	<div><%= nuError %></div>
                     <tr>
                         <td colspan="2" align="center">
-                        	<a href="registration.jsp"">Don't have an account? Click here to register!</a>
+                        	<a href="registration.jsp" style="font-size: 20px">Don't have an account? Click here to register!</a>
                         </td>                        
                     </tr>  
                     <tr>
                         <td colspan="2" align="center"><input type="submit" name="submit" value="Login" />
                             &nbsp;&nbsp;
-                            <input type="reset" value="Reset" />
+                            <input type="reset" value="Clear" />
                         </td>                        
                     </tr>  
                     <tr>
                         <td colspan="2" align="center">
-                        	<a href="main.jsp"">Or click here to continue anonymously!</a>
+                        	<a href="main.jsp" style="font-size: 20px">Or click here to continue anonymously!</a>
                         </td>                        
                     </tr>                   
                 </tbody>
