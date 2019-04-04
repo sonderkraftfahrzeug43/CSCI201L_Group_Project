@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schedulebuilder?user=root&password=Abeler.123");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schedulebuilder?user=root&password=Password);
 			st = conn.createStatement();
 			//st.executeUpdate("UPDATE `pageVisited` SET `count` = `count`+1 WHERE userID=4 and pageid=1)
 			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + userName + "'");
