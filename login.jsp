@@ -30,19 +30,21 @@
 <link rel="stylesheet" type="text/css" href="login.css" />
 </head>
 <body>
+<!-- background image -->
+	<div class="background-img"></div>
 	<div class = nav>
 			<h1 class = center_p>Schedule Builder</h1>
 			<form method="POST" action="Login">
             <center>
-            <table border="1" cellpadding="5" cellspacing="2" >
+            <table class = table border="1" cellpadding="5" cellspacing="2" >
                 <tbody>
                     <tr>
-                        <td style="color: black;">Username:</td>
+                        <td style="color: white;">Username:</td>
                         <td ><input type="text" name="username" required/></td>
                     </tr>
                     	
                     <tr>
-                        <td style="color: black;">Password:</td>
+                        <td style="color: white;">Password:</td>
                         <td><input type="password" name="password" required/></td>
                     </tr>
                     	<div><%= wpError  %></div>
