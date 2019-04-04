@@ -21,20 +21,49 @@
 	z-index: 5;
 	width: 500px;
 	height: 300px;
-	left: 33%;
-	top: 40%;
+	left: 36%;
+	top: 35%;
 	
 }
 
 .center_p {
   margin: 0;
   position: absolute;
-  top: -10%;
-  left: 50%;
+  top: -14%;
+  left: 42.5%;
   transform: translate(-50%, -50%);
   color: white;
+  text-align: center;
 }
 
 .table {
 	background:rgba(255,255,255,0.5);
+	width: 450px;
+	height: 250px;
+	text-align: center;
+	position: absolute;
+	left: -2.5%;
+}
+
+
+h1 {
+	font-size: 60px;
+	font-family: tableHeader;
+	width: 700px;
+	position: absolute;
+	text-align: center;
+}
+
+table{
+	font-family: tableTitles;
+	border-radius: 25px;
+}
+
+@font-face {
+	font-family: tableHeader;
+	src: url("Fonts/LeagueMono-Bold.ttf");
+}
+@font-face {
+	font-family: tableTitles;
+	src: url("Fonts/LeagueMono-Thin.ttf");
 }
