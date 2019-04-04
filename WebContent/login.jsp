@@ -55,9 +55,9 @@
                         </td>                        
                     </tr>  
                     <tr>
-                        <td colspan="2" align="center"><input type="submit" name="submit" value="Login" />
+                        <td colspan="2" align="center"><input id="button1" type="submit" name="submit" value="Login" />
                             &nbsp;&nbsp;
-                            <input type="reset" value="Clear" />
+                            <input id="button2" type="reset" value="Clear" />
                         </td>                        
                     </tr>  
                     <tr>

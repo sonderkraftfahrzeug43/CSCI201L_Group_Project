@@ -44,11 +44,23 @@
 	position: absolute;
 	left: -2.5%;
 }
+#button1 {
+  font-family: tableTitles;
+  font-size: 20px;
+  color: white;
+  background: #af3418;
+}
 
+#button2 {
+  font-family: tableTitles;
+  font-size: 20px;
+  color: black;
+  background: #efcc2f;
+}
 
 h1 {
 	font-size: 60px;
-	font-family: tableHeader;
+	font-family: tableHeaders;
 	width: 700px;
 	position: absolute;
 	text-align: center;
@@ -58,10 +70,9 @@ table{
 	font-family: tableTitles;
 	border-radius: 25px;
 }
-
 @font-face {
-	font-family: tableHeader;
-	src: url("Fonts/LeagueMono-Bold.ttf");
+	font-family: tableHeaders;
+	src: url("Fonts/LeagueMono-Light.ttf");
 }
 @font-face {
 	font-family: tableTitles;

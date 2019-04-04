@@ -61,9 +61,9 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2" align="center"><input type="submit" name="submit" value="Register" />
+                        <td colspan="2" align="center"><input id="button2" type="submit" name="submit" value="Register" />
                             &nbsp;&nbsp;
-                            <input type="reset" value="Clear" />
+                            <input id="button1" type="reset" value="Clear" />
                         </td>                        
                     </tr>  
                     <tr>
