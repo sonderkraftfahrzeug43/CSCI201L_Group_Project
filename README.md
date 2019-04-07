@@ -5,10 +5,6 @@ project notes:
 - Login_Register is a package
 - add sql connector jar to path
   
-- main.jsp
-  - create layout of page
-  - write algorithm for scheduling
-
 - database:
   - schema: schedulebuilder
   - tables:
