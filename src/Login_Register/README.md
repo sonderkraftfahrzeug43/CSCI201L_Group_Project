@@ -3,8 +3,9 @@
     - line 40 Login.java change to your password 
   
   todo:
-    - set session for user
-    - test
+    - test if user login works
+      - redirect
+      - session attribute
     
 - Register.java:
-  create
+
