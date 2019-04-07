@@ -8,4 +8,9 @@
       - session attribute
     
 - Register.java:
+  notes:
+   - line 56 change to your password
+   
+   todo:
+   - complete register
 
