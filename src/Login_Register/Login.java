@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.TimeZone;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,7 +38,8 @@ public class Login extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schedulebuilder?user=root&password=Password);
+			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url , "root" , "Abeler.123");
 			st = conn.createStatement();
 			//st.executeUpdate("UPDATE `pageVisited` SET `count` = `count`+1 WHERE userID=4 and pageid=1)
 			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + userName + "'");
@@ -58,7 +60,7 @@ public class Login extends HttpServlet {
 				// login
 				username_and_password = true;
 				nextPage = "/main.jsp";
-				session1.setAttribute(userName, "iduser ");
+				session1.setAttribute(userName, "iduser");
 				
 			}
 			
