@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 			}	
 			st = conn.createStatement();
 			//st.executeUpdate("UPDATE `pageVisited` SET `count` = `count`+1 WHERE userID=4 and pageid=1)
-			rs = st.executeQuery("SELECT * FROM User WHERE username='" + userName + "' and pass= '"+password+"'");
+			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + userName + "' and pass= '"+password+"'");
 			if(rs.next()) 
 			{
 				// login
