@@ -4,16 +4,6 @@ project notes:
 - also add the folders Images and Fonts in WebContent
 - Login_Register is a package
 - add sql connector jar to path
-
-- Login.java:
-  notes:
-    - line 40 Login.java change to your password 
-  
-  todo:
-    - set session for user
-    - test
-- Register.java:
-  create
   
 - main.jsp
   - create layout of page
