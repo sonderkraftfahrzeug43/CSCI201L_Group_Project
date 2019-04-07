@@ -44,7 +44,7 @@
                     </tr>
                     	
                     <tr>
-                        <td style="color: white; font-size: 30px;">Password:</td>
+                        <td style="color: white; font-size: 30px">Password:</td>
                         <td><input type="password" name="password" style="width:200px;" required/></td>
                     </tr>
                     	<div><%= wpError  %></div>
