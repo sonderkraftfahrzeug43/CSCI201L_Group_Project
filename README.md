@@ -11,4 +11,6 @@ todo:
 - complete settings.jsp
 - complete requirements.jsp
 - complete sidebar
+- create friend search
+- create class search
   
