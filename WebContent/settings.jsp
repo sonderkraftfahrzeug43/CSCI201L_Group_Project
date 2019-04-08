@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Schedule Builder</title>
-<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="settings.css" />
 </head>
 <body>
 	<div class="background-img"></div>
@@ -32,22 +32,23 @@
             <table class = table>
                 <tbody>
                     <tr>
-                        <td style="color: white; font-size: 30px">Change Major:</td>
-                        <td ><input type="text" name="major" style="width:200px;" required/></td>
+                        <td class = desc style="color: white; font-size: 30px">Change Major:</td>
+                        <td ><input class = field type="text" name="major" style="width:200px;" required/></td>
                     </tr>
                     	
                     <tr>
-                        <td style="color: white; font-size: 30px">Change Minor:</td>
-                        <td><input type="password" name="password" style="width:200px;" required/></td>
+                        <td class = desc style="color: white; font-size: 30px">Change Minor:</td>
+                        <td><input class = field type="password" name="password" style="width:200px;" required/></td>
                     </tr>
                     <tr>
-                    	<td style="color: white; font-size: 30px">Change Password:</td>
-                        <td ><input type="text" name="major" style="width:200px;" required/></td>
+                    	<td class = desc style="color: white; font-size: 30px">Change Password:</td>
+                        <td ><input class = field type="text" name="major" style="width:200px;" required/></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center"><input id="button1" type="submit" name="submit" value="Save changes" />
+                            &nbsp;&nbsp;<input id="button2" type="submit" name="submit" value="Clear Current Schedule" />
                             &nbsp;&nbsp;
-                            <input id="button2" type="submit" value="Delete Account" />
+                            <input id="button1" type="submit" value="Delete Account" />
                         </td>                        
                     </tr>  
                                       
