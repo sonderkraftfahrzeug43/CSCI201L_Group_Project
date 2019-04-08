@@ -10,6 +10,19 @@ registration.jsp
 
 main.jsp:
 todo:
-- create layout of page
+- display schedule of user if not display noschedule
+- complete sidebar
+  - user info
+  - notifications
 - write algorithm for scheduling
+
+profile.jsp
+
+settings.jsp
+
+requirements.jsp
+
+friend search
+
+class search
 
