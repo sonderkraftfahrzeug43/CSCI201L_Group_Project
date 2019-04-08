@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/* Background Image */
+.background-img {
+	background-image: url("Images/Black Vignette.png"),
+		url("Images/tommytrojan.jpg");
+	background-repeat: no-repeat;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	background-size: cover;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	filter: blur(5px);
+	-webkit-filter: blur(5px);
+	transform: scale(1.1);
+}
+
+.nav {
+	position: absolute;
+	z-index: 5;
+	width: 800px;
+	height: 300px;
+	left: 30%;
+	top: 30%;
+}
+
+.table {
+	background:rgba(255,255,255,0.5);
+	width: 1100px;
+	height: 650px;
+	text-align: center;
+	position: absolute;
+	top: -60%;
+}
+
+table{
+	font-family: tableTitles;
+}
+.center_p {
+  margin: 0;
+  position: absolute;
+  left: 42.5%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+h1 {
+	position:absolute;
+	top: -75%;
+	font-size: 60px;
+	font-family: tableHeaders;
+	width: 700px;
+	text-align: center;
+	padding-left: 420px;
+}
+
+@font-face {
+	font-family: tableHeaders;
+	src: url("Fonts/LeagueMono-Light.ttf");
+}
+@font-face {
+	font-family: tableTitles;
+	src: url("Fonts/LeagueMono-Thin.ttf");
+}
+
+.sidenav {
+  height: 100%;
+  width: 440px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(133, 131, 131, 0.6);
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+h2 {
+	position:absolute;
+	left: -30%;
+	font-size: 25px;
+	font-family: tableHeaders;
+	width: 700px;
+	text-align: center;
+	top: -1%;
+	color: white;
+}
+
+.snlinks {
+	position:absolute;
+	top: 8%;
+	left: 10%;
+}
+
+.snlinks1 {
+	position:absolute;
+	top: 8%;
+	left: 33%;
+}
+
+.snlinks2 {
+	position:absolute;
+	top: 8%;
+	left: 55%;
+}
+
+.snlinks3 {
+	position:absolute;
+	top: 8%;
+	left: 78%;
+}
+#button1 {
+  font-family: tableTitles;
+  font-size: 20px;
+  color: white;
+  background: #af3418;
+}
+
+#button2 {
+  font-family: tableTitles;
+  font-size: 20px;
+  color: black;
+  background: #efcc2f;
+}
+
+.field {
+	padding-right: 570px;
+	padding-bottom: 10px;
+}
