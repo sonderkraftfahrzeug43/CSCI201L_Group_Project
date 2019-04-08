@@ -45,7 +45,7 @@
                         <td ><input type="text" name="major" style="width:200px;" required/></td>
                     </tr>
                     <tr>
-                        <td colspan="2" align="center"><input id="button1" type="submit" name="submit" value="Login" />
+                        <td colspan="2" align="center"><input id="button1" type="submit" name="submit" value="Save changes" />
                             &nbsp;&nbsp;
                             <input id="button2" type="submit" value="Delete Account" />
                         </td>                        
