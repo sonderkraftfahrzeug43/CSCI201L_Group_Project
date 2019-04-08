@@ -16,12 +16,14 @@ todo:
   - notifications
 - write algorithm for scheduling
 
-profile.jsp
+profile.jsp:
+todo:
+- get user info and display
 
 settings.jsp
-
+- enable backend of form
 requirements.jsp
-
+- get user major requirements
 friend search
 
 class search
