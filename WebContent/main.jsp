@@ -11,7 +11,7 @@
 <body>
 	<div class="background-img"></div>
 	<div id="sidenav" class="sidenav">
-		<h2>Schedule Builder</h2>
+		<h2 style="text-color:white">Schedule Builder</h2>
 		<a href="profile.jsp" class="snlinks">
 			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;">
 		</a>
@@ -24,13 +24,14 @@
 		<a href="requirements.jsp" class="snlinks3">
 			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;">
 		</a>
+		<input id="button3" type="submit" name="submit" value="Logout" />
 	</div>
 	<div class="nav">
 		<h1 class = center_p>Current Schedule</h1>
 		<table class="table" border="1">
 			<tbody>
 				<tr>
-					<th align="center" valign="middle" width="80" style="background-color: white;"><img src="Images/clockface.jpg" alt="clock" height="50" width="42"></th>
+					<th align="center" valign="middle" width="80"><img src="Images/clock.png" alt="clock" height="50" width="50"></th>
 					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Sunday</th>
 					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Monday</th>
 					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Tuesday</th>
