@@ -24,6 +24,7 @@
 		<a href="requirements.jsp" class="snlinks3">
 			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;">
 		</a>
+		<input id="button3" type="submit" name="submit" value="Logout" />
 	</div>
 	<div class="nav">
 		<h1 class = center_p>Major Requirements</h1>
