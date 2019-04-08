@@ -54,10 +54,9 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center"><input id="button1" type="submit" name="submit" value="Save changes" />
-                            &nbsp;&nbsp;<input id="button2" type="submit" name="submit" value="Invisible mode" />
-                            &nbsp;&nbsp;<input id="button1" type="submit" name="submit" value="Clear Current Schedule" />
+                            &nbsp;&nbsp;<input id="button2" type="submit" name="submit" value="Clear Current Schedule" />
                             &nbsp;&nbsp;
-                            <input id="button2" type="submit" value="Delete Account" />
+                            <input id="button1" type="submit" value="Delete Account" />
                         </td>                        
                     </tr>  
                                       
