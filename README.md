@@ -7,8 +7,8 @@ project notes:
 
 todo:
 - Register.java complete
-- Create profile.jsp
-- create settings.jsp
-- create requirements.jsp
+- complete profile.jsp
+- complete settings.jsp
+- complete requirements.jsp
 - complete sidebar
   
