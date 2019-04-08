@@ -27,34 +27,7 @@
 	</div>
 	<div class="nav">
 		<h1 class = center_p>Major Requirements</h1>
-		<form method="POST" action="Login">
-            <center>
-            <table class = table>
-                <tbody>
-                    <tr>
-                        <td style="color: white; font-size: 30px">Change Major:</td>
-                        <td ><input type="text" name="major" style="width:200px;" required/></td>
-                    </tr>
-                    	
-                    <tr>
-                        <td style="color: white; font-size: 30px">Change Minor:</td>
-                        <td><input type="password" name="password" style="width:200px;" required/></td>
-                    </tr>
-                    <tr>
-                    	<td style="color: white; font-size: 30px">Change Password:</td>
-                        <td ><input type="text" name="major" style="width:200px;" required/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center"><input id="button1" type="submit" name="submit" value="Login" />
-                            &nbsp;&nbsp;
-                            <input id="button2" type="submit" value="Delete Account" />
-                        </td>                        
-                    </tr>  
-                                      
-                </tbody>
-            </table>
-            </center>
-        </form>
+		
    </div>
 </body>
 </html>
