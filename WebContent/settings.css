@@ -37,6 +37,7 @@
 
 table{
 	font-family: tableTitles;
+	border-radius: 25px;
 }
 .center_p {
   margin: 0;
