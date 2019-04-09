@@ -29,13 +29,32 @@
 			document.getElementById("showFriendSearch").style.display = "none";
 			document.getElementById("showProfessorSearch").style.display = "block";
 		}
-	} 
+	}
 	function logout(){
 		window.location.replace("login.jsp");
 	}
+	function checkMinor(){
+		if (1 == 1){
+			var minorObject = document.createElement("object");
+			minorObject.setAttribute('data', 'https://www.cs.usc.edu/academic-programs/undergrad/computer-science/');
+			minorObject.setAttribute("width","1100px");
+			minorObject.setAttribute("height","300px");
+			minorObject.setAttribute("style","overflow:auto;");
+			var h = document.createElement("H1")                
+			var t = document.createTextNode("Minor Requirements");  
+			h.setAttribute("style","color:white;text-align:center;right:13.5%;")
+			h.appendChild(t); 
+			document.getElementById("webpageMinor").append(h);
+			document.getElementById("webpageMinor").append(minorObject);
+			document.getElementByID("objWebpage").setAttribute("height","10px");
+		}
+		else{
+			document.getElementByID("webpageMinor").setAttribute("style","display:hidden");
+		}
+	}
 	
 </script>
-<body>
+<body onload = "checkMinor()">
 	<div class="background-img"></div>
 	<div id="sidenav" class="sidenav">
 		<h2>Schedule Builder</h2>
@@ -95,9 +114,12 @@
 	</div>
 	<div class="nav">
 		<h1 class = "center_p">Major Requirements</h1>
-		 <div class = "webpage"> 
-    		<object type="text/html" data="https://www.cs.usc.edu/academic-programs/undergrad/computer-science/" width="1100px" height="730px" style="overflow:auto;">
+		 <div id = "webpage" class = "webpage"> 
+    		<object id = "objWebpage" type="text/html" data="https://www.cs.usc.edu/academic-programs/undergrad/computer-science/" width="1100px" height="600px" style="overflow:auto;">
     		</object>
+ 		</div>
+ 		<div id = "webpageMinor" class = "webpageMinor">
+ 		`	
  		</div>
    </div>
 </body>
