@@ -6,7 +6,6 @@ project notes:
 - add sql connector jar to path
 
 todo:
-- Register.java complete
 - complete profile.jsp
   - display user data
   - create friend sidebar
@@ -23,6 +22,7 @@ todo:
 - sidebar:
   - connect to backend
   - enable searches
+  - enable logout
 - create friend search
 - create class search
 - create professor search
