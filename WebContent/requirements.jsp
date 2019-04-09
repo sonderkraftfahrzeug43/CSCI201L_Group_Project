@@ -30,6 +30,9 @@
 			document.getElementById("showProfessorSearch").style.display = "block";
 		}
 	} 
+	function logout(){
+		window.location.replace("login.jsp");
+	}
 	
 </script>
 <body>
@@ -48,7 +51,7 @@
 		<a href="requirements.jsp" class="snlinks3">
 			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;">
 		</a>
-		<input id="button3" type="submit" name="submit" value="Logout" />
+		<input id="button3" type="button" name="submit" value="Logout" onclick = "logout()"/>
 		<div id="showClassSearch" class="showClassSearch">
 			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Class...">
 			<button type="submit" name="classSearch"></button>
