@@ -1,30 +1,34 @@
+index.jsp:
+
 login.jsp:
 - todo:
-  - test functionalities (once login.java and register.java are done)
-  - change design if you want
-  
+  - test
+
 registration.jsp
 - todo:
-  - test functionalities (once login.java and register.java are done)
-  - change design if you want
+  - test 
 
 main.jsp:
-todo:
-- display schedule of user if not display noschedule
-- complete sidebar
-  - user info
-  - notifications
-- write algorithm for scheduling
+-todo:
+  - display schedule of user if not display noschedule
+  - complete sidebar
+    - display user info
+    - notifications
 
 profile.jsp:
-todo:
-- get user info and display
+-todo:
+  - get user info and display
 
-settings.jsp
-- enable backend of form
-requirements.jsp
-- get user major requirements
+settings.jsp:
+-todo:
+  - enable backend of form
+requirements.jsp:
+-todo:
+  - get user major requirements
+  - show minor if user has one
+  
 friend search
 
 class search
 
+professor search
