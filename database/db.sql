@@ -1,20 +1,10 @@
-CREATE DATABASE userdb;
-USE userdb;
+CREATE DATABASE schedulebuilder;
+USE schedulebuilder;
 CREATE TABLE User (
 	iduser INT(11) PRIMARY KEY AUTO_INCREMENT,
     userName VARCHAR(50) NOT NULL,
     pass VARCHAR(50) NOT NULL
 );
-
-CREATE TABLE CourseTaken (
-	idct INT(11) PRIMARY KEY AUTO_INCREMENT,
-    iduser INT(11) NOT NULL,
-    idcourse INT(11) NOT NULL,
-    FOREIGN KEY(iduser) REFERENCES User(iduser),
-    FOREIGN KEY(idcourse) REFERENCES Course(idcourse)
-);
-    
-    
 
 CREATE TABLE Friend (
 	idfriend INT(11) PRIMARY KEY AUTO_INCREMENT,
@@ -34,4 +24,13 @@ CREATE TABLE Course (
     courseName VARCHAR(50) NOT NULL,
     idmajor INT(11) NOT NULL,
     FOREIGN KEY(idmajor) REFERENCES Major(idmajor)
+);
+
+
+CREATE TABLE CourseTaken (
+	idct INT(11) PRIMARY KEY AUTO_INCREMENT,
+    iduser INT(11) NOT NULL,
+    idcourse INT(11) NOT NULL,
+    FOREIGN KEY(iduser) REFERENCES User(iduser),
+    FOREIGN KEY(idcourse) REFERENCES Course(idcourse)
 );
