@@ -40,7 +40,7 @@ public class Search extends HttpServlet {
 		String searchKeyword = request.getParameter("searchKeyword");
 		if(searchArea.equals("Professor")) {
 			
-		} else if(searchArea.equals("Professor")) {
+		} else if(searchArea.equals("Course")) {
 			
 		} else {
 			Connection conn = null;
