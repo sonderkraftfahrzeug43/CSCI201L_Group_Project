@@ -39,13 +39,14 @@ table{
 	font-family: tableTitles;
 }
 .center_p {
-  margin: 0;
+  margin-top: 100px;
   position: absolute;
   left: 42.5%;
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
 }
+
 
 h1 {
 	position:absolute;
@@ -308,6 +309,14 @@ p1 {
 }
 .webpage
 {
+	margin-top:80px;
 	position: absolute;
 	top: -55%;
+}
+
+.webpageMinor{
+	top: -80%;
+	position:absolute;
+	margin-top:1000px;
+	display:block;
 }
