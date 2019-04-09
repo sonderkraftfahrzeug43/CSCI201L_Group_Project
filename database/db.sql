@@ -1,9 +1,8 @@
 CREATE DATABASE schedulebuilder;
 USE schedulebuilder;
-CREATE TABLE User (
-	iduser INT(11) PRIMARY KEY AUTO_INCREMENT,
-    userName VARCHAR(50) NOT NULL,
-    pass VARCHAR(50) NOT NULL
+CREATE TABLE GradYear (
+	idgradyear INT(11) PRIMARY KEY AUTO_INCREMENT,
+    gradyearVal INT(11) PRIMARY KEY AUTO_INCREMENT
 );
 
 CREATE TABLE Minor (
@@ -11,23 +10,35 @@ CREATE TABLE Minor (
     minorName VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE Major (
+	idmajor INT(11) PRIMARY KEY AUTO_INCREMENT,
+    majorName VARCHAR(50) NOT NULL,
+    majorReq VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE User (
+	iduser INT(11) PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(50) NOT NULL,
+    pass VARCHAR(50) NOT NULL,
+    idmajor INT(11),
+    idminor INT(11),
+    idgradyear INT(11),
+    FOREIGN KEY(idmajor) REFERENCES Major(idmajor),
+    FOREIGN KEY(idminor) REFERENCES Minor(idminor),
+    FOREIGN KEY(idgradyear) REFERENCES GradYear(idgradyear)
+);
+
+
+
 CREATE TABLE Friend (
 	idfriend INT(11) PRIMARY KEY AUTO_INCREMENT,
     iduser1 INT(11) NOT NULL,
     iduser2 INT(11) NOT NULL,
     FOREIGN KEY(iduser1) REFERENCES User(iduser),
     FOREIGN KEY(iduser2) REFERENCES User(iduser)
-    idmajor INT(11),
-    idminor INT(11),
-    FOREIGN KEY(idmajor) REFERENCES Major(idmajor),
-    FOREIGN KEY(idminor) REFERENCES Minor(idminor)
 );
 
-CREATE TABLE Major (
-	idmajor INT(11) PRIMARY KEY AUTO_INCREMENT,
-    majorName VARCHAR(50) NOT NULL,
-    majorReq VARCHAR(50) NOT NULL
-);
+
 
 CREATE TABLE Course (
 	idcourse INT(11) PRIMARY KEY AUTO_INCREMENT,
