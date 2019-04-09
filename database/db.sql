@@ -55,3 +55,12 @@ CREATE TABLE CourseTaken (
     FOREIGN KEY(iduser) REFERENCES User(iduser),
     FOREIGN KEY(idcourse) REFERENCES Course(idcourse)
 );
+
+CREATE TABLE CourseTaking (
+	idctng INT(11) PRIMARY KEY AUTO_INCREMENT,
+    iduser INT(11) NOT NULL,
+    idcourse INT(11) NOT NULL,
+    FOREIGN KEY(iduser) REFERENCES User(iduser),
+    FOREIGN KEY(idcourse) REFERENCES Course(idcourse)
+);
+	
