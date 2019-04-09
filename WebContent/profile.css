@@ -36,6 +36,14 @@
 	left: -2.3%;
 }
 
+.sidenavtable {
+	background:rgba(0,0,0,0.5);
+	width: 1120px;
+	height: 650px;
+	text-align: center;
+	position: absolute;
+}
+
 table{
 	font-family: tableTitles;
 	border-radius: 25px;
@@ -181,21 +189,6 @@ h2 {
 	top: 38%;
 }
 
-h3 {
-	position:absolute;
-	font-size: 23px;
-	font-family: tableHeaders;
-	width: 700px;
-	color: white;
-}
-
-h4 {
-	position:absolute;
-	font-size: 23px;
-	font-family: tableHeaders;
-	width: 700px;
-	color: white;
-}
 
 h5 {
 	position:absolute;
@@ -226,7 +219,7 @@ p1 {
 .MM {
 	position: absolute;
 	display: block;
-	top: 42%;
+	top: 40%;
 	left: 4%;
 }
 
@@ -307,4 +300,13 @@ p1 {
 .friend {
 	position: absolute;
 	top: -2%;
+}
+
+.sbi {
+	position:absolute;
+	font-size: 23px;
+	font-family: tableHeaders;
+	width: 700px;
+	color: white;
+	top: 10%;
 }

@@ -73,8 +73,18 @@
 			<h3  style="text-color:white">Welcome Username</h3>
 		</div>
 		<div class="MM">
-				<h4 style="text-color:white">Major: </h4>
-				<h5 style="text-color:white">Minor: </h5>
+				<table class="sidenavtable">
+					<tbody>
+                    	<tr>
+                        	<td style="color: white; font-size: 28px; text-align: left">Major:</td>
+                        	<td ><!-- output user major --></td>
+                    	</tr>
+                    	<tr>
+                        	<td style="color: white; font-size: 28px; text-align: left">Minor:</td>
+                        	<td ><!-- output user minor --></td>
+                    	</tr>
+                	</tbody>
+                </table>
 		</div>
 		<div class="Updates">
 			<h6 style="text-color:white; font-size: 28px">Updates: </h6>
