@@ -26,7 +26,7 @@ CREATE TABLE Friend (
 CREATE TABLE Major (
 	idmajor INT(11) PRIMARY KEY AUTO_INCREMENT,
     majorName VARCHAR(50) NOT NULL,
-    majorRequirement VARCHAR(50) NOT NULL
+    majorReq VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Course (
