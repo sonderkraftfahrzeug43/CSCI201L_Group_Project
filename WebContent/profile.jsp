@@ -6,21 +6,26 @@
 <head>
 <script type="text/javascript">
 	// displays and hides both types of search bars
-	function parseJSON() {
-		
-	}
+	// displays and hides both types of search bars
 	function myFunction() {
-		// show City search bar
+		// show Class search bar
 		if (document.getElementById("Class").checked == true) {
 			document.getElementById("showClassSearch").style.display = "block";
 			document.getElementById("showFriendSearch").style.display = "none";
+			document.getElementById("showProfessorSearch").style.display = "none";
 		}
-		// show Location search bar
-		else {
+		// show Friend search bar
+		else if (document.getElementById("Friend").checked == true) {
 			document.getElementById("showClassSearch").style.display = "none";
 			document.getElementById("showFriendSearch").style.display = "block";
+			document.getElementById("showProfessorSearch").style.display = "none";
 		}
-
+		// show Professor search bar
+		else if (document.getElementById("Professor").checked == true){
+			document.getElementById("showClassSearch").style.display = "none";
+			document.getElementById("showFriendSearch").style.display = "none";
+			document.getElementById("showProfessorSearch").style.display = "block";
+		}
 	} 
  
 </script>
@@ -53,11 +58,17 @@
 			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
 			<button type="submit" name="friendSearch"></button>
 		</div>
+		<div id="showProfessorSearch" class="showProfessorSearch">
+			<input type="text" name="professor" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Professor...">
+			<button type="submit" name="professorSearch"></button>
+		</div>
 		<div class="radio-button-div">
 					<input type="radio" name="option" id="Class" value="Class"
 						checked="checked" onclick="myFunction()">Class
 					<input type="radio" name="option" id="Friend" value="Friend"
 						onclick="myFunction()">Friend
+					<input type="radio" name="option" id="Professor" value="Professor"
+						onclick="myFunction()">Professor
 		</div>
 		<div class="User">
 			<h3  style="text-color:white">Welcome Username</h3>
@@ -72,7 +83,31 @@
 	</div>
 	<div class="nav">
 		<h1 class = center_p>User Profile</h1>
-		
+		<table class="table">
+				<tbody>
+                    <tr>
+                        <td style="color: white; font-size: 30px; text-align: left">Major:</td>
+                        <td ><!-- output user major --></td>
+                    </tr>
+                    <tr>
+                        <td style="color: white; font-size: 30px; text-align: left">Minor:</td>
+                        <td ><!-- output user minor --></td>
+                    </tr>
+                    <tr>
+                        <td style="color: white; font-size: 30px; text-align: left">Expected Graduation:</td>
+                        <td ><!-- output user minor --></td>
+                    </tr>
+                    <tr>
+                        <td style="color: white; font-size: 30px; text-align: left">Current Courses:</td>
+                        <td ><!-- output user current courses --></td>
+                    </tr>
+                    <tr>
+                        <td style="color: white; font-size: 30px; text-align: left">Previous Courses:</td>
+                        <td ><!-- output user previous courses --></td>
+                    </tr>
+                </tbody>
+       </table>
+		</div>
 	</div>
 </body>
 </html>

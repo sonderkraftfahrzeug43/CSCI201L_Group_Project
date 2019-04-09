@@ -137,7 +137,7 @@ h2 {
 }
 
 
-/* Div to Show Class Search */
+/* Div to Show City Search */
 .showClassSearch {
 	display: block;
 	position: absolute;
@@ -145,7 +145,7 @@ h2 {
 	left: 6%;
 }
 
-/* Div to Show Friend Search */
+/* Div to Show Location Search */
 .showFriendSearch {
 	position: absolute;
 	display: none;
@@ -153,7 +153,7 @@ h2 {
 	top: 28%;
 	left: 6%;
 }
-/* Div to Show Professor Search */
+
 .showProfessorSearch {
 	position: absolute;
 	display: none;
@@ -305,4 +305,9 @@ p1 {
 .friend {
 	position: absolute;
 	top: -2%;
+}
+.webpage
+{
+	position: absolute;
+	top: -55%;
 }

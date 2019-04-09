@@ -6,27 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Schedule Builder</title>
-<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="requirements.css" />
 </head>
 <script type="text/javascript">
-	// displays and hides both types of search bars
-	function parseJSON() {
-		
-	}
+	//displays and hides both types of search bars
 	function myFunction() {
-		// show City search bar
+		// show Class search bar
 		if (document.getElementById("Class").checked == true) {
 			document.getElementById("showClassSearch").style.display = "block";
 			document.getElementById("showFriendSearch").style.display = "none";
+			document.getElementById("showProfessorSearch").style.display = "none";
 		}
-		// show Location search bar
-		else {
+		// show Friend search bar
+		else if (document.getElementById("Friend").checked == true) {
 			document.getElementById("showClassSearch").style.display = "none";
 			document.getElementById("showFriendSearch").style.display = "block";
+			document.getElementById("showProfessorSearch").style.display = "none";
 		}
-
+		// show Professor search bar
+		else if (document.getElementById("Professor").checked == true){
+			document.getElementById("showClassSearch").style.display = "none";
+			document.getElementById("showFriendSearch").style.display = "none";
+			document.getElementById("showProfessorSearch").style.display = "block";
+		}
 	} 
- 
+	
 </script>
 <body>
 	<div class="background-img"></div>
@@ -53,11 +57,17 @@
 			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
 			<button type="submit" name="friendSearch"></button>
 		</div>
+		<div id="showProfessorSearch" class="showProfessorSearch">
+			<input type="text" name="professor" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Professor...">
+			<button type="submit" name="professorSearch"></button>
+		</div>
 		<div class="radio-button-div">
 					<input type="radio" name="option" id="Class" value="Class"
 						checked="checked" onclick="myFunction()">Class
 					<input type="radio" name="option" id="Friend" value="Friend"
 						onclick="myFunction()">Friend
+					<input type="radio" name="option" id="Professor" value="Professor"
+						onclick="myFunction()">Professor
 		</div>
 		<div class="User">
 			<h3  style="text-color:white">Welcome Username</h3>
@@ -71,8 +81,11 @@
 		</div>
 	</div>
 	<div class="nav">
-		<h1 class = center_p>Major Requirements</h1>
-		
+		<h1 class = "center_p">Major Requirements</h1>
+		 <div class = "webpage"> 
+    		<object type="text/html" data="https://www.cs.usc.edu/academic-programs/undergrad/computer-science/" width="1100px" height="730px" style="overflow:auto;">
+    		</object>
+ 		</div>
    </div>
 </body>
 </html>

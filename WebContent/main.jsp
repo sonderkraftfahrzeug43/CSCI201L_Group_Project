@@ -6,21 +6,25 @@
 <head>
 <script type="text/javascript">
 	// displays and hides both types of search bars
-	function parseJSON() {
-		
-	}
 	function myFunction() {
-		// show City search bar
+		// show Class search bar
 		if (document.getElementById("Class").checked == true) {
 			document.getElementById("showClassSearch").style.display = "block";
 			document.getElementById("showFriendSearch").style.display = "none";
+			document.getElementById("showProfessorSearch").style.display = "none";
 		}
-		// show Location search bar
-		else {
+		// show Friend search bar
+		else if (document.getElementById("Friend").checked == true) {
 			document.getElementById("showClassSearch").style.display = "none";
 			document.getElementById("showFriendSearch").style.display = "block";
+			document.getElementById("showProfessorSearch").style.display = "none";
 		}
-
+		// show Professor search bar
+		else if (document.getElementById("Professor").checked == true){
+			document.getElementById("showClassSearch").style.display = "none";
+			document.getElementById("showFriendSearch").style.display = "none";
+			document.getElementById("showProfessorSearch").style.display = "block";
+		}
 	} 
  
 </script>
@@ -50,14 +54,20 @@
 			<button type="submit" name="classSearch"></button>
 		</div>
 		<div id="showFriendSearch" class="showFriendSearch">
-			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
+			<input type="text" name="friend" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
 			<button type="submit" name="friendSearch"></button>
+		</div>
+		<div id="showProfessorSearch" class="showProfessorSearch">
+			<input type="text" name="professor" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Professor...">
+			<button type="submit" name="professorSearch"></button>
 		</div>
 		<div class="radio-button-div">
 					<input type="radio" name="option" id="Class" value="Class"
 						checked="checked" onclick="myFunction()">Class
 					<input type="radio" name="option" id="Friend" value="Friend"
 						onclick="myFunction()">Friend
+					<input type="radio" name="option" id="Professor" value="Professor"
+						onclick="myFunction()">Professor
 		</div>
 		<div class="User">
 			<h3  style="text-color:white">Welcome Username</h3>

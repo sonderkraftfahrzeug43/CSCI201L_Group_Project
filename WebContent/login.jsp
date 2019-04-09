@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	// wrong password and user does not exist errors
 	String wpError = (String)request.getAttribute("wpError");
 	String nuError = (String)request.getAttribute("nuError");
 	if(wpError == null || wpError.trim().length()==0) {
@@ -30,8 +31,9 @@
 <link rel="stylesheet" type="text/css" href="login.css" />
 </head>
 <body>
-<!-- background image -->
+	<!-- background image -->
 	<div class="background-img"></div>
+	<!-- login fields -->
 	<div class = nav>
 			<h1 class = center_p>Schedule Builder</h1>
 			<form method="POST" action="Login">
@@ -47,7 +49,8 @@
                         <td style="color: white; font-size: 30px">Password:</td>
                         <td><input type="password" name="password" style="width:200px;" required/></td>
                     </tr>
-                    	<div><%= wpError  %></div>
+                    	<!-- check errors -->
+                    	<div><%= wpError  %></div> 
                     	<div><%= nuError %></div>
                     <tr>
                         <td colspan="2" align="center">
