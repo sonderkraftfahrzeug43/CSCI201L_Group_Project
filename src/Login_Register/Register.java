@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
 		try {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			String sql = "insert into user(username,password) values(?,?)";
+			String sql = "insert into user(userName,pass) values(?,?)";
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
 			conn = DriverManager.getConnection(url,"root","yourpassword");
@@ -70,10 +70,10 @@ public class Register extends HttpServlet {
 				nextPage ="/main.jsp";					
 			}
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("cnf: " + e.getMessage());
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("sqle: " + e.getMessage());
 			e.printStackTrace();
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
