@@ -10,8 +10,8 @@ todo:
   - display user data
   - create friend sidebar
 - complete settings.jsp
-  - complete lists of selections for major and minor
-    - list of majors : http://catalogue.usc.edu/content.php?catoid=6&navoid=1553
+  - complete lists of selections for minor
+    
     - list of minors : http://catalogue.usc.edu/content.php?catoid=6&navoid=1551
   - connect to backend
 - complete requirements.jsp
@@ -22,7 +22,7 @@ todo:
 - sidebar:
   - connect to backend
   - enable searches
-  - enable logout
+  
 - create friend search
 - create class search
 - create professor search
