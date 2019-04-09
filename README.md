@@ -9,6 +9,7 @@ todo:
 - Register.java complete
 - complete profile.jsp
   - display user data
+  - create friend sidebar
 - complete settings.jsp
   - complete lists of selections for major and minor
     - list of majors : http://catalogue.usc.edu/content.php?catoid=6&navoid=1553
