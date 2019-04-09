@@ -8,9 +8,21 @@ project notes:
 todo:
 - Register.java complete
 - complete profile.jsp
+  - display user data
 - complete settings.jsp
+  - complete lists of selections for major and minor
+    - list of majors : http://catalogue.usc.edu/content.php?catoid=6&navoid=1553
+    - list of minors : http://catalogue.usc.edu/content.php?catoid=6&navoid=1551
+  - connect to backend
 - complete requirements.jsp
-- complete sidebar
+  - display different link based on major 
+    - list of majors (links to the req) : http://catalogue.usc.edu/content.php?catoid=6&navoid=1553
+  - display two window if user has minor
+  
+- sidebar:
+  - connect to backend
+  - enable searches
 - create friend search
 - create class search
+- create professor search
   
