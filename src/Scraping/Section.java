@@ -1,3 +1,5 @@
+package Scraping;
+
 
 public class Section {
 	public String sectionID;
@@ -13,7 +15,7 @@ public class Section {
 	public String location;
 	public int units;
 	
-	Section(String[] parts) {
+	public Section(String[] parts) {
 //		for (int i = 0; i < parts.length; i++) {
 //			System.out.println(i + ": " + parts[i]);
 //		}
