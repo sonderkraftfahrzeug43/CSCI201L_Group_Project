@@ -71,13 +71,13 @@
 						onclick="myFunction()">Professor
 		</div>
 		<div class="User">
-			<h3  style="text-color:white">Welcome Username</h3>
+			<h3  style="text-color:white; font-size: 28px">Welcome Username</h3>
 		</div>
 		<div class="MM">
 				<table class="sidenavtable">
 					<tbody>
                     	<tr>
-                        	<td style="color: white; font-size: 28px; text-align: left">Major:</td>
+                        	<td style="color: white; font-size: 28px; text-align: left; padding-bottom: 10px; padding-top: 25px;">Major:</td>
                         	<td ><!-- output user major --></td>
                     	</tr>
                     	<tr>
@@ -118,6 +118,9 @@
                 </tbody>
        </table>
 		</div>
+	</div>
+	<div class="friendnav" id="friendnav">
+		<h4 class="friendbar">Friend List</h4>
 	</div>
 </body>
 </html>
