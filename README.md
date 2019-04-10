@@ -19,8 +19,10 @@ todo:
     - create front-end
       - user can enter classes they are taking flexible amount (e.g. CSCI201)
   
-- back-end:
-- complete profile.jsp
+- back-end: (every page apart from main.jsp + generate.jsp the back end can be done with the db I uploaded)
+  - complete main.jsp
+    - display schedule
+  - complete profile.jsp
     - connect to db
     - connect friend bar to db
   - complete settings.jsp
