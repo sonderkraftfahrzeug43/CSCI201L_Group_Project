@@ -188,7 +188,7 @@ VALUES ('1', 'Accounting (BS)', 'http://catalogue.usc.edu/preview_program.php?ca
 /*CREATE MINOR TABLE */
 CREATE TABLE Minor (
 	MinorID INT(11) PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(200) NOT NULL,
     requirements VARCHAR(200) NOT NULL
 );
 /*INSERT MINORS - MARK*/
