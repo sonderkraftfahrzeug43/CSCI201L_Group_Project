@@ -1,22 +1,47 @@
 - database:
   - schema: schedulebuilder
   - tables:
+    - Major
+      - MajorID
+      - name
+      - requirements
+      
+    - Minor
+      - MinorID
+      - name
+      - requirements
+    - GradYear
+      - GradYID
+      - year
     - User
-      - iduser
+      - UserID
       - userName
       - pass
-    -  Major
-      - idmajor
-      - majorName
-    - Course
-      - idcourse
-      - courseName
-      - idmajor
-    - CourseTaken
-      - idct
-      - iduser
-      - idcourse
+      - majorID, fk 
+      - minorID, fk 
+      - gradYID, fk
     - Friend
-      - idfriend
-      - iduser1
-      - iduser2
+      - FriendID
+      - user1ID, fk
+      - user2ID, fk
+      - confirmed (0 = not confirmed - 1 = confirmed)
+    - Updates
+      - UpdateID
+      - userID, fk
+      - date
+      - conent
+    - PreviousClass
+      - PrevCID
+      - name
+      - userID, fk
+    - CurrentClass
+      - CurCID
+      - name
+      - section
+      - location
+      - hrs
+      - professor
+      - userID, fk
+      
+   - todo:
+    - Schedule
