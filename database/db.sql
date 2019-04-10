@@ -1,29 +1,13 @@
-
+DROP DATABASE IF EXISTS schedulebuilder;
+CREATE DATABASE schedulebuilder;
 USE schedulebuilder;
- 
+/*CREATE MAJOR TABLE */
 CREATE TABLE Major (
 	majorID INT(11) PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(200) NOT NULL,
     requirements VARCHAR(200) NOT NULL
 );
-
-CREATE TABLE Minor (
-	minorID INT(11) PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    requirements VARCHAR(200) NOT NULL
-);
-
-
-CREATE TABLE User (
-	userID INT(11) PRIMARY KEY AUTO_INCREMENT,
-    userName VARCHAR(50) NOT NULL,
-    pass VARCHAR(50) NOT NULL,
-    majorID INT(11),
-    minorID INT(11),
-    FOREIGN KEY fk1 (majorID) REFERENCES Major(majorID),
-    FOREIGN KEY fk2 (majorID) REFERENCES Minor(majorID)
-);
-
+/*INSERT MAJORS */
 INSERT INTO Major
 VALUES ('1', 'Accounting (BS)', 'http://catalogue.usc.edu/preview_program.php?catoid=6&poid=5149'),
 ('2', 'Aerospace Engineering (BS)', 'http://catalogue.usc.edu/preview_program.php?catoid=6&poid=5541'),
@@ -199,9 +183,103 @@ VALUES ('1', 'Accounting (BS)', 'http://catalogue.usc.edu/preview_program.php?ca
 ('172', 'Urban Studies and Planning (BS)', 'http://catalogue.usc.edu/preview_program.php?catoid=6&poid=6073'),
 ('173', 'Visual and Performing Arts Studies (BA)','http://catalogue.usc.edu/preview_program.php?catoid=6&poid=5512'),
 ('174', 'Writing for Screen and Television (BFA)','http://catalogue.usc.edu/preview_program.php?catoid=6&poid=5172'),
-('175', 'Food Industry Management Program', 'http://catalogue.usc.edu/preview_program.php?catoid=6&poid=5091')
+('175', 'Food Industry Management Program', 'http://catalogue.usc.edu/preview_program.php?catoid=6&poid=5091');
 
+/*CREATE MINOR TABLE */
+CREATE TABLE Minor (
+	MinorID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    requirements VARCHAR(200) NOT NULL
+);
+/*INSERT MINORS - MARK*/
+INSERT INTO Minor /*REPLACE*/
+VALUES('1','test','test');/*REPLACE*/
 
+/*CREATE GRADYEAR TABLE */
+CREATE TABLE GradYear (
+	GradYID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    year int(11) NOT NULL
+);
+/*INSERT GRADYEARS */
+INSERT INTO GradYear
+VALUES('1','2019'),
+('2','2020'),
+('3','2021'),
+('4','2022'),
+('5','2023'),
+('6','2024'),
+('7','2025'),
+('8','2026'),
+('9','2027'),
+('10','2028');
 
+/*CREATE SCHEDULE TABLE - TODO */
+/*INSERT INTO SCHEDULE - TODO */
 
+/*CREATE USER TABLE */
+CREATE TABLE User (
+	UserID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(30) NOT NULL,
+    pass VARCHAR(30) NOT NULL,
+	majorID INT(11),
+    minorID INT(11),
+    gradYID INT(11),
+    FOREIGN KEY fk1 (majorID) REFERENCES Major(MajorID),
+    FOREIGN KEY fk2 (minorID) REFERENCES Minor(MinorID),
+    FOREIGN KEY fk3 (gradYID) REFERENCES GradYear(GradYID)
+    );
+/*INSERT TEST USER TABLE */
+INSERT INTO User
+VALUES('1','USER','PASS','1','1','1'),
+('2','USER2','PASS2','2','1','2'),
+('3','USER3','PASS3','3','1','3'),
+('4','USER4','PASS4','4','1','4');
 
+/*CREATE FRIEND TABLE */
+CREATE TABLE Friend (
+	FriendID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    user1ID INT(11),
+    user2ID INT(11),
+    confirmed INT(11) NOT NULL,
+    FOREIGN KEY fk1 (user1ID) REFERENCES User(UserID),
+    FOREIGN KEY fk2 (user2ID) REFERENCES User(UserID)
+);
+/*INSERT INTO FRIEND */
+INSERT INTO Friend
+VALUES('1','1','2','0'), /*0 =  NOT CONFIRMED */
+('2','1','2','1'); /*1 = CONFIRMED */
+
+/*CREATE UPDATE TABLE */
+CREATE TABLE Updates (
+	UpdateID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    userID INT(11),
+    date datetime,
+    content VARCHAR(1000),
+    FOREIGN KEY fk1 (userID) REFERENCES User(UserID)
+);
+/*INSERT INTO UPDATE */
+INSERT INTO Updates
+VALUES('1','1','2019-08-30 19:05:00','TEST UPDATE'), 
+('2','3','2019-08-30 19:05:00','TEST UPDATE 2');
+
+/*CREATE PREVIOUSCLASS TABLE */
+CREATE TABLE PreviousClass (
+	PrevCID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30),
+    userID INT(11),
+    FOREIGN KEY fk1 (userID) REFERENCES User(UserID)
+);
+/*INSERT INTO PREVIOUS CLASS */
+INSERT INTO PreviousClass
+VALUES('1','CSCI-201','1');
+
+/*CREATE CURRENTCLASS TABLE */
+CREATE TABLE CurrentClass (
+	PrevCID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30),
+    userID INT(11),
+    FOREIGN KEY fk1 (userID) REFERENCES User(UserID)
+);
+/*INSERT INTO CURRENT CLASS */
+INSERT INTO CurrentClass
+VALUES('2','CSCI-201','1');
