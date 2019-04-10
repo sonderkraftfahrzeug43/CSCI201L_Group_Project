@@ -192,7 +192,7 @@ CREATE TABLE Minor (
     requirements VARCHAR(200) NOT NULL
 );
 /*INSERT MINORS - MARK*/
-INSERT INTO Minor /*REPLACE*/
+INSERT INTO Minor 
 VALUES('1','test','test');/*REPLACE*/
 
 /*CREATE GRADYEAR TABLE */
