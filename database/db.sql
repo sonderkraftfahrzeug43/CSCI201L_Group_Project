@@ -443,7 +443,7 @@ CREATE TABLE Friend (
 );
 /*INSERT INTO FRIEND */
 INSERT INTO Friend
-VALUES('1','1','2','0'), /*0 =  NOT CONFIRMED */
+VALUES('1','4','2','0'), /*0 =  NOT CONFIRMED */
 ('2','1','2','1'); /*1 = CONFIRMED */
 
 /*CREATE UPDATE TABLE */
