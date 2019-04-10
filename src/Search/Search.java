@@ -60,10 +60,10 @@ public class Search extends HttpServlet {
 					int friendID = rs.getInt("iduser");
 					int userID = (int)session.getAttribute("userName");
 					Statement st = conn.createStatement();
-					ResultSet friendCourses = st.executeQuery("SELECT * FROM CourseTaken WHERE iduser=" + friendID);
+					ResultSet friendCourses = st.executeQuery("SELECT * FROM CourseTaking WHERE iduser=" + friendID);
 					st.close();
 					st = conn.createStatement();
-					ResultSet userCourses = st.executeQuery("SELECT * FROM CourseTaken WHERE iduser=" + userID);
+					ResultSet userCourses = st.executeQuery("SELECT * FROM CourseTaking WHERE iduser=" + userID);
 					st.close();
 					Vector<String> sharedCourses = new Vector<String>();
 					while(friendCourses.next()) {
