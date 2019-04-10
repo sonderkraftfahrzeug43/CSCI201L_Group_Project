@@ -58,9 +58,17 @@ public class Login extends HttpServlet {
 			if(rs.next()) 
 			{
 				// login
+				int iduser = rs.getInt("iduser");
+				int idmajor = rs.getInt("idmajor");
+				int idminor = rs.getInt("idminor");
+				int idgradyear = rs.getInt("idgradyear");
 				username_and_password = true;
 				nextPage = "/main.jsp";
-				session1.setAttribute(userName, "iduser");
+				session1.setAttribute("userName", userName);
+				session1.setAttribute("iduser", iduser);
+				session1.setAttribute("idmajor", idmajor);
+				session1.setAttribute("idminor", idminor);
+				session1.setAttribute("idgradyear", idgradyear);
 				
 			}
 			
