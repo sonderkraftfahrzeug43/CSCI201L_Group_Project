@@ -3,7 +3,7 @@ CREATE DATABASE schedulebuilder;
 USE schedulebuilder;
 /*CREATE MAJOR TABLE */
 CREATE TABLE Major (
-	majorID INT(11) PRIMARY KEY AUTO_INCREMENT,
+	MajorID INT(11) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(200) NOT NULL,
     requirements VARCHAR(200) NOT NULL
 );
@@ -275,11 +275,15 @@ VALUES('1','CSCI-201','1');
 
 /*CREATE CURRENTCLASS TABLE */
 CREATE TABLE CurrentClass (
-	PrevCID INT(11) PRIMARY KEY AUTO_INCREMENT,
+	CurrCID INT(11) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30),
+    section VARCHAR(30),
+    location VARCHAR(30),
+    hrs VARCHAR(30),
+    professor VARCHAR(30),
     userID INT(11),
     FOREIGN KEY fk1 (userID) REFERENCES User(UserID)
 );
 /*INSERT INTO CURRENT CLASS */
 INSERT INTO CurrentClass
-VALUES('2','CSCI-201','1');
+VALUES('2','CSCI-201','section1', 'location1','TTH:9:00-9:50', 'Professor1','1');
