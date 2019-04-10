@@ -1,3 +1,4 @@
+- note: the sql has insertion statements for user, friend, updates, currentclass, and previousclass that you can remove (they are only for testing) 
 - database:
   - schema: schedulebuilder
   - tables:
