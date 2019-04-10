@@ -438,12 +438,12 @@ CREATE TABLE Friend (
     user1ID INT(11),
     user2ID INT(11),
     confirmed INT(11) NOT NULL,
-    FOREIGN KEY fk1 (user1ID) REFERENCES User(UserID),
-    FOREIGN KEY fk2 (user2ID) REFERENCES User(UserID)
+    FOREIGN KEY fr1 (user1ID) REFERENCES User(UserID),
+    FOREIGN KEY fr2 (user2ID) REFERENCES User(UserID)
 );
 /*INSERT INTO FRIEND */
 INSERT INTO Friend
-VALUES('1','4','2','0'), /*0 =  NOT CONFIRMED */
+VALUES('1','1','2','0'), /*0 =  NOT CONFIRMED */
 ('2','1','2','1'); /*1 = CONFIRMED */
 
 /*CREATE UPDATE TABLE */
@@ -452,7 +452,7 @@ CREATE TABLE Updates (
     userID INT(11),
     date datetime,
     content VARCHAR(1000),
-    FOREIGN KEY fk1 (userID) REFERENCES User(UserID)
+    FOREIGN KEY fu1 (userID) REFERENCES User(UserID)
 );
 /*INSERT INTO UPDATE */
 INSERT INTO Updates
@@ -464,7 +464,7 @@ CREATE TABLE PreviousClass (
 	PrevCID INT(11) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30),
     userID INT(11),
-    FOREIGN KEY fk1 (userID) REFERENCES User(UserID)
+    FOREIGN KEY fp1 (userID) REFERENCES User(UserID)
 );
 /*INSERT INTO PREVIOUS CLASS */
 INSERT INTO PreviousClass
@@ -479,8 +479,9 @@ CREATE TABLE CurrentClass (
     hrs VARCHAR(30),
     professor VARCHAR(30),
     userID INT(11),
-    FOREIGN KEY fk1 (userID) REFERENCES User(UserID)
+    FOREIGN KEY fc1 (userID) REFERENCES User(UserID)
 );
 /*INSERT INTO CURRENT CLASS */
 INSERT INTO CurrentClass
 VALUES('2','CSCI-201','section1', 'location1','TTH:9:00-9:50', 'Professor1','1');
+
