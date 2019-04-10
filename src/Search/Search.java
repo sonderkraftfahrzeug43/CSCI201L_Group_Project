@@ -58,7 +58,7 @@ public class Search extends HttpServlet {
 					HttpSession session = request.getSession();
 					friendFound = true;
 					int friendID = rs.getInt("iduser");
-					int userID = (int)session.getAttribute("userName");
+					int userID = (int)session.getAttribute("iduser");
 					Statement st = conn.createStatement();
 					ResultSet friendCourses = st.executeQuery("SELECT * FROM CourseTaking WHERE iduser=" + friendID);
 					st.close();
