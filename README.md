@@ -7,23 +7,35 @@ project notes:
 - sql
 
 todo:
+- front-end:
+  - complete profile.jsp
+    - create friend sidebar
+  - complete settings.jsp
+    - select for graduation year
+  - complete requirements.jsp
+  - complete main.jsp
+    - display table (adjust once we display the info)
+  - generate.jsp
+    - create front-end
+      - user can enter classes they are taking flexible amount (e.g. CSCI201)
+  
+- back-end:
 - complete profile.jsp
-  - display user data
-  - create friend sidebar
-- complete settings.jsp
-  - complete lists of selections for minor
-    - list of minors : http://catalogue.usc.edu/content.php?catoid=6&navoid=1551
-  - connect to backend
-- complete requirements.jsp
-  - display different link based on major 
-    - list of majors 
-  - display two window if user has minor
-  
-- sidebar:
-  - connect to backend
-  - enable searches
-  
-- create friend search
-- create class search
-- create professor search
+    - connect to db
+    - connect friend bar to db
+  - complete settings.jsp
+    - connect to db
+  - complete requirements.jsp
+    - connect to db
+  - generate.jsp
+    - connect to db
+      - generate schedule (scraping and scheduling algorithm)
+    
+  - sidebar
+     - enable searches
+      - friend 
+      - class (viet scraping)
+      - professor (ratemyprofessor)
+      
+     
   
