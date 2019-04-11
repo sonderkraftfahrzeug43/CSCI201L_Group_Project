@@ -73,10 +73,12 @@ public class ProfileSearch extends HttpServlet {
 					friends.remove(index);
 				}
 			}
+			String nameAttribute = "";
 			for(int index = 0; index< friends.size();index++){
-				System.out.println(friends.get(index));
+				nameAttribute += (friends.get(index) + "|");
 			}
-//			session1.setAttribute("majURL", majURL);    
+			session1.setAttribute("friends", nameAttribute);
+			System.out.println(nameAttribute);
 		    }
 		    catch (SQLException sqle){
 			    System.out.println("sqle:" + sqle.getMessage());
