@@ -34,9 +34,11 @@
 		window.location.replace("login.jsp");
 	}
 	function checkMinor(){
-		if (1 == 1){
+		var min = "<%= session.getAttribute( "minURL" ) %>";
+		alert(min);
+		if (min!=null){
 			var minorObject = document.createElement("object");
-			minorObject.setAttribute('data', 'https://www.cs.usc.edu/academic-programs/undergrad/computer-science/');
+			minorObject.setAttribute('data', min);
 			minorObject.setAttribute("width","1100px");
 			minorObject.setAttribute("height","300px");
 			minorObject.setAttribute("style","overflow:auto;");
@@ -52,15 +54,20 @@
 			document.getElementByID("webpageMinor").setAttribute("style","display:hidden");
 		}
 	}
+	function prof(){
+		document.profile.submit();
+	}
 	
 </script>
 <body onload = "checkMinor()">
 	<div class="background-img"></div>
 	<div id="sidenav" class="sidenav">
 		<h2>Schedule Builder</h2>
-		<a href="profile.jsp" class="snlinks">
-			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;">
-		</a>
+		<form name = "profile" method = "POST" action="ProfileSearch">
+			<div class="snlinks">
+			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;" onclick = "prof()">
+			</div>
+		</form>
 		<a href="settings.jsp" class="snlinks1">
 			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;">
 		</a>
@@ -115,7 +122,7 @@
 	<div class="nav">
 		<h1 class = "center_p">Major Requirements</h1>
 		 <div id = "webpage" class = "webpage"> 
-    		<object id = "objWebpage" type="text/html" data="https://www.cs.usc.edu/academic-programs/undergrad/computer-science/" width="1100px" height="600px" style="overflow:auto;">
+    		<object id = "objWebpage" type="text/html" data=<%= session.getAttribute("majURL") %> width="1100px" height="600px" style="overflow:auto;">
     		</object>
  		</div>
  		<div id = "webpageMinor" class = "webpageMinor">
