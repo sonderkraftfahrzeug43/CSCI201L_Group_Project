@@ -54,21 +54,21 @@ public class Login extends HttpServlet {
 			}	
 			st = conn.createStatement();
 			//st.executeUpdate("UPDATE `pageVisited` SET `count` = `count`+1 WHERE userID=4 and pageid=1)
-			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + userName + "' and pass= '"+password+"'");
+			rs = st.executeQuery("SELECT * FROM User WHERE userName='" + userName + "' and pass= '"+password+"'");
 			if(rs.next()) 
 			{
 				// login
-				int iduser = rs.getInt("iduser");
-				int idmajor = rs.getInt("idmajor");
-				int idminor = rs.getInt("idminor");
-				int idgradyear = rs.getInt("idgradyear");
+				int iduser = rs.getInt("UserID");
+				int idmajor = rs.getInt("majorID");
+				int idminor = rs.getInt("minorID");
+				int idgradyear = rs.getInt("gradYID");
 				username_and_password = true;
 				nextPage = "/main.jsp";
 				session1.setAttribute("userName", userName);
-				session1.setAttribute("iduser", iduser);
-				session1.setAttribute("idmajor", idmajor);
-				session1.setAttribute("idminor", idminor);
-				session1.setAttribute("idgradyear", idgradyear);
+				session1.setAttribute("UserID", iduser);
+				session1.setAttribute("majorID", idmajor);
+				session1.setAttribute("minorID", idminor);
+				session1.setAttribute("gradYID", idgradyear);
 				
 			}
 			
