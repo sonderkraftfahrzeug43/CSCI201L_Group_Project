@@ -130,5 +130,30 @@
 	<div class="friendnav" id="friendnav">
 		<h4 class="friendbar">Friend List</h4>
 	</div>
+         <div>
+            <table class = "friends" rules = "rows" align="right"style= "width:100%;">
+               <tr style="color:white;align:middle">
+                  <th><strong>Friends</strong></th>
+               </tr>
+               <%
+               String parse = String.valueOf(session.getAttribute("friends"));
+     		   int parser = 0;
+      		   for(int index = 0; index < parse.length(); index++) {
+	     	      if (parse.charAt(index)=='|') {
+	     	    	 System.out.println(parser + " " + index);
+	                 String chunk = parse.substring(parser, index);
+	                 %>
+	                 <tr> 
+	                    <td align="center"><text id = <%=chunk %> ><%= chunk %></text></td>
+	                 </tr>
+	                 <%
+	                 parser = index+1;
+	                 }      
+	               	 
+	             }	
+             %>
+          </table>
+        </div>
+        <!-- <input type="hidden" name="cityName" id = "CityName" /> -->
 </body>
 </html>
