@@ -30,6 +30,9 @@
 	function logout(){
 		window.location.replace("login.jsp");
 	}
+	function req(){
+		document.require.submit();
+	}
  
 </script>
 <meta charset="UTF-8">
@@ -49,9 +52,11 @@
 		<a href="main.jsp" class="snlinks2">
 			<img src="Images/schedule.png" alt="schedule" style="width:50px; height: 50px;">
 		</a>
-		<a href="requirements.jsp" class="snlinks3">
-			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;">
-		</a>
+		<form name = "require" method = "POST" action="RequirementsSearch">
+			<div class="snlinks3">
+			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;" onclick ="req()">
+			</div>
+		</form>
 		<input id="button3" type="button" name="submit" value="Logout" onclick = "logout()"/>
 		<div id="showClassSearch" class="showClassSearch">
 			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Class...">
