@@ -418,9 +418,9 @@ CREATE TABLE User (
 	UserID INT(11) PRIMARY KEY AUTO_INCREMENT,
     userName VARCHAR(30) NOT NULL,
     pass VARCHAR(30) NOT NULL,
-	majorID INT(11),
-    minorID INT(11),
-    gradYID INT(11),
+	majorID INT(11) NOT NULL,
+    minorID INT(11) NOT NULL,
+    gradYID INT(11) NOT NULL,
     FOREIGN KEY fk1 (majorID) REFERENCES Major(MajorID),
     FOREIGN KEY fk2 (minorID) REFERENCES Minor(MinorID),
     FOREIGN KEY fk3 (gradYID) REFERENCES GradYear(GradYID)
@@ -435,8 +435,8 @@ VALUES('1','USER','PASS','1','1','1'),
 /*CREATE FRIEND TABLE */
 CREATE TABLE Friend (
 	FriendID INT(11) PRIMARY KEY AUTO_INCREMENT,
-    user1ID INT(11),
-    user2ID INT(11),
+    user1ID INT(11) NOT NULL,
+    user2ID INT(11) NOT NULL,
     confirmed INT(11) NOT NULL,
     FOREIGN KEY fr1 (user1ID) REFERENCES User(UserID),
     FOREIGN KEY fr2 (user2ID) REFERENCES User(UserID)
@@ -449,7 +449,7 @@ VALUES('1','1','2','0'), /*0 =  NOT CONFIRMED */
 /*CREATE UPDATE TABLE */
 CREATE TABLE Updates (
 	UpdateID INT(11) PRIMARY KEY AUTO_INCREMENT,
-    userID INT(11),
+    userID INT(11) NOT NULL,
     date datetime,
     content VARCHAR(1000),
     FOREIGN KEY fu1 (userID) REFERENCES User(UserID)
@@ -463,7 +463,7 @@ VALUES('1','1','2019-08-30 19:05:00','TEST UPDATE'),
 CREATE TABLE PreviousClass (
 	PrevCID INT(11) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30),
-    userID INT(11),
+    userID INT(11) NOT NULL,
     FOREIGN KEY fp1 (userID) REFERENCES User(UserID)
 );
 /*INSERT INTO PREVIOUS CLASS */
@@ -478,7 +478,7 @@ CREATE TABLE CurrentClass (
     location VARCHAR(30),
     hrs VARCHAR(30),
     professor VARCHAR(30),
-    userID INT(11),
+    userID INT(11) NOT NULL,
     FOREIGN KEY fc1 (userID) REFERENCES User(UserID)
 );
 /*INSERT INTO CURRENT CLASS */
