@@ -86,11 +86,11 @@
 					<tbody>
                     	<tr>
                         	<td style="color: white; font-size: 28px; text-align: left; padding-bottom: 10px; padding-top: 25px;">Major:</td>
-                        	<td ><!-- output user major --></td>
+                        	<td ><% session.getAttribute("major"); %></td>
                     	</tr>
                     	<tr>
                         	<td style="color: white; font-size: 28px; text-align: left">Minor:</td>
-                        	<td ><!-- output user minor --></td>
+                        	<td ><% session.getAttribute("minor"); %></td>
                     	</tr>
                 	</tbody>
                 </table>
@@ -105,11 +105,11 @@
 				<tbody>
                     <tr>
                         <td style="color: white; font-size: 30px; text-align: left">Major:</td>
-                        <td ><!-- output user major --></td>
+                        <td ><% session.getAttribute("major"); %></td>
                     </tr>
                     <tr>
                         <td style="color: white; font-size: 30px; text-align: left">Minor:</td>
-                        <td ><!-- output user minor --></td>
+                        <td ><% session.getAttribute("minor"); %></td>
                     </tr>
                     <tr>
                         <td style="color: white; font-size: 30px; text-align: left">Expected Graduation:</td>
