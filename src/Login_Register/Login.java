@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
 			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + userName + "'");
 			boolean username_exists = false; 
 			boolean username_and_password = false; 
-			HttpSession session1 = request.getSession();
+			HttpSession session1 = request.getSession(true);
 			if(rs.next())
 			{
 				// wrong password
