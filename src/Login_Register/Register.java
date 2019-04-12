@@ -43,6 +43,10 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String major = request.getParameter("major");
+		String minor = request.getParameter("minor");
+		System.out.println(major);
+		System.out.println(minor);
 		ResultSet rs = null;
 		String nextPage = null;
 		Statement st = null;
@@ -51,10 +55,10 @@ public class Register extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			System.out.println(username + " " + password);
-			String sql = "insert into user(userName,pass, majorID, minorID, gradYID) values(?,?,1,1,1)";
+			String sql = "insert into user(userName,pass, majorID, minorID, gradYID) values(?,?,?,?,1)";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url,"root","password");
+			conn = DriverManager.getConnection(url,"root","s62UcrEx");
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + username + "'");
 			if(rs.next())
@@ -62,13 +66,29 @@ public class Register extends HttpServlet {
 				request.setAttribute("utError", "User is taken");
 				nextPage ="/registration.jsp";
 			}
+			else if(major.equals("0")){
+				request.setAttribute("utError", "You must select a major");
+				nextPage ="/registration.jsp";
+			}
 			else
 			{
+				if (minor.equals("0")){
+					minor = null;
+				}
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, username);
 				ps.setString(2, password);
+				ps.setString(3, major);
+				ps.setString(4, minor);
 				ps.executeUpdate();
 				nextPage ="/main.jsp";					
+			}
+			Statement st4 = null;
+			ResultSet rs4 = null;
+			st4= conn.createStatement();
+			rs4 = st4.executeQuery("SELECT * FROM user");
+			while(rs4.next()){
+				System.out.println(rs4.getString("userName"));
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("cnf: " + e.getMessage());
