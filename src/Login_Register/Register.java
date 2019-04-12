@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Register
@@ -83,13 +84,23 @@ public class Register extends HttpServlet {
 				ps.executeUpdate();
 				nextPage ="/main.jsp";					
 			}
-			Statement st4 = null;
-			ResultSet rs4 = null;
-			st4= conn.createStatement();
-			rs4 = st4.executeQuery("SELECT * FROM user");
-			while(rs4.next()){
-				System.out.println(rs4.getString("userName"));
+			HttpSession session = request.getSession(true);
+			Statement st2 = null;
+			ResultSet rs2 = null;
+			st2= conn.createStatement();
+			rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
+			while(rs2.next()){
+				int iduser = rs.getInt("UserID");
+				int idmajor = rs.getInt("majorID");
+				int idminor = rs.getInt("minorID");
+				int idgradyear = rs.getInt("gradYID");
+				session.setAttribute("userName", username);
+				session.setAttribute("UserID", iduser);
+				session.setAttribute("majorID", idmajor);
+				session.setAttribute("minorID", idminor);
+				session.setAttribute("gradYID", idgradyear);
 			}
+			
 		} catch (ClassNotFoundException e) {
 			System.out.println("cnf: " + e.getMessage());
 			e.printStackTrace();
