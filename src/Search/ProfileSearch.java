@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 import java.util.Collections;
+import java.util.TimeZone;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,7 +53,8 @@ public class ProfileSearch extends HttpServlet {
 		ResultSet whileRS = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schedulebuilder?user=root&password=s62UcrEx");
+			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url,"root","password");
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM Friend WHERE user1ID='" + user + "' OR user2ID='" + user + "'");
 			Vector<String> friends = new Vector<String>();
@@ -64,8 +67,7 @@ public class ProfileSearch extends HttpServlet {
 				whileRS = whileST.executeQuery("SELECT * FROM User WHERE UserID='" + friendOne + "'");
 				whileRS.next();
 				String userName = whileRS.getString("userName");
-				friends.add(userName);
-				//System.out.println(userName);        
+				friends.add(userName);        
 			}
 			Collections.sort(friends);
 			for (int index = friends.size()-1;index > 0;index--){
