@@ -20,14 +20,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Search
  */
-@WebServlet("/Search")
-public class Search extends HttpServlet {
+@WebServlet("/FriendSearch")
+public class FriendSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Search() {
+    public FriendSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
