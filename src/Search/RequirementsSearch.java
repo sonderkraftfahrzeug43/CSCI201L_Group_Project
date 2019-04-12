@@ -43,7 +43,8 @@ public class RequirementsSearch extends HttpServlet {
 		ResultSet rsMin = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/schedulebuilder?user=root&password=s62UcrEx");
+			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url,"root","s62UcrEx");
 			stMaj = conn.createStatement();
 			stMin = conn.createStatement();
 			rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
