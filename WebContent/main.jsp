@@ -29,6 +29,12 @@
 	function logout(){
 		window.location.replace("login.jsp");
 	}
+	function req(){
+		document.require.submit();
+	}
+	function prof(){
+		document.profile.submit();
+	}
  
 </script>
 <meta charset="UTF-8">
@@ -39,18 +45,22 @@
 	<div class="background-img"></div>
 	<div id="sidenav" class="sidenav">
 		<h2  style="text-color:white">Schedule Builder</h2>
-		<a href="profile.jsp" class="snlinks">
-			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;">
-		</a>
+		<form name = "profile" method = "POST" action="ProfileSearch">
+			<div class="snlinks">
+			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;" onclick = "prof()">
+			</div>
+		</form>
 		<a href="settings.jsp" class="snlinks1">
 			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;">
 		</a>
 		<a href="main.jsp" class="snlinks2">
 			<img src="Images/schedule.png" alt="schedule" style="width:50px; height: 50px;">
 		</a>
-		<a href="requirements.jsp" class="snlinks3">
-			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;">
-		</a>
+		<form name = "require" method = "POST" action="RequirementsSearch">
+			<div class="snlinks3">
+			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;" onclick ="req()">
+			</div>
+		</form>
 		<input id="button3" type="button" name="submit" value="Logout" onclick = "logout()"/>
 		<div id="showClassSearch" class="showClassSearch">
 			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Class...">
