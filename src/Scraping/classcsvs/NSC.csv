@@ -1,0 +1,12 @@
+b'"Course number","Course title","Registration restrictions","Units","Type","Section","Session","Time","Days","Seats","Registered","Waitlist","Instructor","Room"
+"NSC-135","Introduction to Naval Science","","2.0 units","Lecture","41900R","001","10:00-11:50am","Tuesday","45","1","0","Matthew Cox","PED300"
+"","","","","Lab","41901R","001","6:30-9:20am","Thursday","45","1","0","","SGM123"
+"NSC-251","Seamanship and Ship Operations","","3.0 units","Lecture","41912R","001","11:00-12:20pm","Mon, Wed","40","8","0","Eric Tan","PED300"
+"","","","","Lab","41913R","001","6:30-9:20am","Thursday","40","8","0","","SGM123"
+"NSC-283","Naval Ships Systems I (Engineering)","","3.0 units","Lecture","41914R","001","2:00-3:20pm","Mon, Wed","35","5","0","Bradley Harden","PED300"
+"","","","","Lab","41915R","001","6:30-9:20am","Thursday","40","5","0","","SGM123"
+"NSC-343","Evolution of Warfare","","3.0 units","Lecture-Lab","41916R","001","3:00-5:50pm","Thursday","25","0","0","",""
+"NSC-392","Amphibious Warfare","","3.0 units","Lecture-Lab","41906R","001","3:00-5:50pm","Thursday","20","0","0","",""
+"NSC-453","Leadership and Management I","","3.0 units","Lecture","41907R","001","9:00-10:20am","Mon, Wed","40","6","0","Robert Hill","PED300"
+"","","","","Lab","41908R","001","6:30-9:20am","Thursday","45","6","0","","SGM123"
+'

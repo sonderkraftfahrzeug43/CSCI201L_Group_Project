@@ -1,0 +1,10 @@
+b'"Course number","Course title","Registration restrictions","Units","Type","Section","Session","Time","Days","Seats","Registered","Waitlist","Instructor","Room"
+"MS-101","Foundations of Officership","","1.0 unit","Lecture","41810R","001","10:00-10:50am","Tuesday","25","1","0","","GFS202"
+"","","","","Lab","41812D","001","7:00-9:50am","Thursday","35","0","0","","SLH200"
+"MS-201","Individual Leadership Studies","","2.0 units","Lecture","41820D","001","8:00-9:50am","Tuesday","20","0","0","","GFS202"
+"","","","","Lab","41822D","001","7:00-9:50am","Thursday","35","0","0","","SLH200"
+"MS-301","Leadership and Problem Solving","","3.0 units","Lecture","41830D","001","7:00-9:50am","Tuesday","25","0","0","","KAP146"
+"","","","","Lab","41835D","001","7:00-9:50am","Thursday","30","0","0","","SLH200"
+"MS-401","Leadership and Management","","3.0 units","Lecture","41840D","001","7:00-9:50am","Tuesday","25","0","0","","GFS212"
+"","","","","Lab","41845D","001","7:00-9:50am","Thursday","35","0","0","","SLH200"
+'
