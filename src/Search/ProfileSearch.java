@@ -30,8 +30,7 @@ public class ProfileSearch extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session1 = request.getSession();
-		int user = (Integer)session1.getAttribute("UserID");
+	
 		String nextPage = "/profile.jsp";
 		Connection conn = null;
 		Statement st = null;
@@ -43,8 +42,15 @@ public class ProfileSearch extends HttpServlet {
 		Statement whileST = null;
 		ResultSet whileRS = null;
 		try {
-			int idmajor = (int)session1.getAttribute("majorId");
-			int idminor = (int)session1.getAttribute("minorId");
+			HttpSession session1 = request.getSession();
+			int idmajor = 0;
+			int idminor = 0;
+			int user = 0;
+			if (!session1.isNew()){
+				user = (Integer)session1.getAttribute("UserID");
+				idmajor = (Integer)session1.getAttribute("majorID");
+				idminor = (Integer)session1.getAttribute("minorID");
+			}
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
 			conn = DriverManager.getConnection(url,"root","s62UcrEx");
