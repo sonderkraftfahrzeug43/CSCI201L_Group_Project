@@ -90,10 +90,10 @@ public class Register extends HttpServlet {
 			st2= conn.createStatement();
 			rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
 			while(rs2.next()){
-				int iduser = rs.getInt("UserID");
-				int idmajor = rs.getInt("majorID");
-				int idminor = rs.getInt("minorID");
-				int idgradyear = rs.getInt("gradYID");
+				int iduser = rs2.getInt("UserID");
+				int idmajor = rs2.getInt("majorID");
+				int idminor = rs2.getInt("minorID");
+				int idgradyear = rs2.getInt("gradYID");
 				session.setAttribute("userName", username);
 				session.setAttribute("UserID", iduser);
 				session.setAttribute("majorID", idmajor);
