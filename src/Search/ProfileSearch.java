@@ -18,43 +18,55 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ProfileSearch
- */
 @WebServlet("/ProfileSearch")
 public class ProfileSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ProfileSearch() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session1 = request.getSession();
-		//String user = session1.getAttribute("iduser").toString();
-		int user = 1;
+		int user = (Integer)session1.getAttribute("UserID");
 		String nextPage = "/profile.jsp";
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
+		Statement stMaj = null;
+		ResultSet rsMaj = null;
+		Statement stMin = null;
+		ResultSet rsMin = null;
 		Statement whileST = null;
 		ResultSet whileRS = null;
 		try {
+			int idmajor = (int)session1.getAttribute("majorId");
+			int idminor = (int)session1.getAttribute("minorId");
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url,"root","password");
+			conn = DriverManager.getConnection(url,"root","s62UcrEx");
+			stMaj = conn.createStatement();
+			stMin = conn.createStatement();
+			rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
+			    if (!rsMaj.next()){
+		            System.out.println("ERRORMajor");
+			    }
+			rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
+			    if (!rsMin.next()){
+		            System.out.println("ERRORMinor");
+			    }
+			String majorName = rsMaj.getString("name");
+			String majURL = rsMaj.getString("requirements");
+			String minorName = rsMin.getString("name");
+			String minURL = rsMin.getString("requirements");
+			System.out.println(minURL);
+			session1.setAttribute("majURL", majURL);
+			session1.setAttribute("minURL",minURL);
+			session1.setAttribute("minorName", minorName);
+			session1.setAttribute("majorName", majorName);
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM Friend WHERE user1ID='" + user + "' OR user2ID='" + user + "'");
 			Vector<String> friends = new Vector<String>();
