@@ -105,13 +105,12 @@
 				<tbody>
                     <tr>
                         <td style="color: white; font-size: 30px; text-align: left">Major:</td>
-                        <td ><% session.getAttribute("major"); %></td>
+                        <td ><%= session.getAttribute("majorName") %></td>
                     </tr>
                     <tr>
                         <td style="color: white; font-size: 30px; text-align: left">Minor:</td>
-                        <td ><% session.getAttribute("minor"); %></td>
+                        <td ><%= session.getAttribute("minorName") %></td>
                     </tr>
-                    <tr>
                         <td style="color: white; font-size: 30px; text-align: left">Expected Graduation:</td>
                         <td ><!-- output user minor --></td>
                     </tr>
