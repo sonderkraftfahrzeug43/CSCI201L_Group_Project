@@ -1,0 +1,9 @@
+b'"Course number","Course title","Registration restrictions","Units","Type","Section","Session","Time","Days","Seats","Registered","Waitlist","Instructor","Room"
+"INF-510","Principles of Programming for Data Science","","4.0 units","Lab","32440R","048","3:30-5:20pm","Thursday","40","0","0","",""
+"INF-519","Foundations and Policy for Information Security","","4.0 units","Lecture","32428D","048","12:00-3:20pm","Friday","25","0","0","","OHE136"
+"INF-523","Computer Systems Assurance","P","4.0 units","Discussion","32432R","034","TBA","TBA","25","0","0","","DEN@Viterbi"
+"INF-556","User Experience Design and Strategy","","4.0 units","Discussion","32439R","048","TBA","TBA","25","0","0","","TBA"
+"INF-561","Predictive Analytics","","3.0 units","Lecture","31529D","048","3:30-6:20pm","Friday","30","13","0","","KAP158"
+"INF-562","Integration of Medical Imaging Systems","","3.0 units","Lecture","29305D","034","9:00-11:50am","Friday","20","0","0","Brent Liu","DEN@Viterbi"
+"","","","","Lecture","29310D","048","9:00-11:50am","Friday","28","0","0","Brent Liu","OHE100B"
+'

@@ -1,0 +1,9 @@
+b'"Course number","Course title","Registration restrictions","Units","Type","Section","Session","Time","Days","Seats","Registered","Waitlist","Instructor","Room"
+"LAT-120","Latin I","","4.0 units","Lecture","20000R","001","1:00-1:50pm","MTuWTh","25","1","0","","VKC151"
+"LAT-150","Latin II","P","4.0 units","Lecture","20001R","001","10:00-10:50am","MTuWTh","20","4","0","","THH113"
+"LAT-222","Latin III","P","4.0 units","Lecture","20002R","001","9:30-10:50am","Tue, Thu","20","5","0","Stefano Rebeggiani","THH207"
+"LAT-316","Roman Comedy","","4.0 units","Lecture","20003R","001","12:30-1:50pm","Tue, Thu","5","3","0","Anthony Boyle",""
+"LAT-490x","Directed Research","C","1.0-8.0 units, max 12","Lecture","20007D","001","TBA","TBA","10","0","0","","OFFICE"
+"LAT-499","Special Topics","","2.0-4.0 units, max 8"
+"","Living Latin I","","4.0","Lecture","20008D","001","TBA","TBA","6","0","0","Tyler Patterson","OFFICE"
+'
