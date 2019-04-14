@@ -30,9 +30,12 @@ public class RequirementsSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session1 = request.getSession();
-		//String user = session1.getAttribute("iduser").toString();
-		//String idmajor = session1.getAttribute("idmajor").toString();
-		//String idminor = session1.getAttribute("idminor").toString();
+		int idmajor = 0;
+		int idminor = 0;
+		if (!session1.isNew()){
+			idmajor = (Integer)session1.getAttribute("majorID");
+			idminor = (Integer)session1.getAttribute("minorID");
+		};
 		int idmajor = 24;
 		int idminor = 36;
 		String nextPage = "/requirements.jsp";
