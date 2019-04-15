@@ -43,13 +43,13 @@ public class ProfileSearch extends HttpServlet {
 		ResultSet whileRS = null;
 		try {
 			HttpSession session1 = request.getSession();
-			int idmajor = 0;
-			int idminor = 0;
-			int user = 0;
+			String idmajor = "0";
+			String idminor = "0";
+			String user = "0";
 			if (!session1.isNew()){
-				user = (Integer)session1.getAttribute("UserID");
-				idmajor = (Integer)session1.getAttribute("majorID");
-				idminor = (Integer)session1.getAttribute("minorID");
+				user = session1.getAttribute("UserID").toString();
+				idmajor = session1.getAttribute("majorID").toString();
+				idminor = session1.getAttribute("minorID").toString();
 			}
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
@@ -77,9 +77,9 @@ public class ProfileSearch extends HttpServlet {
 			rs = st.executeQuery("SELECT * FROM Friend WHERE user1ID='" + user + "' OR user2ID='" + user + "'");
 			Vector<String> friends = new Vector<String>();
 			while (rs.next()){
-				int friendOne = rs.getInt("user1ID");
-				if (friendOne == user){
-					friendOne = rs.getInt("user2ID");
+				String friendOne = rs.getString("user1ID");
+				if (friendOne.equals(user)){
+					friendOne = rs.getString("user2ID");
 				}
 				whileST = conn.createStatement();
 				whileRS = whileST.executeQuery("SELECT * FROM User WHERE UserID='" + friendOne + "'");
