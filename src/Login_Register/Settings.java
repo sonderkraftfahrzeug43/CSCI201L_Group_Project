@@ -1,4 +1,4 @@
-package Login_Register;
+package Settings;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,12 +30,13 @@ public class Settings extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("IN SETTING SERVLET");
 		String major = request.getParameter("major");
 		String minor = request.getParameter("minor");
 		String password = request.getParameter("password");
 		String gradYear = request.getParameter("class");
 		ResultSet rs = null;
-		String nextPage = null;
+		String nextPage = "/main.jsp";
 		Statement st = null;
 		Connection conn = null;
 		try {
@@ -51,14 +52,14 @@ public class Settings extends HttpServlet {
 			String query = "UPDATE User SET majorID = ? , minorID = ? , gradYID = ?, WHERE userName = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			if (major.equals("0")){
-				major = session.getAttribute("idmajor").toString();
+				major = session.getAttribute("majorID").toString();
 			}
 			else{
 				session.setAttribute("majorID", major);
 			}
 			ps.setString(1, major);
 			if (minor.equals("0")){
-				minor = session.getAttribute("idminor").toString();
+				minor = session.getAttribute("minorID").toString();
 			}
 			else{
 				session.setAttribute("minorID", minor);
