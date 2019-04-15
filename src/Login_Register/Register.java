@@ -78,14 +78,14 @@ public class Register extends HttpServlet {
 			Statement st2 = null;
 			ResultSet rs2 = null;
 			st2= conn.createStatement();
-			int idmajor = 0;
-			int idminor = 0;
+			String idmajor = "0";
+			String idminor = "0";
 			rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
 			while(rs2.next()){
-				int iduser = rs2.getInt("UserID");
-				idmajor = rs2.getInt("majorID");
-				idminor = rs2.getInt("minorID");
-				int gradyear = rs2.getInt("gradYID");
+				String iduser = rs2.getString("UserID");
+				idmajor = rs2.getString("majorID");
+				idminor = rs2.getString("minorID");
+				String gradyear = rs2.getString("gradYID");
 				if (!session.isNew()){
 					session.setAttribute("userName", username);
 					session.setAttribute("UserID", iduser);
@@ -121,5 +121,4 @@ public class Register extends HttpServlet {
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
-}
 }
