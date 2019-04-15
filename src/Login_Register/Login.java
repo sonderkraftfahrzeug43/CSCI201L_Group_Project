@@ -58,10 +58,10 @@ public class Login extends HttpServlet {
 			if(rs.next()) 
 			{
 				// login
-				int iduser = rs.getInt("UserID");
-				int idmajor = rs.getInt("majorID");
-				int idminor = rs.getInt("minorID");
-				int idgradyear = rs.getInt("gradYID");
+				String iduser = rs.getString("UserID");
+				String idmajor = rs.getString("majorID");
+				String idminor = rs.getString("minorID");
+				String idgradyear = rs.getString("gradYID");
 				username_and_password = true;
 				nextPage = "/main.jsp";
 				session1.setAttribute("userName", userName);
