@@ -31,7 +31,8 @@
 		window.location.replace("login.jsp");
 	}
 	function moveOn(){
-		document.settings.submit();
+		alert("here");
+		document.set.submit();
 	}
  
 </script>
@@ -41,6 +42,7 @@
 <link rel="stylesheet" type="text/css" href="settings.css" />
 </head>
 <body>
+	<form name = "settings" method = "POST" action = "Settings"></form>
 	<div class="background-img"></div>
 	<div id="sidenav" class="sidenav">
 		<h2  style="text-color:white">Schedule Builder</h2>
@@ -100,13 +102,12 @@
 	</div>
 	<div class="nav">
 		<h1 class = center_p>Profile Settings</h1>
-		<form name = "settings" method="POST" action="Settings">
-            <center>
+		<form  method="POST" action="Settings" name = "set">
             <table class = table>
                 <tbody>
                     <tr>
                         <td class = desc style="color: white; font-size: 30px; text-align: right">Major:</td>
-                        <td ><select class = field name="major" style="width:820px; font-size: 15px; font-family: tableTitles">
+                        <td ><select class = field id = "major" name="major" style="width:820px; font-size: 15px; font-family: tableTitles">
                         		<option value=0>Select a major</option>
                         		<option value=1>Accounting (BS)</option>
                         		<option value=2>Aerospace Engineering (BS)</option>
@@ -287,7 +288,7 @@
                     </tr>
                     <tr>
                         <td class = desc style="color: white; font-size: 30px; text-align: right; align: right">Minor:</td>
-                        <td><select class = field name="major" style="width:820px; font-size: 15px; font-family: tableTitles">
+                        <td><select class = field id = "minor" name="minor" style="width:820px; font-size: 15px; font-family: tableTitles">
                         		<option value=0>Select a minor</option>
                         		<option value=1>2-D Art for Games Minor</option>
                         		<option value=2>3-D Animations in Cinematic Arts Minor</option>
@@ -485,7 +486,8 @@
                         		<option value=194>Video Game Design and Management Minor </option>
                         		<option value=195>Video Game Programming Minor </option>
                         		<option value=196>Visual Culture Minor </option>
-                        		<option value=197>Web Technologies and Applications Minor  </option>		
+                        		<option value=197>Web Technologies and Applications Minor  </option>
+                        		</select>
                     </tr>
                     <tr>
                     	<td class = desc style="color: white; font-size: 30px; text-align: right">Password:</td>
@@ -512,7 +514,7 @@
                         	<option value=10>May 2024 </option>
                     </tr>
                     <tr>
-                        <td colspan="2" align="center"><input id="button1" type="button" name="submit" value="Save changes" onclick = "moveOn();" />
+                        <td colspan="2" align="center"><input id="button1" type="button" name="submit" value="Save changes" onclick = "moveOn()" />
                             &nbsp;&nbsp;<input id="button2" type="submit" name="submit" value="Clear Current Schedule" />
                             &nbsp;&nbsp;
                             <input id="button1" type="submit" value="Delete Account" />
@@ -521,7 +523,6 @@
                                       
                 </tbody>
             </table>
-            </center>
         </form>
 	</div>
 </body>
