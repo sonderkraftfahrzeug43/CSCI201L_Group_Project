@@ -98,13 +98,7 @@ public class Register extends HttpServlet {
 			stMaj = conn.createStatement();
 			stMin = conn.createStatement();
 			rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
-			    if (!rsMaj.next()){
-		            System.out.println("ERRORMajor");
-			    }
 			rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
-			    if (!rsMin.next()){
-		            System.out.println("ERRORMinor");
-			    }
 			String majorName = rsMaj.getString("name");
 			String majURL = rsMaj.getString("requirements");
 			System.out.println(majURL);
