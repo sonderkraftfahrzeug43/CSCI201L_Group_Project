@@ -30,14 +30,16 @@ public class RequirementsSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session1 = request.getSession();
-		int idmajor = 0;
-		int idminor = 0;
+		String idmajor = "0";
+		String idminor = "0";
 		if (!session1.isNew()){
-			idmajor = (Integer)session1.getAttribute("majorID");
-			idminor = (Integer)session1.getAttribute("minorID");
-		};
-		int idmajor = 24;
-		int idminor = 36;
+			idmajor = session1.getAttribute("majorID").toString();
+			idminor = session1.getAttribute("minorID").toString();
+		}
+		//String user = session1.getAttribute("iduser").toString();
+		
+		System.out.println(idmajor);
+		System.out.println(idminor);
 		String nextPage = "/requirements.jsp";
 		Connection conn = null;
 		Statement stMaj = null;
@@ -58,12 +60,16 @@ public class RequirementsSearch extends HttpServlet {
 			    if (!rsMin.next()){
 		            System.out.println("ERRORMinor");
 			    }
+			String majorName = rsMaj.getString("name");
 			String majURL = rsMaj.getString("requirements");
 			System.out.println(majURL);
+			String minorName = rsMin.getString("name");
 			String minURL = rsMin.getString("requirements");
 			System.out.println(minURL);
 			session1.setAttribute("majURL", majURL);
 			session1.setAttribute("minURL",minURL);
+			session1.setAttribute("minorName", minorName);
+			session1.setAttribute("majorName", majorName);
 		    }
 		    catch (SQLException sqle){
 			    System.out.println("sqle:" + sqle.getMessage());
