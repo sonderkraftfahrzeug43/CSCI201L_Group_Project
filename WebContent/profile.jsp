@@ -33,7 +33,7 @@
 	function req(){
 		document.require.submit();
 	}
-	function settings(){
+	function sett(){
 		document.settings.submit();
 	}
  
@@ -51,7 +51,7 @@
 		</a>
 		<form name = "settings" method = "POST" action = "Settings">
 			<div class="snlinks1">
-			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;" onclick = "settings()">
+			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;" onclick = "sett()">
 			</div>
 		</form>
 		<a href="main.jsp" class="snlinks2">
