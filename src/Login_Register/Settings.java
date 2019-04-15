@@ -1,4 +1,4 @@
-package Settings;
+package Login_Register;
 
 import java.io.IOException;
 import java.sql.Connection;
