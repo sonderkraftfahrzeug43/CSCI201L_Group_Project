@@ -33,6 +33,9 @@
 	function req(){
 		document.require.submit();
 	}
+	function settings(){
+		document.settings.submit();
+	}
  
 </script>
 <meta charset="UTF-8">
@@ -46,9 +49,11 @@
 		<a href="profile.jsp" class="snlinks">
 			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;">
 		</a>
-		<a href="settings.jsp" class="snlinks1">
-			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;">
-		</a>
+		<form name = "settings" method = "POST" action = "Settings">
+			<div class="snlinks1">
+			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;" onclick = "settings()">
+			</div>
+		</form>
 		<a href="main.jsp" class="snlinks2">
 			<img src="Images/schedule.png" alt="schedule" style="width:50px; height: 50px;">
 		</a>
@@ -79,18 +84,18 @@
 						onclick="myFunction()">Professor
 		</div>
 		<div class="User">
-			<h3  style="text-color:white; font-size: 28px">Welcome Username</h3>
+			<h3  style="text-color:white; font-size: 28px">Welcome <%= session.getAttribute("userName") %></h3>
 		</div>
 		<div class="MM">
 				<table class="sidenavtable">
 					<tbody>
                     	<tr>
                         	<td style="color: white; font-size: 28px; text-align: left; padding-bottom: 10px; padding-top: 25px;">Major:</td>
-                        	<td ><% session.getAttribute("major"); %></td>
+                        	<td ><%= session.getAttribute("majorName") %></td>
                     	</tr>
                     	<tr>
                         	<td style="color: white; font-size: 28px; text-align: left">Minor:</td>
-                        	<td ><% session.getAttribute("minor"); %></td>
+                        	<td ><%= session.getAttribute("minorName") %></td>
                     	</tr>
                 	</tbody>
                 </table>
@@ -111,6 +116,7 @@
                         <td style="color: white; font-size: 30px; text-align: left">Minor:</td>
                         <td ><%= session.getAttribute("minorName") %></td>
                     </tr>
+                    <tr>
                         <td style="color: white; font-size: 30px; text-align: left">Expected Graduation:</td>
                         <td ><!-- output user minor --></td>
                     </tr>
