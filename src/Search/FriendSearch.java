@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Search
  */
-@WebServlet("/FriendSearch")
+@WebServlet("/Search")
 public class FriendSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,101 +38,91 @@ public class FriendSearch extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchArea = request.getParameter("searchArea");
 		String searchKeyword = request.getParameter("searchKeyword");
-		if(searchArea.equals("Professor")) {
-			
-		} else if(searchArea.equals("Course")) {
-			
-		} else {
-			Connection conn = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-			boolean friendFound = false;
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-				conn = DriverManager.getConnection(url , "root" , "roottest");
-				ps = conn.prepareStatement("SELECT * FROM User WHERE userName=?");
-				ps.setString(1, searchKeyword);
-				rs = ps.executeQuery();
-				if(rs.next()) {
-					HttpSession session = request.getSession();
-					friendFound = true;
-					int friendID = rs.getInt("iduser");
-					int userID = (int)session.getAttribute("iduser");
-					Statement st = conn.createStatement();
-					ResultSet friendCourses = st.executeQuery("SELECT * FROM CourseTaking WHERE iduser=" + friendID);
-					st.close();
-					st = conn.createStatement();
-					ResultSet userCourses = st.executeQuery("SELECT * FROM CourseTaking WHERE iduser=" + userID);
-					st.close();
-					Vector<String> sharedCourses = new Vector<String>();
-					while(friendCourses.next()) {
-						int fcid = friendCourses.getInt("idcourse");
-						while(userCourses.next()) {
-							int ucid = userCourses.getInt("idcourse");
-							if(fcid == ucid) {
-								String courseName;
-								st = conn.createStatement();
-								ResultSet course = st.executeQuery("SELECT * FROM Course WHERE idcourse=" + fcid);
-								courseName = course.getString("courseName");
-								sharedCourses.add(courseName);
-								course.close();
-								st.close();
-							}
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		boolean friendFound = false;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url , "root" , "roottest");
+			ps = conn.prepareStatement("SELECT * FROM User WHERE userName=?");
+			ps.setString(1, searchKeyword);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				HttpSession session = request.getSession();
+				friendFound = true;
+				int friendID = rs.getInt("userID");
+				int userID = (int)session.getAttribute("userID");
+				Statement st = conn.createStatement();
+				ResultSet friendCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + friendID);
+				st.close();
+				st = conn.createStatement();
+				ResultSet userCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + userID);
+				st.close();
+				Vector<String> sharedCourses = new Vector<String>();
+				while(friendCourses.next()) {
+					String fcid = friendCourses.getString("name");
+					while(userCourses.next()) {
+						String ucid = userCourses.getString("name");
+						if(fcid == ucid) {
+							String courseName = fcid;
+							sharedCourses.add(courseName);
 						}
 					}
-					friendCourses.close();
-					userCourses.close();
-					int majorId = rs.getInt("idmajor");
-					int minorId = rs.getInt("idminor");
-					if(majorId != 0) {
-						String friendMajor;
-						st = conn.createStatement();
-						ResultSet major = st.executeQuery("SELECT * FROM Major WHERE idmajor=" + majorId);
-						friendMajor = major.getString("majorName");
-						st.close();
-						major.close();
-						request.setAttribute("friendMajor", friendMajor);
-						
-					} else {
-						request.setAttribute("friendMajor", null);
-					}
-					if(minorId != 0) {
-						String friendMinor;
-						st = conn.createStatement();
-						ResultSet minor = st.executeQuery("SELECT * FROM Minor WHERE idmajor=" + majorId);
-						friendMinor = minor.getString("minorName");
-						st.close();
-						minor.close();
-						request.setAttribute("friendMajor", friendMinor);
-					} else {
-						request.setAttribute("friendMinor", null);
-					}
+				}
+				friendCourses.close();
+				userCourses.close();
+				int majorId = rs.getInt("majorID");
+				int minorId = rs.getInt("minorID");
+				if(majorId != 0) {
+					String friendMajor;
+					st = conn.createStatement();
+					ResultSet major = st.executeQuery("SELECT * FROM Major WHERE majorID=" + majorId);
+					friendMajor = major.getString("name");
+					st.close();
+					major.close();
+					request.setAttribute("friendMajor", friendMajor);
 					
-					request.setAttribute("friendId", friendID);
-					request.setAttribute("sharedCourses", sharedCourses);
+					
+				} else {
+					request.setAttribute("friendMajor", null);
 				}
-				if(!friendFound) {
-					request.setAttribute("friendId", null);
+				if(minorId != 0) {
+					String friendMinor;
+					st = conn.createStatement();
+					ResultSet minor = st.executeQuery("SELECT * FROM Minor WHERE minorID=" + minorId);
+					friendMinor = minor.getString("minorName");
+					st.close();
+					minor.close();
+					request.setAttribute("friendMajor", friendMinor);
+				} else {
+					request.setAttribute("friendMinor", null);
 				}
-			} catch(ClassNotFoundException cnfe) {
-				System.out.println("cnfe:" + cnfe.getMessage());
-			} catch (SQLException sqle) {
+				
+				request.setAttribute("friendId", friendID);
+				request.setAttribute("sharedCourses", sharedCourses);
+			}
+			if(!friendFound) {
+				request.setAttribute("friendId", null);
+			}
+		} catch(ClassNotFoundException cnfe) {
+			System.out.println("cnfe:" + cnfe.getMessage());
+		} catch (SQLException sqle) {
+			System.out.println("sqle: " + sqle.getMessage());
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(ps != null) {
+					ps.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch(SQLException sqle) {
 				System.out.println("sqle: " + sqle.getMessage());
-			} finally {
-				try {
-					if(rs != null) {
-						rs.close();
-					}
-					if(ps != null) {
-						ps.close();
-					}
-					if(conn != null) {
-						conn.close();
-					}
-				} catch(SQLException sqle) {
-					System.out.println("sqle: " + sqle.getMessage());
-				}
 			}
 		}
 
