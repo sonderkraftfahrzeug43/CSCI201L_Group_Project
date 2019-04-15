@@ -99,6 +99,8 @@ public class Register extends HttpServlet {
 			stMin = conn.createStatement();
 			rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
 			rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
+			rsMaj.next();
+			rsMin.next();
 			String majorName = rsMaj.getString("name");
 			String majURL = rsMaj.getString("requirements");
 			System.out.println(majURL);
@@ -119,5 +121,5 @@ public class Register extends HttpServlet {
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
-     }
+}
 }
