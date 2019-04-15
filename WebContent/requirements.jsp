@@ -57,6 +57,9 @@
 	function prof(){
 		document.profile.submit();
 	}
+	function sett(){
+		document.settings.submit();
+	}
 	
 </script>
 <body onload = "checkMinor()">
@@ -68,9 +71,11 @@
 			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;" onclick = "prof()">
 			</div>
 		</form>
-		<a href="settings.jsp" class="snlinks1">
-			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;">
-		</a>
+		<form name = "settings" method = "POST" action = "Settings">
+			<div class="snlinks1">
+			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;" onclick = "sett()">
+			</div>
+		</form>
 		<a href="main.jsp" class="snlinks2">
 			<img src="Images/schedule.png" alt="schedule" style="width:50px; height: 50px;">
 		</a>
