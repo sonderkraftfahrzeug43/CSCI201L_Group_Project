@@ -32,43 +32,7 @@
 	}
  
 </script>
-<%
-	String userID = (String)session.getAttribute("userID");//edit late if using different session variable
-	String username;
-	String major;
-	String minor;
-	
-	Connection conn = null;
-	PreparedStatement ps1 = null;
-	PreparedStatement ps2 = null;
-	PreparedStatement ps3 = null;
-	ResultSet rs = null;
-	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-		conn = DriverManager.getConnection(url, "root", "password");
-		
-		ps1 = conn.prepareStatement("SELECT userName FROM User WHERE UserID=?");
-		ps1.setString(1, userID);
-		rs = ps1.executeQuery();
-		username = rs.getString(1);
-		
-		ps2 = conn.prepareStatement("SELECT m.name FROM Major m, User u WHERE u.UserID=? AND m.MajorID=u.majorID;");
-		ps2.setString(1, userID);
-		rs = ps2.executeQuery();
-		major = rs.getString(1);
-		
-		ps3 = conn.prepareStatement("SELECT m.name FROM Minor m, User u WHERE u.UserID=? AND m.MinorID=u.MinorID;");
-		ps3.setString(1, userID);
-		rs = ps3.executeQuery();
-		major = rs.getString(1);
-		
-	} catch(SQLException sqle) {
-		System.out.println("sqle: " + sqle.getMessage());
-	} catch(ClassNotFoundException cnfe) {
-		System.out.println("cnfe: " + cnfe.getMessage());
-	}
-%>
+
 <meta charset="UTF-8">
 <title>Schedule Builder</title>
 <link rel="stylesheet" type="text/css" href="settings.css" />
@@ -111,18 +75,18 @@
 						onclick="myFunction()">Professor
 		</div>
 		<div class="User">
-			<h3  style="text-color:white">Welcome <% out.println(username); %></h3>
+			<h3  style="text-color:white">Welcome <%= session.getAttribute("userName") %></h3>
 		</div>
 		<div class="MM">
 				<table class="sidenavtable">
 					<tbody>
                     	<tr>
                         	<td style="color: white; font-size: 28px; text-align: left">Major:</td>
-                        	<td ><% out.println(major); %></td>
+                        	<td ><%= session.getAttribute("majorName") %></td>
                     	</tr>
                     	<tr>
                         	<td style="color: white; font-size: 28px; text-align: left">Minor:</td>
-                        	<td ><% out.println(minor); %></td>
+                        	<td ><%= session.getAttribute("minorName") %></td>
                     	</tr>
                 	</tbody>
                 </table>
