@@ -17,40 +17,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class Register
- */
 @WebServlet("/Register")
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public Register() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String major = request.getParameter("major");
 		String minor = request.getParameter("minor");
 		System.out.println(major);
 		System.out.println(minor);
 		ResultSet rs = null;
+		ResultSet rsMaj = null;
+		ResultSet rsMin = null;
 		String nextPage = null;
 		Statement st = null;
+		Statement stMaj = null;
+		Statement stMin = null;
 		Connection conn = null;
 		try {
 			String username = request.getParameter("username");
@@ -61,6 +50,7 @@ public class Register extends HttpServlet {
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
 			conn = DriverManager.getConnection(url,"root","s62UcrEx");
 			st = conn.createStatement();
+			System.out.println("PENIS");
 			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + username + "'");
 			if(rs.next())
 			{
@@ -84,22 +74,47 @@ public class Register extends HttpServlet {
 				ps.executeUpdate();
 				nextPage ="/main.jsp";					
 			}
-			HttpSession session = request.getSession(true);
+			HttpSession session = request.getSession();
 			Statement st2 = null;
 			ResultSet rs2 = null;
 			st2= conn.createStatement();
+			int idmajor = 0;
+			int idminor = 0;
 			rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
 			while(rs2.next()){
 				int iduser = rs2.getInt("UserID");
-				int idmajor = rs2.getInt("majorID");
-				int idminor = rs2.getInt("minorID");
-				int idgradyear = rs2.getInt("gradYID");
-				session.setAttribute("userName", username);
-				session.setAttribute("UserID", iduser);
-				session.setAttribute("majorID", idmajor);
-				session.setAttribute("minorID", idminor);
-				session.setAttribute("gradYID", idgradyear);
+				idmajor = rs2.getInt("majorID");
+				idminor = rs2.getInt("minorID");
+				int gradyear = rs2.getInt("gradYID");
+				if (!session.isNew()){
+					session.setAttribute("userName", username);
+					session.setAttribute("UserID", iduser);
+					session.setAttribute("majorID", idmajor);
+					session.setAttribute("minorID", idminor);
+					System.out.println(session.getAttribute("minorID") + " APPLE " + session.getAttribute("majorID"));
+					session.setAttribute("gradYID", gradyear);
+				}
 			}
+			stMaj = conn.createStatement();
+			stMin = conn.createStatement();
+			rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
+			    if (!rsMaj.next()){
+		            System.out.println("ERRORMajor");
+			    }
+			rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
+			    if (!rsMin.next()){
+		            System.out.println("ERRORMinor");
+			    }
+			String majorName = rsMaj.getString("name");
+			String majURL = rsMaj.getString("requirements");
+			System.out.println(majURL);
+			String minorName = rsMin.getString("name");
+			String minURL = rsMin.getString("requirements");
+			System.out.println(minURL);
+			session.setAttribute("majURL", majURL);
+			session.setAttribute("minURL",minURL);
+			session.setAttribute("minorName", minorName);
+			session.setAttribute("majorName", majorName);
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("cnf: " + e.getMessage());
@@ -110,5 +125,5 @@ public class Register extends HttpServlet {
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
-}
+     }
 }
