@@ -5,8 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Schedule Builder</title>
+	<script>
+	function loadPage(){
+		document.login.submit();
+	}
+	</script>
 </head>
-<body>
-
+<body onload = "loadPage()">
+	<form name = "login" method = "POST" action="Index">
+	</form>
 </body>
 </html>
