@@ -1,4 +1,5 @@
-package Search;
+package PageData;
+
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/ProfileSearch")
-public class ProfileSearch extends HttpServlet {
+public class ProfileData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public ProfileSearch() {
+    public ProfileData() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -122,4 +123,5 @@ public class ProfileSearch extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
 	}
+}
 }
