@@ -1,4 +1,4 @@
-package Search;
+package PageData;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,10 +19,10 @@ import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/RequirementsSearch")
-public class RequirementsSearch extends HttpServlet {
+public class RequirementsData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public RequirementsSearch() {
+    public RequirementsData() {
         super();
        
     }
