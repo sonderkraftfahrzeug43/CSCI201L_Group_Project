@@ -26,6 +26,13 @@
 			document.getElementById("showProfessorSearch").style.display = "block";
 		}
 	} 
+	
+	<%
+		String friendName = (String)request.getAttribute("friendName");
+		String friendMajor = (String)request.getAttribute("friendMajor");
+		String friendMinor = (String)request.getAttribute("friendMinor");
+		System.out.println("result received:" + friendName);
+	%>
  
 </script>
 <meta charset="UTF-8">
@@ -90,12 +97,11 @@
             	    </table>
 			</div>
 			<div class="Updates">
-				<h6 style="text-color:white; font-size: 28px">Updates: </h6>
+				<h6 style="text-color:white; font-size: 28px">Updates:</h6>
 			</div>
 		</div>
 	</section>
 	<section>
-         
   </section>
 		
     
