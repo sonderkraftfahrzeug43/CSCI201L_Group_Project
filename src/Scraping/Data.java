@@ -39,6 +39,10 @@ public class Data {
 		}
 	}
 	
+	public Vector<Department> getDepartments() {
+		return departments;
+	}
+	
 	// Search by department acronym
 	public Vector<Department> findDepartmentAcro(String name) {
 		Vector<Department> validDep = new Vector<Department>();
@@ -59,7 +63,6 @@ public class Data {
 		for (int j = 0; j < departments.size(); j++) {
 			Vector<Course> courses = departments.get(j).courses;
 			for (int i = 0; i < courses.size(); i++) {
-				
 				if (courses.get(i).name.toLowerCase().contains(courseName) || courses.get(i).title.toLowerCase().contains(courseName)) {
 					validCourses.add(courses.get(i));
 				}

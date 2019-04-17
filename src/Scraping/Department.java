@@ -60,14 +60,14 @@ public class Department {
 			fr.close();	
 		} catch (FileNotFoundException fnfe) {
 			System.out.println("The file " + filename + " cannot be found. \n");
-			return null;
+			return courses;
 		} catch (IOException ioe) {
 			System.out.println("Input/Output Error: " + ioe.getMessage() + "\n");
-			return null;
+			return courses;
 		} catch (Exception e) {
 			System.out.println("Error in Department for " + filename + ": " + e.getMessage());
 			System.out.println(line + "  vs  " + parts[0]);
-			return null;
+			return courses;
 		}
 		return courses; 
 	}

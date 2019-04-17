@@ -12,6 +12,8 @@ public class Scheduling {
 	
 	public static void main(String[] args) {
 		Data d = new Data();
+		Vector<Department> dep = d.getDepartments();
+		
 //
 //		
 //		
@@ -31,9 +33,9 @@ public class Scheduling {
 			if (word.contentEquals("break")) break;
 			
 			Vector<Course> c = d.findCourses(word);
-			for (int i = 0 ; i < c.size(); i++) {
-				c.get(i).printInfo();
-			}
+//			for (int i = 0 ; i < c.size(); i++) {
+//				c.get(i).printInfo();
+//			}
 			
 		}
 		scan.close();
