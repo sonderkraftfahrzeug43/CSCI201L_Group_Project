@@ -38,7 +38,11 @@ public class Section {
 		System.out.println(sectionType + ", " + sectionID + ", " 
 				+ time.getFormattedTime() + ", " + professor + ", " + location);
 	}
-	
+	public String getInfo() {
+		String returnable = sectionType + ", " + sectionID + ", " 
+				+ time.getFormattedTime() + ", " + professor + ", " + location;
+		return returnable;
+	}
 	private boolean[] getDays(String line) {
 		boolean[] days = new boolean[8];
 		String[] parts = line.split(",");
