@@ -59,26 +59,26 @@
 			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;">
 		</a>
 		<input id="button3" type="button" name="submit" value="Logout" onclick = "logout()"/>
-		<div id="showClassSearch" class="showClassSearch">
-			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Class...">
-			<button type="submit" name="classSearch"></button>
-		</div>
-		<div id="showFriendSearch" class="showFriendSearch">
-			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
-			<button type="submit" name="friendSearch"></button>
-		</div>
-		<div id="showProfessorSearch" class="showProfessorSearch">
-			<input type="text" name="professor" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Professor...">
-			<button type="submit" name="professorSearch"></button>
-		</div>
-		<div class="radio-button-div">
-					<input type="radio" name="option" id="Class" value="Class"
-						checked="checked" onclick="myFunction()">Class
-					<input type="radio" name="option" id="Friend" value="Friend"
-						onclick="myFunction()">Friend
-					<input type="radio" name="option" id="Professor" value="Professor"
-						onclick="myFunction()">Professor
-		</div>
+		<form name = "rButton" method = "POST" action = "Results">
+			<input id="button3" type="button" name="submit" value="Logout" onclick = "logout()"/>
+			<div id="showClassSearch" class="showClassSearch">
+				<input type="text" name="classText" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Class...">
+				<button type="submit" name="classSearch"></button>
+			</div>
+			<div id="showFriendSearch" class="showFriendSearch">
+				<input type="text" name="friendText" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
+				<button type="submit" name="friendSearch"></button>
+			</div>
+			<div id="showProfessorSearch" class="showProfessorSearch">
+				<input type="text" name="professorText" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Professor...">
+				<button type="submit" name="professorSearch"></button>
+			</div>
+			<div class="radio-button-div" name = "radioButton" id = "radioButton">
+					<input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class
+					<input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend
+					<input type="radio" name="option" id="Professor" value="Professor"onclick="myFunction()">Professor		
+			</div>
+		</form> 
 		<div class="User">
 			<h3  style="text-color:white">Welcome <%= session.getAttribute("userName") %></h3>
 		</div>
