@@ -13,11 +13,6 @@ public class Department {
 		String filename = System.getProperty("user.dir") + "\\classCSV\\" + acro + ".csv";
 		acronym = acro;
 		courses = getCourses(filename);
-		if (acronym.contentEquals("CSCI")) {
-			for (int i = 0; i < courses.size(); i++) {
-				System.out.println(courses.get(i).title);
-			}
-		}
 	}
 	
 	public void printInfo() {

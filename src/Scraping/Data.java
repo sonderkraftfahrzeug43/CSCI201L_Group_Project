@@ -21,7 +21,6 @@ public class Data {
 				Department d = new Department(line);
 				departments.add(d);
 				line = br.readLine();
-				System.out.println(line);
 			}
 			br.close();
 			fr.close();	
@@ -57,10 +56,10 @@ public class Data {
 		Vector<Course> validCourses = new Vector<Course>();
 		
 		courseName = courseName.toLowerCase();
-//		System.out.println(courseName);
 		for (int j = 0; j < departments.size(); j++) {
 			Vector<Course> courses = departments.get(j).courses;
 			for (int i = 0; i < courses.size(); i++) {
+				
 				if (courses.get(i).name.toLowerCase().contains(courseName) || courses.get(i).title.toLowerCase().contains(courseName)) {
 					validCourses.add(courses.get(i));
 				}
