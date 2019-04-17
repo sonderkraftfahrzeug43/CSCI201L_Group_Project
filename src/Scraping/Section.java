@@ -33,7 +33,11 @@ public class Section {
 		
 		
 	}
-	
+	String getInfo() {
+		String returnable = sectionType + ", " + sectionID + ", " 
+				+ time.getFormattedTime() + ", " + professor + ", " + location;
+		return returnable;
+	}
 	void printInfo() {
 		System.out.println(sectionType + ", " + sectionID + ", " 
 				+ time.getFormattedTime() + ", " + professor + ", " + location);
