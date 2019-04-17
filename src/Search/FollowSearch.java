@@ -7,9 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.TimeZone;
 import java.util.Vector;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +39,8 @@ public class FollowSearch extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchKeyword = request.getParameter("friend");
+		System.out.println("followsearch recevied:" + searchKeyword);
+		request.setAttribute("friendName", searchKeyword);
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -49,35 +53,21 @@ public class FollowSearch extends HttpServlet {
 			ps.setString(1, searchKeyword);
 			rs = ps.executeQuery();
 			if(rs.next()) {
+				
 				HttpSession session = request.getSession();
 				friendFound = true;
 				int friendID = rs.getInt("userID");
-				int userID = (int)session.getAttribute("userID");
+				int userID = Integer.parseInt((String)session.getAttribute("UserID"));
 				Statement st = conn.createStatement();
-				ResultSet friendCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + friendID);
-				st.close();
-				st = conn.createStatement();
-				ResultSet userCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + userID);
-				st.close();
-				Vector<String> sharedCourses = new Vector<String>();
-				while(friendCourses.next()) {
-					String fcid = friendCourses.getString("name");
-					while(userCourses.next()) {
-						String ucid = userCourses.getString("name");
-						if(fcid == ucid) {
-							String courseName = fcid;
-							sharedCourses.add(courseName);
-						}
-					}
-				}
-				friendCourses.close();
-				userCourses.close();
+				
 				int majorId = rs.getInt("majorID");
+				System.out.println(majorId);
 				int minorId = rs.getInt("minorID");
 				if(majorId != 0) {
 					String friendMajor;
 					st = conn.createStatement();
-					ResultSet major = st.executeQuery("SELECT * FROM Major WHERE majorID=" + majorId);
+					ResultSet major = st.executeQuery("SELECT * FROM Major WHERE MajorID=" + majorId);
+					major.next();//this is not okay
 					friendMajor = major.getString("name");
 					st.close();
 					major.close();
@@ -88,16 +78,62 @@ public class FollowSearch extends HttpServlet {
 				if(minorId != 0) {
 					String friendMinor;
 					st = conn.createStatement();
-					ResultSet minor = st.executeQuery("SELECT * FROM Minor WHERE minorID=" + minorId);
-					friendMinor = minor.getString("minorName");
+					ResultSet minor = st.executeQuery("SELECT * FROM Minor WHERE MinorID=" + minorId);
+					minor.next();//this is not okay
+					friendMinor = minor.getString("name");
 					st.close();
 					minor.close();
-					request.setAttribute("friendMajor", friendMinor);
+					request.setAttribute("friendMinor", friendMinor);
 				} else {
 					request.setAttribute("friendMinor", null);
 				}
 				
 				request.setAttribute("friendId", friendID);
+				
+				
+				
+				ArrayList<String> friendCoursesAL = new ArrayList<String>();
+				ResultSet friendCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + friendID);
+				String fcid = friendCourses.getString("name");
+				friendCoursesAL.add(fcid);
+				while(friendCourses.next()) {
+					fcid = friendCourses.getString("name");
+					friendCoursesAL.add(fcid);
+				}
+				
+				st.close();
+				
+				st = conn.createStatement();
+				ArrayList<String> userCoursesAL = new ArrayList<String>();
+				ResultSet userCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + userID);
+				String ucid = userCourses.getString("name");
+				userCoursesAL.add(ucid);
+				while(userCourses.next()) {
+					ucid = userCourses.getString("name");
+					userCoursesAL.add(ucid);
+				}
+				
+				st.close();
+				
+				friendCourses.close();
+				userCourses.close();
+				
+				ArrayList<String> sharedCourses = new ArrayList<String>();
+				
+				
+				
+				
+				
+				
+				for(int i = 0; i < friendCoursesAL.size(); ++i) {
+					for(int j = 0; j < userCoursesAL.size(); ++j) {
+						if(userCoursesAL.get(j).equals(friendCoursesAL.get(i))) {
+							sharedCourses.add(userCoursesAL.get(j));
+						}
+					}
+				}
+				
+				
 				request.setAttribute("sharedCourses", sharedCourses);
 			}
 			if(!friendFound) {
@@ -122,6 +158,9 @@ public class FollowSearch extends HttpServlet {
 				System.out.println("sqle: " + sqle.getMessage());
 			}
 		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/results.jsp");
+		dispatcher.forward(request, response);
+
 
 	}
 
