@@ -1,4 +1,4 @@
-package Scraping;
+
 public class Section {
 	public String sectionID;
 	public String sectionType;

@@ -1,4 +1,3 @@
-package Scraping;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,11 +17,11 @@ public class Data {
 			BufferedReader br = new BufferedReader(fr);
 			String line = br.readLine();
 			
-//			int i = 0;
 			while (line != null) {		
 				Department d = new Department(line);
 				departments.add(d);
 				line = br.readLine();
+				System.out.println(line);
 			}
 			br.close();
 			fr.close();	

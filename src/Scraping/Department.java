@@ -1,4 +1,3 @@
-package Scraping;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,6 +13,11 @@ public class Department {
 		String filename = System.getProperty("user.dir") + "\\classCSV\\" + acro + ".csv";
 		acronym = acro;
 		courses = getCourses(filename);
+		if (acronym.contentEquals("CSCI")) {
+			for (int i = 0; i < courses.size(); i++) {
+				System.out.println(courses.get(i).title);
+			}
+		}
 	}
 	
 	public void printInfo() {
@@ -40,8 +44,10 @@ public class Department {
 			while (line != null) {
 				parts = Algorithms.readCSV(line);
 
-				if (parts[0].contentEquals("") || parts[0].contentEquals("'")) 
+				if (parts[0].contentEquals("'")) {
+					System.out.println("Early return " + filename + " " + line);
 					return courses;
+				}
 				
 				// Create new course if the first few columns are blank
 				if (parts[0].length() != 0 && parts[1].length() != 0 && parts[3].length() != 0) {

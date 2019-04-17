@@ -1,4 +1,4 @@
-package Scraping;
+import java.util.Scanner;
 import java.util.Vector;
 
 public class Scheduling {
@@ -10,7 +10,38 @@ public class Scheduling {
 	public Scheduling() {
 	}
 	
-	public Vector<Vector<Section>> schedule(Vector<Course> _courses) {
+	public static void main(String[] args) {
+		Data d = new Data();
+//
+//		
+//		
+//		Course cs201 = d.findCourses("Software").get(0);
+//		Course cs270 = d.findCourses("Algorithms").get(0);
+//		
+//		Vector<Course> desiredCourses = new Vector<Course>();
+//		desiredCourses.add(cs201);
+//		desiredCourses.add(cs270);
+//		
+//		Vector<Vector<Section>> all = schedule(desiredCourses);
+		Scanner scan = new Scanner(System.in);
+		while (true) {
+			System.out.print("Word: ");
+			String word = scan.nextLine();
+			
+			if (word.contentEquals("break")) break;
+			
+			Vector<Course> c = d.findCourses(word);
+			for (int i = 0 ; i < c.size(); i++) {
+				c.get(i).printInfo();
+			}
+			
+		}
+		scan.close();
+		System.out.println("done");
+
+	}
+	
+	public static Vector<Vector<Section>> schedule(Vector<Course> _courses) {
 		courses = _courses;
 		
 		
@@ -23,9 +54,7 @@ public class Scheduling {
 			for (int j = 0; j < possible.get(i).size(); j++) {
 				s.addSection(possible.get(i).get(j));
 			}
-			
 			s.printSchedule();
-
 		}
 		
 		Vector<Vector<Section>> actual = new Vector<Vector<Section>>();

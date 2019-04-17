@@ -1,4 +1,3 @@
-package Scraping;
 import java.util.Scanner;
 
 // Just a convenient class to store the section times

@@ -1,4 +1,3 @@
-package Scraping;
 import java.util.Vector;
 
 public class Schedule {
