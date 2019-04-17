@@ -21,13 +21,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class Search
  */
 @WebServlet("/Search")
-public class FollowSearch extends HttpServlet {
+public class FollowSesrch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowSearch() {
+    public FollowSesrch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +36,7 @@ public class FollowSearch extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String searchArea = request.getParameter("searchArea");
-		String searchKeyword = request.getParameter("searchKeyword");
+		String searchKeyword = request.getParameter("friend");
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -83,8 +82,6 @@ public class FollowSearch extends HttpServlet {
 					st.close();
 					major.close();
 					request.setAttribute("friendMajor", friendMajor);
-					
-					
 				} else {
 					request.setAttribute("friendMajor", null);
 				}
