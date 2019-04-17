@@ -1,6 +1,8 @@
- package PageData;
+  package PageData;
 
 import java.io.IOException;
+import java.util.Vector;
+
 import Scraping.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ public class Results extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String choice = request.getParameter("option");
+		Vector<String> results = new Vector<String>();
 		HttpSession session = request.getSession();
 		String search = "";
 		String nextPage = "/results.jsp";
@@ -31,7 +34,17 @@ public class Results extends HttpServlet {
 			search = request.getParameter("friendText");
 			if (search != null){
 				Data data = (Data)session.getAttribute("data");
-				
+				Vector<Course> courses = Data.findCourses(search);
+				if (courses.size()==0){
+					results.add("No results available");
+				}
+				else{
+						results.add(courses.get(0).getHeader());
+						for (int index = 0; index < courses.get(0).getSections().size();index++){
+							results.addElement(courses.get(0).getSections().get(index).getInfo());
+					}
+				}
+			session.setAttribute("resultsArray", results);	
 			}
 			else{
 				nextPage = ("/profile.jsp");
