@@ -17,81 +17,108 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class Login
- */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
-	
+@WebServlet("/Register")
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName = request.getParameter("username");
-		String password = request.getParameter("password");
-		String nextPage = "/login.jsp";
-		Connection conn = null;
-		Statement st = null;
+    public Register() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String major = request.getParameter("major");
+		String minor = request.getParameter("minor");
+		System.out.println(major);
+		System.out.println(minor);
 		ResultSet rs = null;
+		ResultSet rsMaj = null;
+		ResultSet rsMin = null;
+		String nextPage = null;
+		Statement st = null;
+		Statement stMaj = null;
+		Statement stMin = null;
+		Connection conn = null;
 		try {
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			System.out.println(username + " " + password);
+			String sql = "insert into user(userName,pass, majorID, minorID, gradYID) values(?,?,?,?,1)";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url , "root" , "yourpassword");
+			conn = DriverManager.getConnection(url,"root","s62UcrEx");
 			st = conn.createStatement();
-			//st.executeUpdate("UPDATE `pageVisited` SET `count` = `count`+1 WHERE userID=4 and pageid=1)
-			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + userName + "'");
-			boolean username_exists = false; 
-			boolean username_and_password = false; 
-			HttpSession session1 = request.getSession(true);
+			System.out.println("PENIS");
+			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + username + "'");
 			if(rs.next())
 			{
-				// wrong password
-				username_exists = true; 
-				request.setAttribute("wpError", "Wrong password");
-			}	
-			st = conn.createStatement();
-			//st.executeUpdate("UPDATE `pageVisited` SET `count` = `count`+1 WHERE userID=4 and pageid=1)
-			rs = st.executeQuery("SELECT * FROM User WHERE userName='" + userName + "' and pass= '"+password+"'");
-			if(rs.next()) 
+				request.setAttribute("utError", "User is taken");
+				nextPage ="/registration.jsp";
+			}
+			else if(major.equals("0")){
+				request.setAttribute("utError", "You must select a major");
+				nextPage ="/registration.jsp";
+			}
+			else
 			{
-				// login
-				String iduser = rs.getString("UserID");
-				String idmajor = rs.getString("majorID");
-				String idminor = rs.getString("minorID");
-				String idgradyear = rs.getString("gradYID");
-				username_and_password = true;
-				nextPage = "/main.jsp";
-				session1.setAttribute("userName", userName);
-				session1.setAttribute("UserID", iduser);
-				session1.setAttribute("majorID", idmajor);
-				session1.setAttribute("minorID", idminor);
-				session1.setAttribute("gradYID", idgradyear);
-				
+				if (minor.equals("0")){
+					minor = null;
+				}
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, username);
+				ps.setString(2, password);
+				ps.setString(3, major);
+				ps.setString(4, minor);
+				ps.executeUpdate();
+				nextPage ="/main.jsp";					
 			}
+			HttpSession session = request.getSession();
+			Statement st2 = null;
+			ResultSet rs2 = null;
+			st2= conn.createStatement();
+			String idmajor = "0";
+			String idminor = "0";
+			rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
+			while(rs2.next()){
+				String iduser = rs2.getString("UserID");
+				idmajor = rs2.getString("majorID");
+				idminor = rs2.getString("minorID");
+				String gradyear = rs2.getString("gradYID");
+				if (!session.isNew()){
+					session.setAttribute("userName", username);
+					session.setAttribute("UserID", iduser);
+					session.setAttribute("majorID", idmajor);
+					session.setAttribute("minorID", idminor);
+					System.out.println(session.getAttribute("minorID") + " APPLE " + session.getAttribute("majorID"));
+					session.setAttribute("gradYID", gradyear);
+				}
+			}
+			stMaj = conn.createStatement();
+			stMin = conn.createStatement();
+			rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
+			rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
+			rsMaj.next();
+			rsMin.next();
+			String majorName = rsMaj.getString("name");
+			String majURL = rsMaj.getString("requirements");
+			System.out.println(majURL);
+			String minorName = rsMin.getString("name");
+			String minURL = rsMin.getString("requirements");
+			System.out.println(minURL);
+			session.setAttribute("majURL", majURL);
+			session.setAttribute("minURL",minURL);
+			session.setAttribute("minorName", minorName);
+			session.setAttribute("majorName", majorName);
 			
-			if(!username_exists) {
-				// user does not exist
-				request.setAttribute("nuError", "User does not exist");
-				nextPage = "/login.jsp";
-			}
-			
-		} catch (SQLException sqle) {
-			System.out.println("sqle: " + sqle.getMessage());
-		} catch (ClassNotFoundException cnfe) {
-			System.out.println("cnfe: " + cnfe.getMessage());
-		} finally {
-			try {
-				if(rs != null) {rs.close();}
-				if(st != null) {st.close();}
-				if(conn != null) {conn.close();}
-			} catch (SQLException sqle) {
-				System.out.println("sqle: " + sqle.getMessage());
-			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("cnf: " + e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("sqle: " + e.getMessage());
+			e.printStackTrace();
 		}
-	
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
 	}
