@@ -5,64 +5,53 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class Department {
-	private Vector<Course> courses = new Vector<Course>();
+	public Vector<Course> courses = new Vector<Course>();
 //	private String name = "";
-	private String acronym = "";
-	private static final String year = "-20193";
+	public String acronym = "";
 	
 	public Department(String acro) {
-		String filename = acro + year + ".csv";
+		String filename = System.getProperty("user.dir") + "\\classCSV\\" + acro + ".csv";
 		acronym = acro;
-		Vector<Course> courses = parseData(filename);
-		
+		courses = getCourses(filename);
 	}
 	
-	public static void main(String[] args) {
-		// Read in from the list of acronym
-		// Instantiate all departments
-		
-	}
-
-	public static Vector<Course> findCourses(String courseName, Vector<Course> courses) {
-		Vector<Course> validCourses = new Vector<Course>();
-		
-		courseName = courseName.toLowerCase();
-		System.out.println(courseName);
-		
+	public void printInfo() {
+		System.out.println(acronym + ": ");
 		for (int i = 0; i < courses.size(); i++) {
-			if (courses.get(i).name.toLowerCase().contains(courseName) || courses.get(i).title.toLowerCase().contains(courseName)) {
-				validCourses.add(courses.get(i));
-//				System.out.println("Found: " + courses.get(i).name);
-			}
+			System.out.println("	at " + i + " " + courses.get(i).name);
 		}
-		return validCourses;
 	}
 
-	
-	
-	
 	
 	
 	
 	// PRIVATE HELPER FUNCTIONS BELOW
-	private static Vector<Course> parseData(String filename) {
+	private static Vector<Course> getCourses(String filename) {
 		Vector<Course> courses = new Vector<Course>();
+		String line = "";
+		String[] parts = null;
 		try {
 			FileReader fr = new FileReader(filename);
 			BufferedReader br = new BufferedReader(fr);
-			String line = br.readLine();
+			line = br.readLine();
 			line = br.readLine();
 			
 			while (line != null) {
+				parts = Algorithms.readCSV(line);
 
-				String[] parts = readCSV(line);
+				if (parts[0].contentEquals("") || parts[0].contentEquals("'")) 
+					return courses;
 				
 				// Create new course if the first few columns are blank
-				if (parts[0].length() != 0) 
+				if (parts[0].length() != 0 && parts[1].length() != 0 && parts[3].length() != 0) {
 					courses.add(new Course(parts[0], parts[1], parts[3]));
-					
+				}
 				Course course = courses.get(courses.size()-1);
-				course.addSection(new Section(parts));
+	
+				if (parts[5].length() != 0) 
+					course.addSection(new Section(parts));
+				
+	
 				line = br.readLine();	
 			}
 			br.close();
@@ -73,50 +62,11 @@ public class Department {
 		} catch (IOException ioe) {
 			System.out.println("Input/Output Error: " + ioe.getMessage() + "\n");
 			return null;
-		} 
-		return courses;
-	}
-	
-	private static String[] readCSV(String line) {
-		String[] entries = new String[14];
-		for (int i = 0; i < 14; i++)
-			entries[i] = "";
-		
-		int index = 0;
-		
-		boolean quotes = false;
-		String word = "";
-		
-		int j = 0;
-		for (int i = 0; i < line.length(); i++) {
-			char c = line.charAt(i);
-
-			if (quotes) {
-				if (c == '\"') quotes = false;
-				else word += c;
-			}
-			else {
-				if (c == ',') {
-//					System.out.println("inserting " + word + " " + index);
-					entries[index] = word;
-					index++;
-					word = "";
-				}
-				else if (c == '\"') quotes = true;
-				else word += c;	
-			}
+		} catch (Exception e) {
+			System.out.println("Error in Department for " + filename + ": " + e.getMessage());
+			System.out.println(line + "  vs  " + parts[0]);
+			return null;
 		}
-		return entries;
+		return courses; 
 	}
-	
-	private static String remove(String s, char remove) {
-		String ret = "";
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) != remove) 
-				ret += s.charAt(i);
-		}
-		return ret;
-	}
-	
-	
 }

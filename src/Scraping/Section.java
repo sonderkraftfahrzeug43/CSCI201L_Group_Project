@@ -17,13 +17,19 @@ public class Section {
 //		for (int i = 0; i < parts.length; i++) {
 //			System.out.println(i + ": " + parts[i]);
 //		}
-		
+//		System.out.println("1 ");
 		sectionType = parts[4];
+//		System.out.println("2 ");
 		sectionID = parts[5];
+//		System.out.println("3 ");
 		time = new Time(parts[7]);
+//		System.out.println("4 ");
 		days = getDays(parts[8]);
+//		System.out.println("5 ");
 		professor = parts[12];
+//		System.out.println("6 ");
 		location = parts[13];
+//		System.out.println("7 ");
 		
 		
 	}
@@ -69,6 +75,45 @@ public class Section {
 					days[1] = true;
 					days[3] = true;
 				}
+				else if (parts[0].toLowerCase().contains("mtuwth")) {
+					days[0] = true;
+					days[1] = true;
+					days[2] = true;
+					days[3] = true;
+				}
+				else if (parts[0].toLowerCase().contains("tuwthf")) {
+					days[4] = true;
+					days[1] = true;
+					days[2] = true;
+					days[3] = true;
+				}
+				else if (parts[0].toLowerCase().contains("mtuthf")) {
+					days[0] = true;
+					days[1] = true;
+					days[3] = true;
+					days[4] = true;
+				}
+				else if (parts[0].toLowerCase().contains("mwthf")) {
+					days[0] = true;
+					days[2] = true;
+					days[3] = true;
+					days[4] = true;
+				}
+				else if (parts[0].toLowerCase().contains("tuthf")) {
+					days[1] = true;
+					days[3] = true;
+					days[4] = true;
+				}
+				else if (parts[0].toLowerCase().contains("mtuwf")) {
+					days[0] = true;
+					days[1] = true;
+					days[2] = true;
+					days[4] = true;
+				}
+				else if (parts[0].toLowerCase().contains("sat")) {
+					days[5] = true;
+				}
+				
 				else {
 					System.out.println("\t\t\t\t\t" + i + " - Breaking out because unexpected input: " + parts[i] + " from sectionID " + sectionID);
 					break;

@@ -58,9 +58,14 @@ public class Time {
 				endTime += in.charAt(i);
 			}
 		}
-		
-		militaryStart = Integer.parseInt(flatStart);
-		militaryEnd = Integer.parseInt(flatEnd);
+		if (flatStart == "" || flatEnd == "") {
+			militaryStart = -1;
+			militaryEnd = -1;
+		}
+		else {
+			militaryStart = Integer.parseInt(flatStart);
+			militaryEnd = Integer.parseInt(flatEnd);
+		}
 		
 //		System.out.println(startTime + " vs " + endTime);
 		if (startTime.length() > endTime.length()) {
@@ -75,15 +80,6 @@ public class Time {
 			
 		}
 		
-//		System.out.println("flatStart: " + flatStart);
-//		System.out.println("flatEnd: " + flatEnd);
-//		System.out.println("start: " + startTime);
-//		System.out.println("end: " + endTime);
-//		System.out.println("formatted: " + getFormattedTime());
-//		if (AMPM.contentEquals("PM") && !jumps) {
-//			System.out.println("				milStart: " + militaryStart + " vs " + flatStart);
-//			System.out.println("				milEnd: " + militaryEnd + " vs " + flatEnd);
-//		}
 
 	}
 	

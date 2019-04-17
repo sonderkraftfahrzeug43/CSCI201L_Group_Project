@@ -4,19 +4,75 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+// Class that encapsulates all the data scraped
+public class Data {
+	public final static String filename = "./acronymList.txt";
+	private static Vector<Department> departments = new Vector<Department>();
+	
+	public Data() {
+		System.out.println(System.getProperty("user.dir"));
+		// Read in all the departments and instantiate them
+		try {
+			FileReader fr = new FileReader(filename);
+			BufferedReader br = new BufferedReader(fr);
+			String line = br.readLine();
+			
+//			int i = 0;
+			while (line != null) {		
+				Department d = new Department(line);
+				departments.add(d);
+				line = br.readLine();
+			}
+			br.close();
+			fr.close();	
+	
+		} catch (FileNotFoundException fnfe) {
+			System.out.println("The file " + filename + " cannot be found. \n"); 
+			return;
 
-public class Algorithms {
-	// Returns a list of possible sections
-	public static Vector<Vector<Section>> schedule(Vector<Course> courses) {
-		return Scheduling.schedule(courses);
+		} catch (IOException ioe) {
+			System.out.println("Input/Output Error: " + ioe.getMessage() + "\n");
+			return;
+
+		} catch (Exception ex) {
+			System.out.println("There was an error parsing.");
+			return;
+		}
 	}
-
+	
+	// Search by department acronym
+	public Vector<Department> findDepartmentAcro(String name) {
+		Vector<Department> validDep = new Vector<Department>();
+		for (int i = 0; i < departments.size(); i++) {
+			if (departments.get(i).acronym.toLowerCase().contentEquals(name)) {
+				validDep.add(departments.get(i));
+			}
+		}
+		return validDep;
+	}
+	
+	
+	
+	public static Vector<Course> findCourses(String courseName) {
+		Vector<Course> validCourses = new Vector<Course>();
+		
+		courseName = courseName.toLowerCase();
+//		System.out.println(courseName);
+		for (int j = 0; j < departments.size(); j++) {
+			Vector<Course> courses = departments.get(j).courses;
+			for (int i = 0; i < courses.size(); i++) {
+				if (courses.get(i).name.toLowerCase().contains(courseName) || courses.get(i).title.toLowerCase().contains(courseName)) {
+					validCourses.add(courses.get(i));
+				}
+			}
+		}
+		return validCourses;
+	}
+	
 	
 	public static void main(String[] args) {
 		
 	}
-	
-	
 	
 	// PRIVATE HELPER FUNCTIONS BELOW
 	private static Vector<Course> parseCourses(String filename) {
@@ -62,11 +118,13 @@ public class Algorithms {
 		
 		boolean quotes = false;
 		String word = "";
+
+
 		
 		for (int i = 0; i < line.length(); i++) {
 			char c = line.charAt(i);
 
-			// Kill rest of entry data if there is a carrot
+			// Kill rest of entry data if there is a carot
 			if (c == '<') {
 				for (int k = index; k < 14; k++) {
 					entries[k] = null;
@@ -112,13 +170,4 @@ public class Algorithms {
 		}
 		return ret;
 	}
-	
-
-	
-	
-	
-		
-	
-	
-	
 }
