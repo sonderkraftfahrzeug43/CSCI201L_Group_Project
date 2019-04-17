@@ -1,4 +1,4 @@
-  package PageData;
+ package PageData;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -31,8 +31,9 @@ public class Results extends HttpServlet {
 		System.out.println("NEW REQUEST");
 		if(choice.equals("Class")){
 			System.out.println("CODE FOR CLASS");
-			search = request.getParameter("friendText");
+			search = request.getParameter("classText");
 			if (search != null){
+				System.out.println(search);
 				Data data = (Data)session.getAttribute("data");
 				Vector<Course> courses = Data.findCourses(search);
 				if (courses.size()==0){
@@ -76,3 +77,4 @@ public class Results extends HttpServlet {
 	}
 
 }
+
