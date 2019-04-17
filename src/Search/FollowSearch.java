@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Search
  */
-@WebServlet("/Search")
+@WebServlet("/FollowSearch")
 public class FollowSesrch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
