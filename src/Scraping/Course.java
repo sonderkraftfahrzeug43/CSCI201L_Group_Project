@@ -36,15 +36,15 @@ public class Course {
 	}
 
 	
-	Vector<Section> getSections() {
+	public Vector<Section> getSections() {
 		return sections;
 	}
 	
-	void addSection(Section s) {
+	public void addSection(Section s) {
 		sections.add(s);
 	}
 	
-	void printInfo() {
+	public void printInfo() {
 		System.out.println(name + ": " + title + " (" + units + ")");
 		for (int i = 0; i < sections.size(); i++) {
 			System.out.print("\t");
