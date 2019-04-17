@@ -77,39 +77,6 @@ public class Data {
 		
 	}
 	
-	// PRIVATE HELPER FUNCTIONS BELOW
-	private static Vector<Course> parseCourses(String filename) {
-		Vector<Course> courses = new Vector<Course>();
-		try {
-			FileReader fr = new FileReader(filename);
-			BufferedReader br = new BufferedReader(fr);
-			String line = br.readLine();
-			line = br.readLine();
-			
-			while (line != null) {
-
-				String[] parts = readCSV(line);
-				
-				// Create new course if the first few columns are blank
-				if (parts[0].length() != 0) 
-					courses.add(new Course(parts[0], parts[1], parts[3]));
-					
-				Course course = courses.get(courses.size()-1);
-				course.addSection(new Section(parts, course));
-				line = br.readLine();	
-			}
-			br.close();
-			fr.close();	
-		} catch (FileNotFoundException fnfe) {
-			System.out.println("The file " + filename + " cannot be found. \n");
-			return null;
-		} catch (IOException ioe) {
-			System.out.println("Input/Output Error: " + ioe.getMessage() + "\n");
-			return null;
-		} 
-		return courses;
-	}
-	
 	public static String[] readCSV(String line) {
 		
 		// Initialize array 
