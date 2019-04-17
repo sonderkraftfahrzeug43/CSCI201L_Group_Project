@@ -3,6 +3,7 @@ public class Section {
 	public String sectionID;
 	public String sectionType;
 	public String professor;
+	public Course motherCourse;
 	
 	
 	public boolean[] days; 
@@ -13,10 +14,12 @@ public class Section {
 	public String location;
 	public int units;
 	
-	Section(String[] parts) {
+	Section(String[] parts, Course _c) {
 //		for (int i = 0; i < parts.length; i++) {
 //			System.out.println(i + ": " + parts[i]);
 //		}
+		
+		
 //		System.out.println("1 ");
 		sectionType = parts[4];
 //		System.out.println("2 ");
@@ -38,11 +41,7 @@ public class Section {
 		System.out.println(sectionType + ", " + sectionID + ", " 
 				+ time.getFormattedTime() + ", " + professor + ", " + location);
 	}
-	public String getInfo() {
-		String returnable = sectionType + ", " + sectionID + ", " 
-				+ time.getFormattedTime() + ", " + professor + ", " + location;
-		return returnable;
-	}
+	
 	private boolean[] getDays(String line) {
 		boolean[] days = new boolean[8];
 		String[] parts = line.split(",");

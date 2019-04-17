@@ -51,7 +51,7 @@ public class Department {
 				Course course = courses.get(courses.size()-1);
 	
 				if (parts[5].length() != 0) 
-					course.addSection(new Section(parts));
+					course.addSection(new Section(parts, course));
 				
 	
 				line = br.readLine();	

@@ -76,7 +76,7 @@ public class Time {
 		if (AMPM.contentEquals("PM")) {
 //			System.out.println("PM");
 			militaryEnd += 1200;
-			if (!jumps) militaryStart += 1200;
+			if (!jumps && (startTime.charAt(0) != '1' && startTime.charAt(1) != '2')) militaryStart += 1200;
 			
 		}
 		

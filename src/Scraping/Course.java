@@ -1,4 +1,3 @@
-package Scraping;
 import java.util.Vector;
 
 public class Course {
@@ -8,7 +7,7 @@ public class Course {
 	public String courseNum = ""; // 201
 	public String title = ""; // Principles of Software Development
 	public String units; // 4
-	public Course(String _name, String _title, String _units) {
+	Course(String _name, String _title, String _units) {
 		name = _name;
 		try {
 			boolean first = true;
@@ -36,33 +35,20 @@ public class Course {
 	}
 
 	
-	public Vector<Section> getSections() {
+	Vector<Section> getSections() {
 		return sections;
 	}
 	
-	public void addSection(Section s) {
+	void addSection(Section s) {
 		sections.add(s);
 	}
 	
-	public void printInfo() {
+	void printInfo() {
 		System.out.println(name + ": " + title + " (" + units + ")");
 		for (int i = 0; i < sections.size(); i++) {
 			System.out.print("\t");
 			sections.get(i).printInfo();
 		}
 	}
-	public String getInfo(){
-		String complete = "";
-		complete += (name + ": " + title + " (" + units + ")");
-		for (int i = 0; i < sections.size(); i++) {
-			complete+=("\n");
-			complete+=(sections.get(i).getInfo());
-		}
-		return complete;
-	}
-	public String getHeader(){
-		String header = name + ": " + title + " (" + units + ")";
-		return header;
-	}
-}
 
+}

@@ -94,7 +94,7 @@ public class Data {
 					courses.add(new Course(parts[0], parts[1], parts[3]));
 					
 				Course course = courses.get(courses.size()-1);
-				course.addSection(new Section(parts));
+				course.addSection(new Section(parts, course));
 				line = br.readLine();	
 			}
 			br.close();

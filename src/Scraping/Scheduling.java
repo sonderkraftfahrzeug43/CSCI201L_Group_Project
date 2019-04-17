@@ -6,13 +6,26 @@ public class Scheduling {
 	private static Vector<Vector<Section>> possible = new Vector<Vector<Section>>();
 	private static Vector<Course> courses = new Vector<Course>();
 	
+	public static void testSearch() {
+		Data d = new Data();
+		while (true) {
+			String search = "math";
+			Vector<Course> c = d.findCourses(search);
+			for (int i = 0; i < c.size(); i++) {
+				c.get(i).printInfo();
+			}
+			return;
+		}
+	}
+	
 	
 	public Scheduling() {
 	}
 	
 	public static void main(String[] args) {
-		Data d = new Data();
-		Vector<Department> dep = d.getDepartments();
+		testSearch();
+//		Data d = new Data();
+//		Vector<Department> dep = d.getDepartments();
 		
 //
 //		
@@ -25,27 +38,52 @@ public class Scheduling {
 //		desiredCourses.add(cs270);
 //		
 //		Vector<Vector<Section>> all = schedule(desiredCourses);
-		Scanner scan = new Scanner(System.in);
-		while (true) {
-			System.out.print("Word: ");
-			String word = scan.nextLine();
+		
 			
-			if (word.contentEquals("break")) break;
-			
-			Vector<Course> c = d.findCourses(word);
-//			for (int i = 0 ; i < c.size(); i++) {
-//				c.get(i).printInfo();
+		
+		
+//		Vector<Course> c = d.findCourses("Software Development");
+//		Course cs201 = c.get(0);
+//		Schedule s = new Schedule();
+//		Schedule s2 = new Schedule(s);
+//		
+//		s.addSection(cs201.sections.get(0));
+//		
+//		c = d.findCourses("Introduction to Algorithms");
+//		Course cs270 = c.get(0);
+//		s.addSection(cs270.sections.get(0));
+//		
+//		
+//		
+//		
+//		s.addSection(d.findCourses("Data Structures").get(0).sections.get(0));
+//		System.out.println("s2");
+//		s2.printSchedule();
+//		System.out.println("\ns");
+//		s.printSchedule();
+		
+		
+//		c.clear();
+//		c.add(cs201);
+//		c.add(cs270);
+		
+//		schedule(c);
+//		for (int i = 0 ; i < all.size(); i++) {
+//			System.out.println("NEW COMBINATION: ");
+//			for (int j = 0; j < all.get(i).size(); j++) {
+//				System.out.println(all.get(i).get(j).sectionID);
 //			}
+//			System.out.println();
+//			
+//		}
 			
-		}
-		scan.close();
-		System.out.println("done");
+		
+
 
 	}
 	
 	public static Vector<Vector<Section>> schedule(Vector<Course> _courses) {
 		courses = _courses;
-		
 		
 		Schedule schedule = new Schedule();
 		scheduleHelper(0, schedule);
@@ -78,26 +116,41 @@ public class Scheduling {
 		return actual;
 	}
 	
-	private static void scheduleHelper(int index, Schedule schedule) {
+	private static void scheduleHelper(int index, Schedule _schedule) {
+		Schedule schedule = _schedule;
+		
 		// If you reach the end, do nothing
 		if (index == courses.size()) {
+			System.out.println("Index: " + index);
 			all.add(schedule.sections);
+			Vector<Section> s = schedule.sections;
+			for (int i = 0; i < s.size(); i++) {
+				System.out.println(s.get(i).sectionID);
+			}
+			schedule.printSchedule();
+			System.out.println("\n\n");
 			return;
 		}
 		
-		Schedule OGschedule = schedule;
+		
 		boolean allConflicts = true;
 		Vector<Section> sections = courses.get(index).sections;
 		for (int i = 0; i < sections.size(); i++) {
-			schedule = OGschedule;
+			schedule = new Schedule(_schedule);
+			System.out.println("Trying " + sections.get(i).sectionID + "\n");
+			schedule.printSchedule();
+			
 			if (!schedule.conflicts(sections.get(i))) {
+				
+//				schedule.printSchedule();
+				System.out.println();
 				allConflicts = false;
 				scheduleHelper(index+1, schedule.addSection(sections.get(i)));
+				
+//				System.out.println("after rec call");
+//				_schedule.printSchedule();
+				
 			}
-		}
-		
-		if (allConflicts) {
-			all.add(null);
 		}
 	}
 }
