@@ -121,4 +121,5 @@ public class Register extends HttpServlet {
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
+	}
 }
