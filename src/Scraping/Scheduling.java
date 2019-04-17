@@ -1,3 +1,4 @@
+package Scraping;
 import java.util.Scanner;
 import java.util.Vector;
 
