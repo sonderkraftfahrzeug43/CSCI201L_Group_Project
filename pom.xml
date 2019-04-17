@@ -5,7 +5,7 @@
   <artifactId>webappRunnerSample</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>webappRunnerSample Maven Webapp</name>
+  <name>schedule-builder</name>
   <url>http://maven.apache.org</url>
 
   <dependencies>
@@ -15,9 +15,27 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+    <dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
+		</dependency>
   </dependencies>
   <build>
-    <finalName>webappRunnerSample</finalName>
+    <finalName>schedule-builder</finalName>
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
