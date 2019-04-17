@@ -8,7 +8,7 @@ public class Course {
 	public String courseNum = ""; // 201
 	public String title = ""; // Principles of Software Development
 	public String units; // 4
-	Course(String _name, String _title, String _units) {
+	public Course(String _name, String _title, String _units) {
 		name = _name;
 		try {
 			boolean first = true;
@@ -40,7 +40,7 @@ public class Course {
 		return sections;
 	}
 	
-	void addSection(Section s) {
+	public void addSection(Section s) {
 		sections.add(s);
 	}
 	
