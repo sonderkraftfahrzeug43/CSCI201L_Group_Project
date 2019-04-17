@@ -67,8 +67,10 @@
 			<button type="submit" name="classSearch"></button>
 		</div>
 		<div id="showFriendSearch" class="showFriendSearch">
-			<input type="text" name="friend" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
-			<button type="submit" name="friendSearch"></button>
+			<form method="get" action="FollowSearch">
+				<input type="text" name="friend" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
+				<input type="submit" name="submit" value="Search" />
+			</form>
 		</div>
 		<div id="showProfessorSearch" class="showProfessorSearch">
 			<input type="text" name="professor" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Professor...">
