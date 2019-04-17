@@ -50,5 +50,14 @@ public class Course {
 			sections.get(i).printInfo();
 		}
 	}
+	public String getInfo(){
+		String complete = "";
+		complete += (name + ": " + title + " (" + units + ")");
+		for (int i = 0; i < sections.size(); i++) {
+			complete+=("\n");
+			complete+=(sections.get(i).getInfo());
+		}
+		return complete;
+	}
 
 }
