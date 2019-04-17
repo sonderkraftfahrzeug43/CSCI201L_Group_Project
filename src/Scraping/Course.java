@@ -1,3 +1,4 @@
+package Scraping;
 import java.util.Vector;
 
 public class Course {
