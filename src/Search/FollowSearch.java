@@ -21,13 +21,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class Search
  */
 @WebServlet("/FollowSearch")
-public class FollowSesrch extends HttpServlet {
+public class FollowSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowSesrch() {
+    public FollowSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
