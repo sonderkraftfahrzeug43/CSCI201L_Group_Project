@@ -38,6 +38,9 @@
 	function sett() {
 		document.settings.submit();
 	}
+	function man(){
+		window.location.replace("main.jsp");
+	}
 </script>
 <meta charset="UTF-8">
 <title>Schedule Builder</title>
@@ -67,9 +70,11 @@
 								</a>
 							</form>
 						</li>
-						<li class="nav-item"><a class="nav-item" href="main.jsp">
-								<img src="Images/schedule.png" style="width: 50px; height: 50px">
-						</a></li>
+						<li class="nav-item">
+						<a class="nav-item" href="main.jsp">
+								<img src="Images/schedule.png" style="width: 50px; height: 50px" onclick = "mn()">
+						</a>
+						</li>
 						<li class="nav-item">
 							<form name="require" method="POST" action="RequirementsSearch">
 								<a class="nav-item"> <img src="Images/requirements.png"
@@ -82,27 +87,25 @@
 						<input type="button" name="submit" id="logoutButton"
 							value="Logout" onclick="logout()">
 					</div>
-					<div id="showClassSearch" class="showClassSearch">
-						<input type="text" name="class" placeholder="Search Class....">
-						<button type="submit" name="classSearch"></button>
-					</div>
-					<div id="showFriendSearch" class="showFriendSearch">
-						<input type="text" name="friend" placeholder="Search Friend...">
-						<button type="submit" name="friendSearch"></button>
-					</div>
-					<div id="showProfessorSearch" class="showProfessorSearch">
-						<input type="text" name="professor"
-							placeholder="Search Professor...">
-						<button type="submit" name="professorSearch"></button>
-					</div>
-					<div class="radio-button-div">
-						<input type="radio" name="option" id="Class" value="Class"
-							checked="checked" onclick="myFunction()">Class <input
-							type="radio" name="option" id="Friend" value="Friend"
-							onclick="myFunction()">Friend <input type="radio"
-							name="option" id="Professor" value="Professor"
-							onclick="myFunction()">Professor
-					</div>
+					<form name = "rButton" method = "POST" action = "Results">
+						<div id="showClassSearch" class="showClassSearch">
+							<input type="text" name="classText" placeholder="Search Class....">
+							<button type="submit" name="classSearch"></button>
+						</div>
+						<div id="showFriendSearch" class="showFriendSearch">
+							<input type="text" name="friendText" placeholder="Search Friend...">
+							<button type="submit" name="friendSearch"></button>
+						</div>
+						<div id="showProfessorSearch" class="showProfessorSearch">
+							<input type="text" name="professorText" placeholder="Search Professor...">
+							<button type="submit" name="professorSearch"></button>
+						</div>
+						<div class="radio-button-div">
+							<input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class 
+							<input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend 
+							<input type="radio" name="option" id="Professor" value="Professor" onclick="myFunction()">Professor
+						</div>
+					</form>
 					<div class="User"
 						style="font-family: tableTitles; text-align: center">
 						<h3 style="color: white; font-size: 28px;">
@@ -146,17 +149,17 @@
 						<tr>
 							<td style="color: white; font-size: 30px; text-align: left">Expected
 								Graduation:</td>
-							<td style="color: white; font-size: 30px;"><%=session.getAttribute("minorName")%></td>
+							<td style="color: white; font-size: 30px;"><%=session.getAttribute("gradYear")%></td>
 						</tr>
 						<tr>
 							<td style="color: white; font-size: 30px; text-align: left">Current
 								Courses:</td>
-							<td style="color: white; font-size: 30px;"><%=session.getAttribute("minorName")%></td>
+							<td style="color: white; font-size: 30px;">STILL NEED TO FILL</td>
 						</tr>
 						<tr>
 							<td style="color: white; font-size: 30px; text-align: left">Previous
 								Courses:</td>
-							<td style="color: white; font-size: 30px;"><%=session.getAttribute("minorName")%></td>
+							<td style="color: white; font-size: 30px;">STILL NEED TO FILL</td>
 						</tr>
 					</table>
 				</div>
