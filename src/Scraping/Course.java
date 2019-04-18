@@ -1,13 +1,14 @@
 package Scraping;
 import java.util.Vector;
 
-public class Course {
+public class Course implements Comparator<Course> {
 	public Vector<Section> sections = new Vector<Section>();
 	public String name = ""; // CSCI-201
 	public String department = ""; // CSCI
 	public String courseNum = ""; // 201
 	public String title = ""; // Principles of Software Development
 	public String units; // 4
+	
 	public Course(String _name, String _title, String _units) {
 		name = _name;
 		try {
@@ -24,18 +25,14 @@ public class Course {
 				else 
 					first = false;
 			}
-			
 			title = _title;
-			
 			String[] parts = _units.split(".0");
 			units = parts[0];
 		} catch (Exception e) {
 			System.out.println("e here");
 		}
-		
 	}
 
-	
 	public Vector<Section> getSections() {
 		return sections;
 	}
@@ -51,6 +48,26 @@ public class Course {
 			sections.get(i).printInfo();
 		}
 	}
+	
+	public static int stringCompare(String str1, String str2) {
+		for (int i = 0; i < str1.length() && i < str2.length(); i++) {
+			if ((int)str1.charAt(i) == (int)str2.charAt(i))
+				continue;
+			else 
+				return (int)str1.charAt(i) - (int)str2.charAt(i);
+		}
+		
+		if (str1.length() < str2.length()) 
+			return (str1.length() - str2.length());
+		
+		else if (str1.length() > str2.length()) 
+			return (str1.length() - str2.length());
+		
+		else 
+			return 0;
+		
+	}
+	
 	public String getInfo(){
 		String complete = "";
 		complete += (name + ": " + title + " (" + units + ")");
@@ -63,6 +80,24 @@ public class Course {
 	public String getHeader(){
 		String header = name + ": " + title + " (" + units + ")";
 		return header;
+	}
+
+	// Comparator to sort Courses
+	public static Comparator<Course> courseComparator = new Comparator<Course>() {
+		public int compare(Course c1, Course c2) {
+		
+			if (Course.stringCompare(c1.name, c2.name) > 0) 
+				return 1;
+			else if (Course.stringCompare(c1.name,c2.name) < 0)
+				return -1;
+			else
+				return 0;
+		}
+	};
+
+	@Override
+	public int compare(Course o1, Course o2) {
+		return courseComparator.compare(o1, o2);
 	}
 
 }
