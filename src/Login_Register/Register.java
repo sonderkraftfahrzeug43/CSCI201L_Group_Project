@@ -22,12 +22,19 @@ public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public Register() {
         super();
-        // TODO Auto-generated constructor stub
     }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /* SESSION ATTRIBUTES
+     * userName = user's username
+     * UserID = user's id
+     * majorID = major's id
+     * minorID = minor's id
+     * gradYID = grad year's id
+     * gradYear = grad year's name
+     * majURL = major url
+     * minURL = minor url
+     * minorName = minor's name
+     * majorName = major's name
+     * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String major = request.getParameter("major");
 		String minor = request.getParameter("minor");
@@ -36,21 +43,22 @@ public class Register extends HttpServlet {
 		ResultSet rs = null;
 		ResultSet rsMaj = null;
 		ResultSet rsMin = null;
+		ResultSet rsGrad = null;
 		String nextPage = null;
 		Statement st = null;
 		Statement stMaj = null;
 		Statement stMin = null;
+		Statement stGrad = null;
 		Connection conn = null;
 		try {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			System.out.println(username + " " + password);
+			String grad = request.getParameter("grad");
 			String sql = "insert into user(userName,pass, majorID, minorID, gradYID) values(?,?,?,?,1)";
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url,"root","s62UcrEx");
 			st = conn.createStatement();
-			System.out.println("PENIS");
 			rs = st.executeQuery("SELECT * FROM user WHERE userName='" + username + "'");
 			if(rs.next())
 			{
@@ -59,6 +67,10 @@ public class Register extends HttpServlet {
 			}
 			else if(major.equals("0")){
 				request.setAttribute("utError", "You must select a major");
+				nextPage ="/registration.jsp";
+			}
+			else if(grad.equals("0")){
+				request.setAttribute("utError", "You must select a graduation year");
 				nextPage ="/registration.jsp";
 			}
 			else
@@ -71,47 +83,48 @@ public class Register extends HttpServlet {
 				ps.setString(2, password);
 				ps.setString(3, major);
 				ps.setString(4, minor);
+				ps.setString(5, grad);
 				ps.executeUpdate();
 				nextPage ="/main.jsp";					
-			}
-			HttpSession session = request.getSession();
-			Statement st2 = null;
-			ResultSet rs2 = null;
-			st2= conn.createStatement();
-			String idmajor = "0";
-			String idminor = "0";
-			rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
-			while(rs2.next()){
-				String iduser = rs2.getString("UserID");
-				idmajor = rs2.getString("majorID");
-				idminor = rs2.getString("minorID");
-				String gradyear = rs2.getString("gradYID");
-				if (!session.isNew()){
-					session.setAttribute("userName", username);
-					session.setAttribute("UserID", iduser);
-					session.setAttribute("majorID", idmajor);
-					session.setAttribute("minorID", idminor);
-					System.out.println(session.getAttribute("minorID") + " APPLE " + session.getAttribute("majorID"));
-					session.setAttribute("gradYID", gradyear);
+				HttpSession session = request.getSession();
+				Statement st2 = null;
+				ResultSet rs2 = null;
+				st2= conn.createStatement();
+				String idmajor = "0";
+				String idminor = "0";
+				rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
+				while(rs2.next()){
+					String iduser = rs2.getString("UserID");
+					if (!session.isNew()){
+						session.setAttribute("userName", username);
+						session.setAttribute("UserID", iduser);
+						session.setAttribute("majorID", major);
+						session.setAttribute("minorID", minor);
+						session.setAttribute("gradYID", grad);
+					}
 				}
+				stGrad = conn.createStatement();
+				stMaj = conn.createStatement();
+				stMin = conn.createStatement();
+				rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
+				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
+				rsGrad = stGrad.executeQuery("SELECT * From gradyear WHERE GradYID='" + grad + "'");
+				rsMaj.next();
+				rsMin.next();
+				rsGrad.next();
+				String majorName = rsMaj.getString("name");
+				String majURL = rsMaj.getString("requirements");
+				System.out.println(majURL);
+				String minorName = rsMin.getString("name");
+				String minURL = rsMin.getString("requirements");
+				System.out.println(minURL);
+				String gradYearName = rsGrad.getString("year");
+				session.setAttribute("majURL", majURL);
+				session.setAttribute("minURL",minURL);
+				session.setAttribute("gradYear", gradYearName);
+				session.setAttribute("minorName", minorName);
+				session.setAttribute("majorName", majorName);
 			}
-			stMaj = conn.createStatement();
-			stMin = conn.createStatement();
-			rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
-			rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
-			rsMaj.next();
-			rsMin.next();
-			String majorName = rsMaj.getString("name");
-			String majURL = rsMaj.getString("requirements");
-			System.out.println(majURL);
-			String minorName = rsMin.getString("name");
-			String minURL = rsMin.getString("requirements");
-			System.out.println(minURL);
-			session.setAttribute("majURL", majURL);
-			session.setAttribute("minURL",minURL);
-			session.setAttribute("minorName", minorName);
-			session.setAttribute("majorName", majorName);
-			
 		} catch (ClassNotFoundException e) {
 			System.out.println("cnf: " + e.getMessage());
 			e.printStackTrace();
