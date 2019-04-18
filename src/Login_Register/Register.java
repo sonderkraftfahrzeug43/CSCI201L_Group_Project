@@ -107,7 +107,7 @@ public class Register extends HttpServlet {
 				stMin = conn.createStatement();
 				rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + major + "'");
 				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + minor + "'");
-				rsGrad = stGrad.executeQuery("SELECT * FROM gradyear WHERE GradYID'" + grad + "'");
+				rsGrad = stGrad.executeQuery("SELECT * FROM gradyear WHERE GradYID='" + grad + "'");
 				rsMaj.next();
 				rsMin.next();
 				rsGrad.next();
@@ -124,6 +124,7 @@ public class Register extends HttpServlet {
 				Vector<Section> prevClasses = new Vector<Section>();
 				session.setAttribute("majURL", majURL);
 				session.setAttribute("minURL",minURL);
+				System.out.println("Curr classes" + currClasses);
 				session.setAttribute("currClasses", currClasses);
 				session.setAttribute("prevClasses", prevClasses);
 				session.setAttribute("gradYear", gradYearName);
