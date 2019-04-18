@@ -1,3 +1,4 @@
+package Scraping;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,7 +13,7 @@ public class Department {
 	public Department(String acro) {
 		String filename = System.getProperty("user.dir") + "\\classCSV\\" + acro + ".csv";
 		acronym = acro;
-		courses = parseCourses(filename);
+		courses = getCourses(filename);
 	}
 	
 	public void printInfo() {
@@ -26,7 +27,7 @@ public class Department {
 	
 	
 	// PRIVATE HELPER FUNCTIONS BELOW
-	private static Vector<Course> parseCourses(String filename) {
+	private static Vector<Course> getCourses(String filename) {
 		Vector<Course> courses = new Vector<Course>();
 		String line = "";
 		String[] parts = null;

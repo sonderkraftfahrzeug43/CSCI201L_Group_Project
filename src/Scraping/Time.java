@@ -1,3 +1,6 @@
+package Scraping;
+import java.util.Scanner;
+
 // Just a convenient class to store the section times
 
 public class Time {
@@ -65,24 +68,36 @@ public class Time {
 			militaryEnd = Integer.parseInt(flatEnd);
 		}
 		
-		if (startTime.length() > endTime.length()) 
+//		System.out.println(startTime + " vs " + endTime);
+		if (startTime.length() > endTime.length()) {
+//			System.out.println(startTime + " vs " + endTime);
 			jumps = true;
-		
+		}
 		
 		if (AMPM.contentEquals("PM")) {
-			if (!(endTime.charAt(0) != '1' && (endTime.charAt(1) == '1' || endTime.charAt(1) == '2')))
-				militaryEnd += 1200;
-			
-			if (!jumps && (startTime.charAt(0) != '1' && (startTime.charAt(1) != '2' || startTime.charAt(1) != '1'))) 
-				militaryStart += 1200;
-			
+//			System.out.println("PM");
+			militaryEnd += 1200;
+			if (!jumps && (startTime.charAt(0) != '1' && startTime.charAt(1) != '2')) militaryStart += 1200;
 			
 		}
+		
+
 	}
 	
 	// Prints the original formatted time
 	public String getFormattedTime() {
 		return startTime + "-" + endTime + AMPM;
 	}
+	
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String line = scan.nextLine();
+		@SuppressWarnings("unused")
+		Time t = new Time(line);
+		
 
+		scan.close();
+
+		
+	}
 }
