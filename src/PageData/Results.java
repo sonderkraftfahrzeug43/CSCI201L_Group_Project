@@ -38,8 +38,8 @@ public class Results extends HttpServlet {
 		ResultSet rs1 = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url , "root" , "roottest");
+			String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
 			ps = conn.prepareStatement("SELECT * FROM follow WHERE user1ID=?");
 			ps.setString(1, username);
 			rs = ps.executeQuery();
