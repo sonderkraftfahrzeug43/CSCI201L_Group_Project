@@ -47,8 +47,8 @@ public class SettingsData extends HttpServlet {
 			}
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url,"root","s62UcrEx");
+			String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
 			String query = "UPDATE User SET majorID = ? , minorID = ? , gradYID = ?, WHERE userName = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			if (major.equals("0")){
