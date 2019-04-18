@@ -524,8 +524,8 @@
                         	<option value=10>May 2024 </option>
                     </tr>
                     <tr>
-                        <td colspan="2" align="center"><input id="button1" type="button" name="submit" value="Save changes" onclick = "moveOn()" />
-                            &nbsp;&nbsp;<input id="button2" type="submit" name="submit" value="Clear Current Schedule" />
+                        <td colspan="2" align="center"><input id="button1" type="button" name="s" value="Save changes" onclick = "moveOn()" />
+                            &nbsp;&nbsp;<input id="button2" type="submit" name="s" value="Clear Current Schedule" />
                             &nbsp;&nbsp;
                             <input id="button1" type="submit" value="Delete Account" />
                         </td>                        
