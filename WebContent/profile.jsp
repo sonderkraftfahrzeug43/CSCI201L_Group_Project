@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@page import="java.util.Vector" %>
+<%@page import="Scraping.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,14 +153,41 @@
 							<td style="color: white; font-size: 30px;"><%=session.getAttribute("gradYear")%></td>
 						</tr>
 						<tr>
-							<td style="color: white; font-size: 30px; text-align: left">Current
-								Courses:</td>
-							<td style="color: white; font-size: 30px;">STILL NEED TO FILL</td>
+							<td style="color: white; font-size: 30px; text-align: left">Current Courses:</td>
+							<%
+							Vector<Section> vecCur = (Vector<Section>)session.getAttribute("currClasses");
+							System.out.println(vecCur);
+							if (vecCur.size() == 0){
+							%>
+								<td style="color: white; font-size: 30px; text-align: left">NO CURRENT CLASSES</td>
+							<%
+							}
+							else  {
+								for (int index = 0; index < vecCur.size();index++){
+							%>
+									<td style="color: white; font-size: 30px; text-align: left"><%= vecCur.get(index).getInfo() %></td>
+							<%
+								}
+							}
+							%>
 						</tr>
 						<tr>
-							<td style="color: white; font-size: 30px; text-align: left">Previous
-								Courses:</td>
-							<td style="color: white; font-size: 30px;">STILL NEED TO FILL</td>
+							<td style="color: white; font-size: 30px; text-align: left">Previous Courses:</td>
+							<%
+							Vector<Section> vecPrev = (Vector<Section>)session.getAttribute("prevClasses");
+							if (vecPrev.size()==0){
+							%>
+								<td style="color: white; font-size: 30px; text-align: left">NO CURRENT CLASSES</td>
+							<%
+							}
+							else  {
+								for (int index = 0; index < vecPrev.size();index++){
+							%>
+									<td style="color: white; font-size: 30px; text-align: left"><%= vecPrev.get(index).getInfo() %></td>
+							<%
+								}
+							}
+							%>
 						</tr>
 					</table>
 				</div>
