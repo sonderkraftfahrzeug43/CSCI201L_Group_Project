@@ -1,5 +1,5 @@
 package Login_Register;
-
+import Scraping.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TimeZone;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,12 +35,12 @@ public class Register extends HttpServlet {
      * minURL = minor url
      * minorName = minor's name
      * majorName = major's name
+     * currClasses = array of user's current Sections
+     * prevClasses = array of user's previous Sections
      * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String major = request.getParameter("major");
 		String minor = request.getParameter("minor");
-		System.out.println(major);
-		System.out.println(minor);
 		ResultSet rs = null;
 		ResultSet rsMaj = null;
 		ResultSet rsMin = null;
@@ -85,13 +86,11 @@ public class Register extends HttpServlet {
 				ps.setString(4, minor);
 				ps.setString(5, grad);
 				ps.executeUpdate();
-				nextPage ="/main.jsp";					
+				nextPage = "/main.jsp";					
 				HttpSession session = request.getSession();
 				Statement st2 = null;
 				ResultSet rs2 = null;
 				st2= conn.createStatement();
-				String idmajor = "0";
-				String idminor = "0";
 				rs2 = st2.executeQuery("SELECT * FROM user WHERE userName ='" + username + "'");
 				while(rs2.next()){
 					String iduser = rs2.getString("UserID");
@@ -106,19 +105,23 @@ public class Register extends HttpServlet {
 				stGrad = conn.createStatement();
 				stMaj = conn.createStatement();
 				stMin = conn.createStatement();
-				rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + idmajor + "'");
-				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + idminor + "'");
-				rsGrad = stGrad.executeQuery("SELECT * From gradyear WHERE GradYID='" + grad + "'");
+				rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + major + "'");
+				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + minor + "'");				
 				rsMaj.next();
 				rsMin.next();
-				rsGrad.next();
+				System.out.println("1");
 				String majorName = rsMaj.getString("name");
+				System.out.println("2");
 				String majURL = rsMaj.getString("requirements");
 				System.out.println(majURL);
 				String minorName = rsMin.getString("name");
 				String minURL = rsMin.getString("requirements");
 				System.out.println(minURL);
 				String gradYearName = rsGrad.getString("year");
+				Vector<Section> currClasses = new Vector<Section>();
+				Vector<Section> prevClasses = new Vector<Section>();
+				session.setAttribute("prevClasses", prevClasses);
+				session.setAttribute("currClasses", currClasses);
 				session.setAttribute("majURL", majURL);
 				session.setAttribute("minURL",minURL);
 				session.setAttribute("gradYear", gradYearName);
