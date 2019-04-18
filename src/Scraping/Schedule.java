@@ -1,11 +1,10 @@
-package Scraping;
 import java.util.Vector;
 
 public class Schedule {
 	// Example: times[120][4] represents 12:00PM on Thursday
 	// Row 0 is 12:00AM
 	// Col 0 is Monday
-	private boolean[][] times = new boolean[241][7];
+	public boolean[][] times = new boolean[241][7];
 	Vector<Section> sections = new Vector<Section>();
 	
 	Schedule() {
@@ -16,6 +15,10 @@ public class Schedule {
 		}
 	}
 	
+	
+	// Copy s2 to s
+	
+	
 	@SuppressWarnings("unchecked")
 	Schedule(Schedule s) {
 		System.out.println("Cloning");
@@ -24,13 +27,15 @@ public class Schedule {
 	}
 	
 	public Schedule addSection(Section s)  {
-		if (this.conflicts(s)) return null;
+		if (this.conflicts(s)) {
+			return null;
+		}
 		
 		Time t = s.time;
 		boolean[] days = s.days;
 //		System.out.println(t.militaryStart + ", " + t.militaryEnd);
 //		System.out.println(s.sectionType + " - " + s.sectionID);
-		System.out.println(t.startTime + " ,  " + t.endTime);
+//		System.out.println(t.startTime + " ,  -" + t.endTime);
 		for (int i = t.militaryStart/10; i < t.militaryEnd/10; i++) {
 			for (int j = 0; j < days.length; j++) {
 				// If the class meets on that day and
@@ -68,18 +73,27 @@ public class Schedule {
 		boolean[] days = s.days;
 		
 		
-		
-		for (int i = t.militaryStart/10; i < 240; i++) {
+		if (s.sectionID.contentEquals("38437R")) {
+			System.out.println("ID: " + s.sectionID);
+			System.out.println("		Time Range: "  + t.militaryStart+ ", " + t.militaryEnd);
+
+			System.out.println("In schedule:");
+			for (int i = 0; i < sections.size(); i++) {
+				System.out.println(sections.get(i).sectionID);
+			}
+			this.printSchedule();
+		}
+		for (int i = t.militaryStart/10; i < t.militaryEnd/10; i++) {
 			for (int j = 0; j < days.length; j++) {
 				// If the class meets on that day and 
 				if (days[j] == true && times[i][j] == true) {
+//					System.out.println(s.sectionID + " conflicts on day " + j + " during time " + i);
 					return true;
 				}
-					
 			}
 		}
 	
-		
+//		System.out.println("No conflict.");
 		return false;
 		
 	}
