@@ -28,7 +28,7 @@ public class Results extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-	public int getNumFriends(String className,HttpSession session){
+	public int getNumFriends(String sessionName,HttpSession session){
 		int sharedClasses = 0;
 		String username = session.getAttribute("UserID").toString();
 		Connection conn = null;
@@ -38,8 +38,8 @@ public class Results extends HttpServlet {
 		ResultSet rs1 = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url , "root" , "s62UcrEx");
 			ps = conn.prepareStatement("SELECT * FROM follow WHERE user1ID=?");
 			ps.setString(1, username);
 			rs = ps.executeQuery();
@@ -55,7 +55,7 @@ public class Results extends HttpServlet {
 				ps1.setString(1, friends.get(index));
 				rs1 = ps1.executeQuery();
 				while(rs1.next()){
-					if (className.equals(rs1.getString("name"))){
+					if (sessionName.equals(rs1.getString("session"))){
 						sharedClasses++;
 					}
 				}
@@ -108,11 +108,9 @@ public class Results extends HttpServlet {
 					System.out.println("courses size" + courses.size());
 					for (int outer = 0; outer < courses.size();outer++){
 						for (int inner = 0; inner < courses.get(outer).getSections().size();inner++){
-							String name = courses.get(outer).name;
-							String title = courses.get(outer).title;
-							String completeName = name + " " + title;
+							String sessionName = courses.get(outer).getSections().get(inner).sectionID;
 							results.add(courses.get(outer).getHeader() + " " + courses.get(outer).getSections().get(inner).getInfo());
-							System.out.println(getNumFriends(completeName,session));
+							System.out.println(getNumFriends(sessionName,session));
 							System.out.println(courses.get(outer).getHeader() + " " +courses.get(outer).getSections().get(inner).getInfo());
 						}
 					}
@@ -221,4 +219,3 @@ public class Results extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 }
-
