@@ -35,6 +35,10 @@
 	function prof(){
 		document.profile.submit();
 	}
+	function man(){
+		window.location.replace("main.jsp");
+	}
+ 
  
 </script>
 <meta charset="UTF-8">
@@ -54,7 +58,7 @@
 			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;">
 		</a>
 		<a href="main.jsp" class="snlinks2">
-			<img src="Images/schedule.png" alt="schedule" style="width:50px; height: 50px;">
+			<img src="Images/schedule.png" alt="schedule" style="width:50px; height: 50px;" onclick = "man()">
 		</a>
 		<form name = "require" method = "POST" action="RequirementsSearch">
 			<div class="snlinks3">
