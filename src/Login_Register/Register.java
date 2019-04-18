@@ -54,7 +54,7 @@ public class Register extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String grad = request.getParameter("grad");
-			String sql = "insert into user(userName,pass, majorID, minorID, gradYID) values(?,?,?,?,1)";
+			String sql = "insert into user(userName,pass, majorID, minorID, gradYID) values(?,?,?,?,?)";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
 			conn = DriverManager.getConnection(url,"root","s62UcrEx");
