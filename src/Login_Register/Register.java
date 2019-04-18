@@ -36,7 +36,7 @@ public class Register extends HttpServlet {
      * minorName = minor's name
      * majorName = major's name
      * currClasses = array of user's current Sections
-     * prevClasses = array of user's previous Sections
+     * prevClasses = array 
      * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String major = request.getParameter("major");
@@ -106,9 +106,11 @@ public class Register extends HttpServlet {
 				stMaj = conn.createStatement();
 				stMin = conn.createStatement();
 				rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + major + "'");
-				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + minor + "'");				
+				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + minor + "'");
+				rsGrad = stGrad.executeQuery("SELECT * FROM gradyear WHERE GradYID'" + grad + "'");
 				rsMaj.next();
 				rsMin.next();
+				rsGrad.next();
 				System.out.println("1");
 				String majorName = rsMaj.getString("name");
 				System.out.println("2");
@@ -120,10 +122,10 @@ public class Register extends HttpServlet {
 				String gradYearName = rsGrad.getString("year");
 				Vector<Section> currClasses = new Vector<Section>();
 				Vector<Section> prevClasses = new Vector<Section>();
-				session.setAttribute("prevClasses", prevClasses);
-				session.setAttribute("currClasses", currClasses);
 				session.setAttribute("majURL", majURL);
 				session.setAttribute("minURL",minURL);
+				session.setAttribute("currClasses", currClasses);
+				session.setAttribute("prevClasses", prevClasses);
 				session.setAttribute("gradYear", gradYearName);
 				session.setAttribute("minorName", minorName);
 				session.setAttribute("majorName", majorName);
