@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 public class SettingsData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public Settings() {
+    public SettingsData() {
         super();
     }
 
@@ -47,32 +47,39 @@ public class SettingsData extends HttpServlet {
 			}
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
-			String query = "UPDATE User SET majorID = ? , minorID = ? , gradYID = ?, WHERE userName = ?";
+			String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url,"root","s62UcrEx");
+			String query = "UPDATE User SET pass = ?, majorID = ? , minorID = ? , gradYID = ? WHERE userName = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
+			if(password != null){
+				password = session.getAttribute("password").toString();
+			}
+			else{
+				session.setAttribute("password",password);
+			}
+			ps.setString(1, password);
 			if (major.equals("0")){
 				major = session.getAttribute("majorID").toString();
 			}
 			else{
 				session.setAttribute("majorID", major);
 			}
-			ps.setString(1, major);
+			ps.setString(2, major);
 			if (minor.equals("0")){
 				minor = session.getAttribute("minorID").toString();
 			}
 			else{
 				session.setAttribute("minorID", minor);
 			}
-			ps.setString(2, minor);
+			ps.setString(3, minor);
 			if (gradYear.equals("0")){
 				gradYear = session.getAttribute("gradyear").toString();
 			}
 			else{
 				session.setAttribute("gradYID", gradYear);
 			}
-			ps.setString(3, gradYear);
-			ps.setString(4, username);
+			ps.setString(4, gradYear);
+			ps.setString(5, username);
 			ps.executeUpdate();
 			nextPage ="/main.jsp";	
 		} catch (ClassNotFoundException e) {
