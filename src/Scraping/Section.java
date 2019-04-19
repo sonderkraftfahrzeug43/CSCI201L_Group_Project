@@ -114,7 +114,7 @@ public class Section {
 	}
 	
 	public String getInfo() {
-		String returnable = sectionType + ", " + sectionID + ", " 
+		String returnable = sectionType + ", ID:" + sectionID + ", " 
 				+ time.getFormattedTime() + ", " + professor + ", " + location;
 		return returnable;
 	}
