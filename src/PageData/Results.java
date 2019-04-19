@@ -152,6 +152,7 @@ public class Results extends HttpServlet {
 			search = request.getParameter("classText");
 			if (search != null){
 				session.setAttribute("searchType", choice);
+				session.setAttribute("searchWord", search);
 				Data data = (Data)session.getAttribute("data");
 				Vector<Course> courses = data.findCourses(search);
 				if (courses.size()==0){
@@ -180,6 +181,7 @@ public class Results extends HttpServlet {
 			search = request.getParameter("friendText");
 			if (search != null){
 				session.setAttribute("searchType", choice);
+				session.setAttribute("searchWord", search);
 				String searchKeyword = search;
 				Connection conn = null;
 				PreparedStatement ps = null;
