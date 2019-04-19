@@ -80,12 +80,7 @@ public class Time {
 			
 		}
 	}
-	
-	public String getInfo() {
-		String returnable = sectionType + ", " + sectionID + ", " 
-				+ time.getFormattedTime() + ", " + professor + ", " + location;
-		return returnable;
-	}
+
 	
 	// Prints the original formatted time
 	public String getFormattedTime() {
@@ -93,3 +88,4 @@ public class Time {
 	}
 
 }
+
