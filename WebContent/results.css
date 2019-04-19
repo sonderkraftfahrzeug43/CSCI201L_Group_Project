@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: tableHeaders;
+  src: url("Fonts/LeagueMono-Light.ttf");
+}
+@font-face {
+  font-family: tableTitles;
+  src: url("Fonts/LeagueMono-Thin.ttf");
+}
+
+#background {
+  background-image: url("Images/Black Vignette.png"), url("Images/tommytrojan.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  filter: blur(5px);
+  z-index: 0;
+}
+
+.container-fluid {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.row {
+  height: 100%;
+}
+
+#sidenav {
+  background: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  padding: 5px;
+  justify-content: center;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+#sidenav h2 {
+  text-align: center;
+  color: white;
+  margin-top: 8%;
+}
+
+#logout {
+  width: 100%;
+}
+
+#logoutButton {
+  font-size: 20px;
+  color: white;
+  background: #af3418;
+}
+
+#showClassSearch {
+  width: 95%;
+  font-size: 20px;
+  font-family: tableTitles;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  margin-left: 10%;
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+}
+
+#showFriendSearch {
+  width: 95%;
+  font-size: 20px;
+  font-family: tableTitles;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  margin-left: 10%;
+  display: none;
+  z-index: 1;
+  position: relative;
+}
+
+#showProfessorSearch {
+  width: 95%;
+  font-size: 20px;
+  font-family: tableTitles;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  margin-left: 10%;
+  display: none;
+  z-index: 1;
+  position: relative;
+}
+
+.showClassSearch button {
+  z-index: 2;
+  background-image: url(Images/magglass.png);
+  background-size: cover;
+  background-position: center;
+  border: none;
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  float: none;
+  margin-left: -10%;
+  background-color: transparent;
+  margin-top: 4px;
+}
+
+.showFriendSearch button {
+  z-index: 2;
+  background-image: url(Images/magglass.png);
+  background-size: cover;
+  background-position: center;
+  border: none;
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  float: none;
+  margin-left: -10%;
+  background-color: transparent;
+  margin-top: 4px;
+}
+
+.showProfessorSearch button {
+  z-index: 2;
+  background-image: url(Images/magglass.png);
+  background-size: cover;
+  background-position: center;
+  border: none;
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  float: none;
+  margin-left: -10%;
+  background-color: transparent;
+  margin-top: 4px;
+}
+
+.radio-button-div {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#nav {
+  height: 100%;
+  overflow: scroll;
+}
+
+#nav h1 {
+  text-align: center;
+  margin-top: 7%;
+  color: white;
+}
