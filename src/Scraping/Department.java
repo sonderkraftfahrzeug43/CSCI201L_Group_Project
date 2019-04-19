@@ -13,7 +13,7 @@ public class Department {
 	public Department(String acro) {
 		String filename = System.getProperty("user.dir") + "\\classCSV\\" + acro + ".csv";
 		acronym = acro;
-		courses = getCourses(filename);
+		courses = parseCourses(filename);
 	}
 	
 	public void printInfo() {
@@ -27,7 +27,7 @@ public class Department {
 	
 	
 	// PRIVATE HELPER FUNCTIONS BELOW
-	private static Vector<Course> getCourses(String filename) {
+	private static Vector<Course> parseCourses(String filename) {
 		Vector<Course> courses = new Vector<Course>();
 		String line = "";
 		String[] parts = null;
