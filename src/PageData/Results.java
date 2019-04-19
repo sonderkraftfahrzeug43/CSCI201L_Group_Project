@@ -28,6 +28,60 @@ public class Results extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	public int mutualFriends(String f1,String f2){
+		int count = 0;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		PreparedStatement ps1 = null;
+		ResultSet rs1 = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+			ps = conn.prepareStatement("SELECT * FROM follow WHERE user1ID=?");
+			ps.setString(1, f1);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String friendID = rs.getString("user2ID");
+				ps1 = null;
+				rs1 = null;
+				ps1 = conn.prepareStatement("SELECT * FROM follow WHERE user1ID=? AND user2ID=?");
+				ps1.setString(1, f2);
+				ps1.setString(2, friendID);
+				rs1 = ps1.executeQuery();
+				if (rs1.next()){
+					count++;
+				}
+			}
+		} catch(ClassNotFoundException cnfe) {
+			System.out.println("cnfe:" + cnfe.getMessage());
+		} catch (SQLException sqle) {
+			System.out.println("sqle: " + sqle.getMessage());
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(ps != null) {
+					ps.close();
+				}
+				if(rs1 != null) {
+					rs.close();
+				}
+				if(ps1 != null) {
+					ps.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch(SQLException sqle) {
+				System.out.println("sqle: " + sqle.getMessage());
+			}
+		}
+		return count;
+	}
+
 	public int getNumFriends(String sessionName,HttpSession session){
 		int sharedClasses = 0;
 		String username = session.getAttribute("UserID").toString();
@@ -90,10 +144,10 @@ public class Results extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String choice = request.getParameter("option");
 		Vector<String> results = new Vector<String>();
+		Vector<Integer> metric = new Vector<Integer>(); 
 		HttpSession session = request.getSession();
 		String search = "";
 		String nextPage = "/results.jsp";
-		System.out.println("NEW REQUEST");
 		if(choice.equals("Class")){
 			System.out.println("CODE FOR CLASS");
 			search = request.getParameter("classText");
@@ -110,7 +164,7 @@ public class Results extends HttpServlet {
 						for (int inner = 0; inner < courses.get(outer).getSections().size();inner++){
 							String sessionName = courses.get(outer).getSections().get(inner).sectionID;
 							results.add(courses.get(outer).getHeader() + " " + courses.get(outer).getSections().get(inner).getInfo());
-							System.out.println(getNumFriends(sessionName,session));
+							metric.add(getNumFriends(sessionName,session));
 							System.out.println(courses.get(outer).getHeader() + " " +courses.get(outer).getSections().get(inner).getInfo());
 						}
 					}
@@ -129,67 +183,20 @@ public class Results extends HttpServlet {
 				Connection conn = null;
 				PreparedStatement ps = null;
 				ResultSet rs = null;
-				boolean friendFound = false;
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					String url = "jdbc:mysql://localhost:3306/schedulebuilder?serverTimezone=" + TimeZone.getDefault().getID();
-					conn = DriverManager.getConnection(url , "root" , "roottest");
-					ps = conn.prepareStatement("SELECT * FROM User WHERE userName=?");
+					searchKeyword = searchKeyword.toLowerCase();
+					String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
+					conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+					ps = conn.prepareStatement("SELECT * FROM User WHERE userName LIKE '%?%'");
 					ps.setString(1, searchKeyword);
 					rs = ps.executeQuery();
-					if(rs.next()) {
-						friendFound = true;
-						int friendID = rs.getInt("userID");
-						int userID = (int)session.getAttribute("userID");
-						Statement st = conn.createStatement();
-						ResultSet friendCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + friendID);
-						st.close();
-						st = conn.createStatement();
-						ResultSet userCourses = st.executeQuery("SELECT * FROM CurrentClass WHERE userID=" + userID);
-						st.close();
-						Vector<String> sharedCourses = new Vector<String>();
-						while(friendCourses.next()) {
-							String fcid = friendCourses.getString("name");
-							while(userCourses.next()) {
-								String ucid = userCourses.getString("name");
-								if(fcid == ucid) {
-									String courseName = fcid;
-									sharedCourses.add(courseName);
-								}
-							}
-						}
-						friendCourses.close();
-						userCourses.close();
-						int majorId = rs.getInt("majorID");
-						int minorId = rs.getInt("minorID");
-						if(majorId != 0) {
-							String friendMajor;
-							st = conn.createStatement();
-							ResultSet major = st.executeQuery("SELECT * FROM Major WHERE majorID=" + majorId);
-							friendMajor = major.getString("name");
-							st.close();
-							major.close();
-							request.setAttribute("friendMajor", friendMajor);
-						} else {
-							request.setAttribute("friendMajor", null);
-						}
-						if(minorId != 0) {
-							String friendMinor;
-							st = conn.createStatement();
-							ResultSet minor = st.executeQuery("SELECT * FROM Minor WHERE minorID=" + minorId);
-							friendMinor = minor.getString("minorName");
-							st.close();
-							minor.close();
-							request.setAttribute("friendMajor", friendMinor);
-						} else {
-							request.setAttribute("friendMinor", null);
-						}
-						String fID = Integer.toString(friendID);
-						request.setAttribute("friendId", fID);
-						request.setAttribute("sharedCourses", sharedCourses);
-					}
-					if(!friendFound) {
-						request.setAttribute("friendId", null);
+					Vector<String> friends = new Vector<String>();
+					while(rs.next()) {
+						String friendID = rs.getString("userID");
+						String friendUsername = rs.getString("userName");
+						friends.add(friendUsername);
+						metric.add(mutualFriends(session.getAttribute("UserID").toString(),friendID));
 					}
 				} catch(ClassNotFoundException cnfe) {
 					System.out.println("cnfe:" + cnfe.getMessage());
@@ -219,3 +226,4 @@ public class Results extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 }
+
