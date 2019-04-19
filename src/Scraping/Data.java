@@ -11,7 +11,6 @@ public class Data {
 	private static Vector<Department> departments = new Vector<Department>();
 	
 	public Data() {
-		System.out.println(System.getProperty("user.dir"));
 		// Read in all the departments and instantiate them
 		try {
 			FileReader fr = new FileReader(filename);
@@ -57,87 +56,78 @@ public class Data {
 	
 	
 	
-	public static Vector<Course> findCourses(String courseName) {
-		Vector<Course> validCourses = new Vector<Course>();
+	public static Vector<Course> findCourses(String searchString) {
+		// Use a map to so we don't add redundant courses
+		Map<String, Course> validCourses = new HashMap();
 		
-		courseName = courseName.toLowerCase();
+		searchString = searchString.toLowerCase();
 		for (int j = 0; j < departments.size(); j++) {
 			Vector<Course> courses = departments.get(j).courses;
 			for (int i = 0; i < courses.size(); i++) {
-				if (courses.get(i).name.toLowerCase().contains(courseName) || courses.get(i).title.toLowerCase().contains(courseName)) {
-					validCourses.add(courses.get(i));
+				if (validCourses.get(courses.get(i).name) == null && 
+						(courses.get(i).name.toLowerCase().contains(searchString) || courses.get(i).title.toLowerCase().contains(searchString))) {
+					validCourses.put(courses.get(i).name, courses.get(i));
+				}
+			}
+			
+			if (departments.get(j).acronym.contentEquals(searchString.toLowerCase())) {
+				Vector<Course> c = departments.get(j).courses;
+				for (int i = 0; i < c.size(); i++) {
+					if (validCourses.get(c.get(i).name) == null)
+						validCourses.put(c.get(i).name, c.get(i));
 				}
 			}
 		}
-		return validCourses;
+		
+		Vector<Course> ret = new Vector<Course>();
+		
+		for (Object key : validCourses.keySet()) {
+			Course c = validCourses.get(key);
+			ret.add(c);
+		}
+
+		
+		Collections.sort(ret, Course.courseComparator);
+
+		
+		return ret;
 	}
 	
 	
 	public static void main(String[] args) {
-		
+		testSort();
 	}
 	
-	public static String[] readCSV(String line) {
+	public static void testSort() {
+		Data d = new Data();
+		Vector<Course> ret = new Vector<Course>();
 		
-		// Initialize array 
-		String[] entries = new String[14];
-		for (int i = 0; i < 14; i++)
-			entries[i] = "";
+		Course c = d.findCourses("Software Development").get(0);
+		ret.add(c);
 		
-		int index = 0;
+		c = d.findCourses("Linear Algebra and").get(0);
+		ret.add(c);
 		
-		boolean quotes = false;
-		String word = "";
-
-
+		c = d.findCourses("Fundamentals of Physics").get(0);
+		ret.add(c);
 		
-		for (int i = 0; i < line.length(); i++) {
-			char c = line.charAt(i);
-
-			// Kill rest of entry data if there is a carot
-			if (c == '<') {
-				for (int k = index; k < 14; k++) {
-					entries[k] = null;
-				}
-				return entries;
-			}
-				
-			else {
-				if (quotes) {
-					if (c == '\"') {
-						quotes = false;
-						entries[index] = word;
-						index++;
-						word = "";
-						if ((i+1) < line.length() && line.charAt(i+1) == ',') {
-							i++;
-						}
-					}
-					else word += c;
-				}
-				else {
-					if (c == ',') {
-	//						System.out.println("inserting " + word + " " + index);
-						entries[index] = word;
-						index++;
-						word = "";
-
-					}
-					else if (c == '\"') quotes = true;
-					else word += c;	
-				}
-			}
-		}
+		c = d.findCourses("Data Structures").get(0);
+		ret.add(c);
 		
-		return entries;
-	}
-	
-	public static String remove(String s, char remove) {
-		String ret = "";
-		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) != remove) 
-				ret += s.charAt(i);
-		}
-		return ret;
-	}
+		c = d.findCourses("Python").get(0);
+		ret.add(c);
+		
+		c = d.findCourses("Microbiology").get(0);
+		ret.add(c);
+		
+		System.out.println("BEFORE:");
+		for(int i = 0; i < ret.size(); i++) 
+			System.out.println("	" + ret.get(i).name + ": " + ret.get(i).title);
+		
+		Collections.sort(ret, Course.courseComparator);
+		System.out.println("AFTER:");
+		for(int i = 0; i < ret.size(); i++) 
+			System.out.println("	" + ret.get(i).name + ": " + ret.get(i).title);
+		
+	}	
 }
