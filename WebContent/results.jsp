@@ -26,7 +26,11 @@
             document.getElementById("showProfessorSearch").style.display = "block";
           }
         }
-
+        function add(a) {
+        	document.getElementById("addValue").value = a;
+        	document.tableform.submit();
+        }
+        	
         function logout(){
           window.location.replace("login.jsp");
         }
@@ -119,49 +123,30 @@
                </div>
              </div>
            </div>
+           <form name = "tableform" action = "Add" method = "POST">
+           <input id = "addValue" name = "addValue" style = "display:none;"></input>
            <div class="col-lg-9">
              <div id="nav">
                <h1 style="font-size:45px"><%= session.getAttribute("className") %></h1>
                <table class="table" style="font-family:tableTitles">
-                 <tr>Lecture:</tr>
+               <% Vector<String> results = (Vector<String>)session.getAttribute("resultsArray");
+               	  Vector<Integer> metrics = (Vector<Integer>)session.getAttribute("metricsArray");
+               	  for (int i = 0; i < results.size();i++){          		  
+               %>
                  <tr>
-                 	<td>
-                 		<!-- insert for getting lecture times -->
+                 	<td style = "color:white;">
+                 		<button id = <%= results.get(i) %> style = "font-size:28px;color:white;border:0;padding:0;background-color:rgba(255, 255, 255, 0);" onclick="add('<%= results.get(i) %>')"><%= results.get(i) %></button>
                  	</td>
-                 	<td>
-                 		<!-- insert for getting professor -->
-                 	</td>
-                 	<td>
-                 		<!-- insert for getting location -->
+                 	<td style = "color:white;">
+                 		<%= metrics.get(i) %>
                  	</td>
                  </tr>
-                 <tr>Lab:</tr>
-                 <tr>
-                 	<td>
-                 		<!-- insert for getting lecture times -->
-                 	</td>
-                 	<td>
-                 		<!-- insert for getting professor -->
-                 	</td>
-                 	<td>
-                 		<!-- insert for getting location -->
-                 	</td>
-                 </tr>
-                 <tr>Quiz:</tr>
-                 <td>
-                 		<!-- insert for getting lecture times -->
-                 	</td>
-                 	<td>
-                 		<!-- insert for getting professor -->
-                 	</td>
-                 	<td>
-                 		<!-- insert for getting location -->
-                 	</td>
+                <% }  %>
                </table>
              </div>
            </div>
+           </form>
         </div>
       </div>
     </body>
 </html>
- 
