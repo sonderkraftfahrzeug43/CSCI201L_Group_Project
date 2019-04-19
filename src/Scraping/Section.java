@@ -1,4 +1,5 @@
 package Scraping;
+
 public class Section {
 	public String sectionID;
 	public String sectionType;
@@ -15,32 +16,14 @@ public class Section {
 	public int units;
 	
 	Section(String[] parts, Course _c) {
-//		for (int i = 0; i < parts.length; i++) {
-//			System.out.println(i + ": " + parts[i]);
-//		}
-		
-		
-//		System.out.println("1 ");
 		sectionType = parts[4];
-//		System.out.println("2 ");
 		sectionID = parts[5];
-//		System.out.println("3 ");
 		time = new Time(parts[7]);
-//		System.out.println("4 ");
 		days = getDays(parts[8]);
-//		System.out.println("5 ");
 		professor = parts[12];
-//		System.out.println("6 ");
-		location = parts[13];
-//		System.out.println("7 ");
-		
-		
+		location = parts[13];		
 	}
-	public String getInfo() {
-		String returnable = sectionType + ", " + sectionID + ", " 
-				+ time.getFormattedTime() + ", " + professor + ", " + location;
-		return returnable;
-	}
+	
 	void printInfo() {
 		System.out.println(sectionType + ", " + sectionID + ", " 
 				+ time.getFormattedTime() + ", " + professor + ", " + location);
@@ -49,7 +32,6 @@ public class Section {
 	private boolean[] getDays(String line) {
 		boolean[] days = new boolean[8];
 		String[] parts = line.split(",");
-		
 		
 		for (int i = 0; i < parts.length; i++) {
 			parts[i] = parts[i].toLowerCase();
@@ -129,5 +111,11 @@ public class Section {
 		}
 		
 		return days;
+	}
+	
+	public String getInfo() {
+		String returnable = sectionType + ", " + sectionID + ", " 
+				+ time.getFormattedTime() + ", " + professor + ", " + location;
+		return returnable;
 	}
 }
