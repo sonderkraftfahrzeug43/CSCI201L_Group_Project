@@ -149,10 +149,9 @@ public class Results extends HttpServlet {
 		String search = "";
 		String nextPage = "/results.jsp";
 		if(choice.equals("Class")){
-			System.out.println("CODE FOR CLASS");
 			search = request.getParameter("classText");
 			if (search != null){
-				System.out.println(search);
+				session.setAttribute("searchType", choice);
 				Data data = (Data)session.getAttribute("data");
 				Vector<Course> courses = data.findCourses(search);
 				if (courses.size()==0){
@@ -169,16 +168,18 @@ public class Results extends HttpServlet {
 						}
 					}
 				}
-			session.setAttribute("resultsArray", results);	
+		    session.setAttribute("searchTerm", search);
+			session.setAttribute("resultsArray", results);
+			session.setAttribute("metricsArray", metric);
 			}
 			else{
 				nextPage = ("/profile.jsp");
 			}
 		}
 		if(choice.equals("Friend")){
-			System.out.println("CODE FOR FRIEND");
 			search = request.getParameter("friendText");
 			if (search != null){
+				session.setAttribute("searchType", choice);
 				String searchKeyword = search;
 				Connection conn = null;
 				PreparedStatement ps = null;
@@ -188,14 +189,14 @@ public class Results extends HttpServlet {
 					searchKeyword = searchKeyword.toLowerCase();
 					String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
 					conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
-					ps = conn.prepareStatement("SELECT * FROM User WHERE userName LIKE '%?%'");
-					ps.setString(1, searchKeyword);
+					ps = conn.prepareStatement("SELECT * FROM User WHERE userName LIKE ?");
+					String workingString = '%' + searchKeyword + '%';
+					ps.setString(1, workingString);
 					rs = ps.executeQuery();
-					Vector<String> friends = new Vector<String>();
 					while(rs.next()) {
 						String friendID = rs.getString("userID");
 						String friendUsername = rs.getString("userName");
-						friends.add(friendUsername);
+						results.add(friendUsername);
 						metric.add(mutualFriends(session.getAttribute("UserID").toString(),friendID));
 					}
 				} catch(ClassNotFoundException cnfe) {
@@ -217,6 +218,9 @@ public class Results extends HttpServlet {
 						System.out.println("sqle: " + sqle.getMessage());
 					}
 				}
+				session.setAttribute("resultsArray", results);
+				session.setAttribute("metricsArray", metric);
+				session.setAttribute("searchTerm", search);
 			}
 			else{
 				nextPage = ("/profile.jsp");
