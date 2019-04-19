@@ -4,7 +4,6 @@ import java.util.Vector;
 
 public class Scheduling {
 	private static Vector<Vector<Section>> all = new Vector<Vector<Section>>();
-	private static Vector<Vector<Section>> possible = new Vector<Vector<Section>>();
 	private static Vector<Course> courses = new Vector<Course>();
 	
 	public static void testSearch() {
@@ -19,67 +18,44 @@ public class Scheduling {
 		}
 	}
 	
+	public static void testSchedule() {
+		Data d = new Data();
+		
+		// ITP 303
+		Course c1 = d.findCourses("ACCT-473").get(0);
+		
+		// ITP 435
+		Course c2 = d.findCourses("ACCT-372").get(0);
+		
+		// ITP 380
+		Course c3 = d.findCourses("CSCI-310").get(0);
+		
+		// CSCI 360
+		Course c4 = d.findCourses("PSYC-165").get(0);
+				
+		
+		Vector<Course> desiredCourses = new Vector<Course>();
+		desiredCourses.add(c1);
+		desiredCourses.add(c2);
+		desiredCourses.add(c3);
+		desiredCourses.add(c4);
+		
+		for (int i = 0; i < desiredCourses.size(); i++) {
+			desiredCourses.get(i).printInfo();
+		}
+		
+		Vector<Vector<Section>> all = schedule(desiredCourses);
+		
+		
+	}
+	
 	
 	public Scheduling() {
 	}
 	
 	public static void main(String[] args) {
-		testSearch();
-//		Data d = new Data();
-//		Vector<Department> dep = d.getDepartments();
+		testSchedule();
 		
-//
-//		
-//		
-//		Course cs201 = d.findCourses("Software").get(0);
-//		Course cs270 = d.findCourses("Algorithms").get(0);
-//		
-//		Vector<Course> desiredCourses = new Vector<Course>();
-//		desiredCourses.add(cs201);
-//		desiredCourses.add(cs270);
-//		
-//		Vector<Vector<Section>> all = schedule(desiredCourses);
-		
-			
-		
-		
-//		Vector<Course> c = d.findCourses("Software Development");
-//		Course cs201 = c.get(0);
-//		Schedule s = new Schedule();
-//		Schedule s2 = new Schedule(s);
-//		
-//		s.addSection(cs201.sections.get(0));
-//		
-//		c = d.findCourses("Introduction to Algorithms");
-//		Course cs270 = c.get(0);
-//		s.addSection(cs270.sections.get(0));
-//		
-//		
-//		
-//		
-//		s.addSection(d.findCourses("Data Structures").get(0).sections.get(0));
-//		System.out.println("s2");
-//		s2.printSchedule();
-//		System.out.println("\ns");
-//		s.printSchedule();
-		
-		
-//		c.clear();
-//		c.add(cs201);
-//		c.add(cs270);
-		
-//		schedule(c);
-//		for (int i = 0 ; i < all.size(); i++) {
-//			System.out.println("NEW COMBINATION: ");
-//			for (int j = 0; j < all.get(i).size(); j++) {
-//				System.out.println(all.get(i).get(j).sectionID);
-//			}
-//			System.out.println();
-//			
-//		}
-			
-		
-
 
 	}
 	
@@ -89,69 +65,80 @@ public class Scheduling {
 		Schedule schedule = new Schedule();
 		scheduleHelper(0, schedule);
 		
-		for (int i = 0; i < possible.size(); i++) {
+		System.out.println("Final Possible Schedules:");
+		System.out.println("Count: " + all.size());
+		Vector<Vector<Section>> possible = new Vector<Vector<Section>>();
+		
+		for (int i = 0; i < all.size(); i++) {
 			System.out.println("NEW SCHEDULE: ");
-			Schedule s = new Schedule();
-			for (int j = 0; j < possible.get(i).size(); j++) {
-				s.addSection(possible.get(i).get(j));
+			for (int j = 0; j < all.get(i).size(); j++) {
+				System.out.println("	" + all.get(i).get(j).sectionID);
 			}
-			s.printSchedule();
 		}
 		
 		Vector<Vector<Section>> actual = new Vector<Vector<Section>>();
-//		
-//		for (int i = 0; i < possible.size(); i++) {
-//			boolean bad = false;
-//			for (int j = 0; j < possible.get(i).size(); j++) {
-//				if (possible.get(i).get(j) == null) {
-//					bad = true;
-//					break;
-//				}
-//			}
-//			
-//			if (!bad) {
-//				actual.add(possible.get(i));
-//			}
-//		}
-		
 		return actual;
 	}
 	
-	private static void scheduleHelper(int index, Schedule _schedule) {
-		Schedule schedule = _schedule;
+	public static void copy(Schedule s, Schedule s2) {
+		for (int i = 0; i < 241; i++) {
+			for (int j = 0; j < 7; j++) 
+				s2.times[i][j] = s.times[i][j];
+		}
 		
+		s2.sections.clear();
+		for (int i = 0; i < s.sections.size(); i++) {
+			s2.sections.add(s.sections.get(i));
+		}
+	}
+	
+	private static void scheduleHelper(int index, Schedule _schedule) {		
 		// If you reach the end, do nothing
 		if (index == courses.size()) {
-			System.out.println("Index: " + index);
+			Schedule schedule = new Schedule();
+			copy(_schedule, schedule);
+			
+//			System.out.println("Index: " + index);
 			all.add(schedule.sections);
-			Vector<Section> s = schedule.sections;
+			Vector<Section> s = _schedule.sections;
+			System.out.println("Schedule " + all.size());
+//			System.out.println("Number of sections: " + s.size());
 			for (int i = 0; i < s.size(); i++) {
 				System.out.println(s.get(i).sectionID);
 			}
-			schedule.printSchedule();
+//			_schedule.printSchedule();
 			System.out.println("\n\n");
 			return;
 		}
 		
+		Schedule schedule = new Schedule();
 		
 		boolean allConflicts = true;
 		Vector<Section> sections = courses.get(index).sections;
 		for (int i = 0; i < sections.size(); i++) {
-			schedule = new Schedule(_schedule);
-			System.out.println("Trying " + sections.get(i).sectionID + "\n");
-			schedule.printSchedule();
+			
+			copy(_schedule, schedule);
+//			System.out.println("\nCopy of schedule");
+//			_schedule.printSchedule();
 			
 			if (!schedule.conflicts(sections.get(i))) {
-				
-//				schedule.printSchedule();
-				System.out.println();
+				System.out.println("\nTrying " + sections.get(i).sectionID + ", size: " + schedule.sections.size());
 				allConflicts = false;
-				scheduleHelper(index+1, schedule.addSection(sections.get(i)));
+				schedule.addSection(sections.get(i));
+//				System.out.println("Size after: " + schedule.sections.size());
+//				schedule.printSchedule();
+				scheduleHelper(index+1, schedule);
 				
 //				System.out.println("after rec call");
+//				for (int j = 0; j < schedule.sections.size(); j++)
+//					System.out.println(schedule.sections.get(j).sectionID);
 //				_schedule.printSchedule();
 				
 			}
+			else {
+				System.out.println(sections.get(i).sectionID + " conflicts.");
+			}
 		}
+		System.out.println("End of checking  " + courses.get(index).name);
 	}
 }
