@@ -137,9 +137,15 @@
                  	<td style = "color:white;">
                  		<button id = <%= results.get(i) %> style = "color:white;border:0;padding:0;background-color:rgba(255, 255, 255, 0);" onclick="add('<%= results.get(i) %>')"><%= results.get(i) %></button>
                  	</td>
+                 	<%
+                 	if (metrics.size()!=0){
+                 	%>
                  	<td style = "color:white;">
                  		<%= metrics.get(i) %>
                  	</td>
+                 	<%
+                 	}
+                 	%>
                  </tr>
                 <% }  %>
                </table>
