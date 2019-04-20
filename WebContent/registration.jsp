@@ -43,7 +43,7 @@
 	<div class = nav>
 			<h1 class = center_p>Schedule Builder</h1>
 			<form method="POST" action="Register">
-            <center>
+
             <table class = table>
                 <tbody>
                     <tr>
@@ -59,7 +59,8 @@
                         <td style="color: white; font-size: 30px;">Confirm:</td>
                         <td><input type="password" name="password" style="width:200px;" required/></td>
                     </tr>
-					<td class = desc style="color: white; font-size: 30px; text-align: right">Major:</td>
+                    <tr>
+					<td class = desc style="color: white; font-size: 30px; text-align: center">Major:</td>
                         <td ><select class = field name="major" style="width:200px; font-size: 15px; font-family: tableTitles">
                         		<option value=0>Select a major</option>
                         		<option value=1>Accounting (BS)</option>
@@ -237,10 +238,11 @@
                         		<option value=173>Visual and Performing Arts Studies (BA)</option>
                         		<option value=174>Writing for Screen and Television (BFA)</option>
                         		<option value=175>Food Industry Management Program</option>
+                        	</select>
                         </td>
                     </tr>
                     <tr>
-                        <td class = desc style="color: white; font-size: 30px; text-align: right; align: right">Minor:</td>
+                        <td class = desc style="color: white; font-size: 30px; text-align: center; align: center">Minor:</td>
                         <td><select class = field name="minor" style="width:200px; font-size: 15px; font-family: tableTitles">
                         		<option value=0>Select a minor</option>
                         		<option value=1>2-D Art for Games Minor</option>
@@ -439,8 +441,27 @@
                         		<option value=194>Video Game Design and Management Minor </option>
                         		<option value=195>Video Game Programming Minor </option>
                         		<option value=196>Visual Culture Minor </option>
-                        		<option value=197>Web Technologies and Applications Minor  </option>		
+                        		<option value=197>Web Technologies and Applications Minor  </option>
+                        	</select>		
                     </tr>
+                    <tr>
+                             <td style="color:white; font-size:30px; text-align:left">Expected Graduation:</td>
+                                  <td> <select class = field name="minor" style="width:200px; font-size: 15px; font-family: tableTitles">
+                                         <option value=0>Select Expected Graduation </option>
+                                          <option value=1>May 2019 </option>
+                                          <option value=2>December 2019 </option>
+                                          <option value=3>May 2020 </option>
+                                          <option value=4>December 2020 </option>
+                                          <option value=5>May 2021 </option>
+                                          <option value=6>December 2021 </option>
+                                          <option value=7>May 2022 </option>
+                                          <option value=8>December 2022 </option>
+                                          <option value=9>May 2023 </option>
+                                          <option value=10>December 2023 </option>
+                                          <option value=10>May 2024 </option>
+                                   </select>
+                             </td>
+                       </tr>
                     <tr>
                         <td colspan="2" align="center"><input id="button2" type="submit" name="submit" value="Register" />
                             &nbsp;&nbsp;
@@ -454,14 +475,7 @@
                     </tr>                   
                 </tbody>
             </table>
-            </center>
         </form>
 	</div>
-
-	<!-- Display All -->
-	<!-- <form action="MyServlet" method="GET">
-		<button type="submit" class="displayAll" name="displayAll">Display All</button>
-	</form>-->
-	
 </body>
 </html>
