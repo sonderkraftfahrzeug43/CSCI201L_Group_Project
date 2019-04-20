@@ -86,7 +86,7 @@ public class Register extends HttpServlet {
 				ps.setString(4, minor);
 				ps.setString(5, grad);
 				ps.executeUpdate();
-				nextPage = "/main.jsp";					
+				nextPage = "/generate.jsp";					
 				HttpSession session = request.getSession();
 				Statement st2 = null;
 				ResultSet rs2 = null;
