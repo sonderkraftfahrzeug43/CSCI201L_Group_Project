@@ -71,13 +71,14 @@ public class Time {
 		
 		
 		if (AMPM.contentEquals("PM")) {
-			if (!(endTime.charAt(0) != '1' && (endTime.charAt(1) == '1' || endTime.charAt(1) == '2')))
+//			if (!(endTime.charAt(0) != '1' && (endTime.charAt(1) == '1' || endTime.charAt(1) == '2')))
+//				militaryEnd += 1200;
+			
+			if (endTime.charAt(1) == ':')
 				militaryEnd += 1200;
 			
 			if (!jumps && (startTime.charAt(0) != '1' && (startTime.charAt(1) != '2' || startTime.charAt(1) != '1'))) 
 				militaryStart += 1200;
-			
-			
 		}
 	}
 
