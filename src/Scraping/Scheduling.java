@@ -69,15 +69,17 @@ public class Scheduling {
 		System.out.println("Count: " + all.size());
 		Vector<Vector<Section>> possible = new Vector<Vector<Section>>();
 		
-		for (int i = 0; i < all.size(); i++) {
-			System.out.println("NEW SCHEDULE: ");
-			for (int j = 0; j < all.get(i).size(); j++) {
-				System.out.println("	" + all.get(i).get(j).sectionID);
-			}
-		}
+//		for (int i = 0; i < all.size(); i++) {
+//			System.out.println("NEW SCHEDULE: ");
+//			for (int j = 0; j < all.get(i).size(); j++) {
+//				System.out.println("	" + all.get(i).get(j).sectionID);
+//			}
+//		}
 		
 		Vector<Vector<Section>> actual = new Vector<Vector<Section>>();
-		return actual;
+		return all;
+		
+		
 	}
 	
 	public static void copy(Schedule s, Schedule s2) {
@@ -101,13 +103,13 @@ public class Scheduling {
 //			System.out.println("Index: " + index);
 			all.add(schedule.sections);
 			Vector<Section> s = _schedule.sections;
-			System.out.println("Schedule " + all.size());
+//			System.out.println("Schedule " + all.size());
 //			System.out.println("Number of sections: " + s.size());
-			for (int i = 0; i < s.size(); i++) {
-				System.out.println(s.get(i).sectionID);
-			}
+//			for (int i = 0; i < s.size(); i++) {
+//				System.out.println(s.get(i).sectionID);
+//			}
 //			_schedule.printSchedule();
-			System.out.println("\n\n");
+//			System.out.println("\n\n");
 			return;
 		}
 		
@@ -122,7 +124,7 @@ public class Scheduling {
 //			_schedule.printSchedule();
 			
 			if (!schedule.conflicts(sections.get(i))) {
-				System.out.println("\nTrying " + sections.get(i).sectionID + ", size: " + schedule.sections.size());
+//				System.out.println("\nTrying " + sections.get(i).sectionID + ", size: " + schedule.sections.size());
 				allConflicts = false;
 				schedule.addSection(sections.get(i));
 //				System.out.println("Size after: " + schedule.sections.size());
@@ -136,9 +138,9 @@ public class Scheduling {
 				
 			}
 			else {
-				System.out.println(sections.get(i).sectionID + " conflicts.");
+//				System.out.println(sections.get(i).sectionID + " conflicts.");
 			}
 		}
-		System.out.println("End of checking  " + courses.get(index).name);
+//		System.out.println("End of checking  " + courses.get(index).name);
 	}
 }
