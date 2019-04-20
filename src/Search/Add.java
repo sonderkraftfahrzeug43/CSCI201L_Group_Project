@@ -34,15 +34,15 @@ public class Add extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		String nextPage = null;
 		String searchType = session.getAttribute("searchType").toString();
+		String userID = session.getAttribute("UserID").toString();
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		Statement st = null;
+		Statement st2 = null;
+		Connection conn = null;
 		if (searchType.equals("Friend")){
-			ResultSet rs = null;
-			ResultSet rs2 = null;
-			String nextPage = null;
-			Statement st = null;
-			Statement st2 = null;
-			Connection conn = null;
-			String f1ID = session.getAttribute("UserID").toString();
 			String f2User = request.getParameter("addValue");
 			System.out.println(f2User);
 			try {
@@ -54,7 +54,7 @@ public class Add extends HttpServlet {
 				rs.next();
 				String f2ID = rs.getString("UserId");
 				st2 = conn.createStatement();
-				rs2 = st2.executeQuery("SELECT * FROM follow WHERE user1ID='" + f1ID + "' AND user2ID='" + f2ID + "'");
+				rs2 = st2.executeQuery("SELECT * FROM follow WHERE user1ID='" + userID + "' AND user2ID='" + f2ID + "'");
 				if(rs2.next())
 				{
 					System.out.println("ALREADY FOLLOWING");
@@ -63,7 +63,7 @@ public class Add extends HttpServlet {
 				else{
 					String sql = "INSERT INTO follow(user1ID,user2ID) values(?,?)";
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, f1ID);
+					ps.setString(1, userID);
 					ps.setString(2, f2ID);
 					ps.executeUpdate();
 					System.out.println("EXECUTED SUCCESSFULLY");
@@ -76,8 +76,34 @@ public class Add extends HttpServlet {
 				System.out.println("sqle: " + e.getMessage());
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
-			dispatcher.forward(request, response);
 		}
+		else{
+			String classToAdd = request.getParameter("addValue").toString();
+			String id = null;
+			nextPage ="/results.jsp";
+			for (int index = 0; index < classToAdd.length()-3; index++){
+				if (classToAdd.substring(index,index+3).equals("ID:")){
+					id = classToAdd.substring(index+3,index+9);
+				}	
+			}
+			try{
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
+				conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+				st = conn.createStatement();
+				rs = st.executeQuery("SELECT * FROM currentclass WHERE section='" + id + "' AND UserID='" + userID + "'");
+				if (rs.next()){
+					System.out.println("Already have this class");
+				}
+			} catch (ClassNotFoundException e) {
+				System.out.println("cnf: " + e.getMessage());
+				e.printStackTrace();
+			} catch (SQLException e) {
+				System.out.println("sqle: " + e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
+		dispatcher.forward(request, response);
 	}
 }
