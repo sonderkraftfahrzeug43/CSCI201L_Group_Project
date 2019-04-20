@@ -446,7 +446,7 @@
                     </tr>
                     <tr>
                              <td style="color:white; font-size:30px; text-align:left">Expected Graduation:</td>
-                                  <td> <select class = field name="minor" style="width:200px; font-size: 15px; font-family: tableTitles">
+                                  <td> <select class = field name="grad" style="width:200px; font-size: 15px; font-family: tableTitles">
                                          <option value=0>Select Expected Graduation </option>
                                           <option value=1>May 2019 </option>
                                           <option value=2>December 2019 </option>
