@@ -38,7 +38,7 @@ todo:
      - enable searches
       - friend 
       - class (viet scraping)
-      - professor (ratemyprofessor)
+
       
      
   
