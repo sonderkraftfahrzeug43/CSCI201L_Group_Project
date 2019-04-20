@@ -9,28 +9,21 @@
 <link rel="stylesheet" type="text/css" href="generate.css" />
 <script language="javascript">
 		function addRow(tableID) {
-
 			var table = document.getElementById(tableID);
-
 			var rowCount = table.rows.length;
 			var row = table.insertRow(rowCount);
-
 			var cell1 = row.insertCell(0);
 			var element1 = document.createElement("input");
 			element1.type = "checkbox";
 			element1.name="chkbox[]";
 			cell1.appendChild(element1);
-
 			var cell2 = row.insertCell(1);
 			cell2.innerHTML = "Class: ";
-
 			var cell3 = row.insertCell(2);
 			var element2 = document.createElement("input");
 			element2.type = "text";
 			element2.name = "txtbox[]";
 			cell3.appendChild(element2);
-
-
 		}
 
 		function deleteRow(tableID) {
@@ -53,6 +46,9 @@
 				alert(e);
 			}
 		}
+		function generate(){
+			document.gen.submit();
+		}
 
 	</script>
 </head>
@@ -62,16 +58,17 @@
 	<!-- login fields -->
 	<div class = nav>
 			<h1 class = center_p>Schedule Builder</h1>
-			<form method="POST" action="Login">
+			<form name = "gen" method="POST" action="Generate">
 			<input type="button" value="Add Row" onclick="addRow('dataTable')" id="button1"/>
 			<input type="button" value="Delete Row" onclick="deleteRow('dataTable')" id="button2"/>
+			<input type="button" value = "Submit" onclick = "generate()"/>
             <center>
             <table class = table id="dataTable">
                 <tbody>
                     <tr>
                         <td><input type="checkbox" name="chk[]"/></td>
                         <td>Class: </TD>
-                        <td> <input type="text" name="txt[]" /> </td>
+                        <td> <input type="text" name="txtbox[]" /> </td>
                     </tr>           
                 </tbody>
             </table>
