@@ -21,12 +21,12 @@ public class Section {
 		time = new Time(parts[7]);
 		days = getDays(parts[8]);
 		professor = parts[12];
-		location = parts[13];
+		location = parts[13];		
 		motherCourse = _c;
 	}
 	
 	void printInfo() {
-		System.out.println(sectionType + ", " + sectionID + ", " 
+		System.out.println("	" + motherCourse.name + ": " + sectionType + ", " + sectionID + ", " 
 				+ time.getFormattedTime() + ", " + professor + ", " + location);
 	}
 	
@@ -115,7 +115,7 @@ public class Section {
 	}
 	
 	public String getInfo() {
-		String returnable = sectionType + ", ID:" + sectionID + ", " 
+		String returnable = sectionType + ", " + sectionID + ", " 
 				+ time.getFormattedTime() + ", " + professor + ", " + location;
 		return returnable;
 	}
