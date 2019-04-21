@@ -1,6 +1,6 @@
 b'"Course number","Course title","Registration restrictions","Units","Type","Section","Session","Time","Days","Seats","Registered","Waitlist","Instructor","Room"
-"EDUE-563","History of Higher Education","M","3.0 units","Lecture","27150D","001","4:00-6:40pm","Wednesday","22","0","0","",""
-"","","","","Lecture","27151D","001","7:00-9:40pm","Wednesday","22","0","0","",""
+"EDUE-563","History of Higher Education","M","3.0 units","Lecture","27150D","001","4:00-6:40pm","Wednesday","22","0","0","","WPHB30"
+"","","","","Lecture","27151D","001","7:00-9:40pm","Wednesday","22","0","0","","WPH205"
 "EDUE-700","Foundations in Urban Education","","3.0 units","Lecture","26521D","001","TBA","TBA","25","0","0","","OFFICE"
 "","","","","Lecture","26523D","001","4:00-6:40pm","Thursday","25","0","0","","WPH403"
 "","","","","Lecture","26524D","001","7:10-9:50pm","Tuesday","25","0","0","","WPH403"
@@ -9,4 +9,6 @@ b'"Course number","Course title","Registration restrictions","Units","Type","Sec
 "","","","","Lecture","26528D","001","7:10-9:50pm","Thursday","25","0","0","","WPH403"
 "","","","","Lecture","26529D","001","7:10-9:50pm","Tuesday","25","0","0","","WPH403"
 "","","","","Lecture","26530D","001","4:00-6:40pm","Wednesday","25","0","0","","WPH403"
+"EDUE-784a","Dissertation in Practice, Data Analysis","P","2.0 units","Lecture","26534D","001","TBA","TBA","125","0","0","","OFFICE"
+"EDUE-784b","Dissertation in Practice, Data Analysis","P","2.0 units","Lecture","26535D","001","TBA","TBA","10","0","0","","OFFICE"
 '
