@@ -148,21 +148,23 @@ public class Generate extends HttpServlet {
 				String sql = "insert into currentclass(name,section,location,days,hrs,professor,userID) values(?,?,?,?,?,?,?)";
 				boolean[] days = helpus.get(maxIndex).get(index).days;
 				String daysAsString = "";
+				for (int test = 0; test < days.length;test++){
+					System.out.println(days[test]);
+				}
 				for (int daysI = 0; daysI < days.length; daysI++){
-					if (days[index]==false){
+					if (days[daysI]==false){
 						daysAsString += "0";
 					}
 					else{
 						daysAsString +="1";
 					}
-					
 				}
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, helpus.get(maxIndex).get(index).motherCourse.getHeader());
 				ps.setString(2, helpus.get(maxIndex).get(index).sectionID.toString());
 				ps.setString(3, helpus.get(maxIndex).get(index).location.toString());
 				ps.setString(4, daysAsString);
-				ps.setString(5, helpus.get(maxIndex).get(index).time.toString());
+				ps.setString(5, helpus.get(maxIndex).get(index).time.getFormattedTime());
 				ps.setString(6, helpus.get(maxIndex).get(index).professor.toString());
 				ps.setString(7, session.getAttribute("UserID").toString());
 				ps.executeUpdate();
