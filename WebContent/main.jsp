@@ -4,125 +4,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript">
-	// displays and hides both types of search bars
-	function myFunction() {
-		// show Class search bar
-		if (document.getElementById("Class").checked == true) {
-			document.getElementById("showClassSearch").style.display = "block";
-			document.getElementById("showFriendSearch").style.display = "none";
-			document.getElementById("showProfessorSearch").style.display = "none";
+	<script type="text/javascript">
+		// displays and hides both types of search bars
+		function myFunction() {
+			// show Class search bar
+			if (document.getElementById("Class").checked == true) {
+				document.getElementById("showClassSearch").style.display = "block";
+				document.getElementById("showFriendSearch").style.display = "none";
+				document.getElementById("showProfessorSearch").style.display = "none";
+			}
+			// show Friend search bar
+			else if (document.getElementById("Friend").checked == true) {
+				document.getElementById("showClassSearch").style.display = "none";
+				document.getElementById("showFriendSearch").style.display = "block";
+				document.getElementById("showProfessorSearch").style.display = "none";
+			}
+			// show Professor search bar
+			else if (document.getElementById("Professor").checked == true){
+				document.getElementById("showClassSearch").style.display = "none";
+				document.getElementById("showFriendSearch").style.display = "none";
+				document.getElementById("showProfessorSearch").style.display = "block";
+			}
+		} 
+		function logout(){
+			window.location.replace("login.jsp");
 		}
-		// show Friend search bar
-		else if (document.getElementById("Friend").checked == true) {
-			document.getElementById("showClassSearch").style.display = "none";
-			document.getElementById("showFriendSearch").style.display = "block";
-			document.getElementById("showProfessorSearch").style.display = "none";
+		function req(){
+			document.require.submit();
 		}
-		// show Professor search bar
-		else if (document.getElementById("Professor").checked == true){
-			document.getElementById("showClassSearch").style.display = "none";
-			document.getElementById("showFriendSearch").style.display = "none";
-			document.getElementById("showProfessorSearch").style.display = "block";
+		function prof(){
+			document.profile.submit();
 		}
-	} 
-	function logout(){
-		window.location.replace("login.jsp");
-	}
-	function req(){
-		document.require.submit();
-	}
-	function prof(){
-		document.profile.submit();
-	}
-	function man(){
-		window.location.replace("main.jsp");
-	}
- 
- 
-</script>
-<meta charset="UTF-8">
-<title>Schedule Builder</title>
-<link rel="stylesheet" type="text/css" href="main.css" />
+		function man(){
+			window.location.replace("main.jsp");
+		}
+	 
+	 
+	</script>
+	<meta charset="UTF-8">
+	<title>Schedule Builder</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-	<div class="background-img"></div>
-	<div id="sidenav" class="sidenav">
-		<h2  style="text-color:white">Schedule Builder</h2>
-		<form name = "profile" method = "POST" action="ProfileSearch">
-			<div class="snlinks">
-			<img src="Images/profile.png" alt="profile" style="width:50px; height: 50px;" onclick = "prof()">
-			</div>
-		</form>
-		<a href="settings.jsp" class="snlinks1">
-			<img src="Images/setting.png" alt="settings" style="width:50px; height: 50px;">
-		</a>
-		<a href="main.jsp" class="snlinks2">
-			<img src="Images/schedule.png" alt="schedule" style="width:50px; height: 50px;" onclick = "man()">
-		</a>
-		<form name = "require" method = "POST" action="RequirementsSearch">
-			<div class="snlinks3">
-			<img src="Images/requirements.png" alt="requirements" style="width:50px; height: 50px;" onclick ="req()">
-			</div>
-		</form>
-		<input id="button3" type="button" name="submit" value="Logout" onclick = "logout()"/>
-		<div id="showClassSearch" class="showClassSearch">
-			<input type="text" name="class" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Class...">
-			<button type="submit" name="classSearch"></button>
-		</div>
-		<div id="showFriendSearch" class="showFriendSearch">
-			<form method="get" action="FollowSearch">
-				<input type="text" name="friend" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Friend...">
-				<input type="submit" name="submit" value="Search" />
-			</form>
-		</div>
-		<div id="showProfessorSearch" class="showProfessorSearch">
-			<input type="text" name="professor" style="width:335px; font-family:tableTitles; font-size:20px; padding-top: 10px; padding-bottom: 10px" placeholder="Search Professor...">
-			<button type="submit" name="professorSearch"></button>
-		</div>
-		<div class="radio-button-div">
-					<input type="radio" name="option" id="Class" value="Class"
-						checked="checked" onclick="myFunction()">Class
-					<input type="radio" name="option" id="Friend" value="Friend"
-						onclick="myFunction()">Friend
-					<input type="radio" name="option" id="Professor" value="Professor"
-						onclick="myFunction()">Professor
-		</div>
-		<div class="User">
-			<h3  style="text-color:white">Welcome Username</h3>
-		</div>
-		<div class="MM">
-				<table class="sidenavtable">
-					<tbody>
-                    	<tr>
-                        	<td style="color: white; font-size: 28px; text-align: left">Major:</td>
-                        	<td ><!-- output user major --></td>
-                    	</tr>
-                    	<tr>
-                        	<td style="color: white; font-size: 28px; text-align: left">Minor:</td>
-                        	<td ><!-- output user minor --></td>
-                    	</tr>
-                	</tbody>
-                </table>
-		</div>
-		<div class="Updates">
-			<h6 style="text-color:white; font-size: 28px">Updates: </h6>
-		</div>
-	</div>
-	<div class="nav">
-		<h1 class = center_p>Current Schedule</h1>
-		<table class="table" border="1">
-			<tbody>
-				<tr>
-					<th align="center" valign="middle" width="80"><img src="Images/clock.png" alt="clock" height="50" width="50"></th>
-					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Monday</th>
-					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Tuesday</th>
-					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Wednesday</th>
-					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Thursday</th>
-					<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Friday</th>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</body>
+      <div id="background"></div>
+      <div class="container-fluid">
+        <div class="row">
+           <div class="col-lg-3">
+             <div id="sidenav">
+               <h2>Schedule Builder</h2>
+               <ul class="nav nav-pills flex-row" style="justify-content:space-between; align-items:center; padding-top:15px; padding-bottom:15px;">
+                 <li class="nav-item">
+                   <a class="nav-link" href="profile.jsp">
+                     <img src="Images/profile.png" style="width:50px; height:50px">
+                   </a>
+                 </li>
+                 <li class="nav-item">
+                   <form name="settings" method="POST" action="Settings">
+                     <a class="nav-item" href="settings.jsp">
+                       <img src="Images/setting.png" style="width:50px; height:50px" onclick="sett()">
+                     </a>
+                   </form>
+                 </li>
+                 <li class="nav-item">
+                  <a class="nav-item" href="main.jsp">
+                    <img src="Images/schedule.png" style="width:50px; height:50px">
+                  </a>
+                 </li>
+                 <li class="nav-item">
+                   <form name="require" method="POST" action="RequirementsSearch">
+                     <a class="nav-item">
+                       <img src="Images/requirements.png" style="width:50px; height:50px" onclick="req()">
+                     </a>
+                   </form>
+                 </li>
+               </ul>
+               <div id="logout" style="text-align:center">
+                 <input type="button" name="submit" id="logoutButton" value="Logout" onclick="logout()">
+               </div>
+               <div id="showClassSearch" class="showClassSearch">
+                 <input type="text" name="class" placeholder="Search Class....">
+                 <button type="submit" name="classSearch"></button>
+               </div>
+               <div id="showFriendSearch" class="showFriendSearch">
+                 <input type="text" name="friend" placeholder="Search Friend...">
+                 <button type="submit" name="friendSearch"></button>
+               </div>
+               <div id="showProfessorSearch" class="showProfessorSearch">
+                 <input type="text" name="professor" placeholder="Search Professor...">
+                 <button type="submit" name="professorSearch"></button>
+               </div>
+               <div class="radio-button-div">
+                 <input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class
+                 <input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend
+                 <input type="radio" name="option" id="Professor" value="Professor" onclick="myFunction()">Professor
+               </div>
+               <div class="User" style="font-family:tableTitles; text-align:center">
+                 <h3 style="color:white; font-size:28px;">Welcome <%= session.getAttribute("userName") %></h3>
+               </div>
+               <div class="MM" style="font-family:tableTitles; font-size:28px; color:white">
+                 <table class="sidenavtable" align="center">
+                   <tbody>
+                     <tr>
+                       <td>Major:</td>
+                       <td><%= session.getAttribute("majorName") %></td>
+                     </tr>
+                     <tr>
+                       <td>Minor:</td>
+                       <td><%= session.getAttribute("minorName") %></td>
+                     </tr>
+                   </tbody>
+                 </table>
+               </div>
+               <div class="Updates" style="font-family:tableTitles; text-align:center; margin-top: 25px;">
+                 <h6 style="color:white; font-size:28px;">Updates:</h6>
+               </div>
+             </div>
+           </div>
+           <div class="col-lg-9">
+           	<div id="nav">
+           		<h1>Current Schedule</h1>
+           		<table class="schedule" border="1">
+           			<tr>
+           				<th align="center" valign="middle" width="80"><img src="Images/clock.png" alt="clock" height="50" width="50"></th>
+						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Monday</th>
+						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Tuesday</th>
+						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Wednesday</th>
+						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Thursday</th>
+						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Friday</th>
+           			</tr>
+           		</table>
+           	</div>
+           </div>
+        </div>
+      </div>
+    </body>
 </html>
+
