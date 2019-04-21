@@ -68,7 +68,7 @@
                     <tr>
                         <td><input type="checkbox" name="chk[]"/></td>
                         <td>Class: </TD>
-                        <td> <input type="text" name="txtbox[]" /> </td>
+                        <td> <input type="text" name="txtbox[]" placeholder="Add a Class (e.g CSCI-201)...." style="width:90%; font-size:16px; font-family:tableTitles"/> </td>
                     </tr>           
                 </tbody>
             </table>
