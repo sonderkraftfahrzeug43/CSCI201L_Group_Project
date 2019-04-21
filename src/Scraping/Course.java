@@ -2,12 +2,25 @@ package Scraping;
 import java.util.Vector;
 
 public class Course implements Comparator<Course> {
-	public Vector<Section> sections = new Vector<Section>();
+	public Vector<Vector<Section>> sections = new Vector<Vector<Section>>();
+	public Vector<Section> allSections = new Vector<Section>();
 	public String name = ""; // CSCI-201
 	public String department = ""; // CSCI
 	public String courseNum = ""; // 201
 	public String title = ""; // Principles of Software Development
 	public String units; // 4
+	
+	public Course(Course c, Vector<Section> s) {
+		for (int i = 0; i < s.size(); i++) {
+			allSections.add(s.get(i));
+		}
+		
+		this.name = c.name;
+		this.department = c.department;
+		this.courseNum = c.courseNum;
+		this.title = c.title;
+		this.units = c.units;
+	}
 	
 	public Course(String _name, String _title, String _units) {
 		name = _name;
@@ -33,19 +46,30 @@ public class Course implements Comparator<Course> {
 		}
 	}
 
-	public Vector<Section> getSections() {
-		return sections;
-	}
+
 	
 	public void addSection(Section s) {
-		sections.add(s);
+		allSections.add(s);
+		
+		for (int i = 0; i < sections.size(); i++) {
+			if (sections.get(i).get(0).sectionType.contains(s.sectionType)) {
+				sections.get(i).add(s);
+				return;
+			}
+				
+		}
+		
+		Vector<Section> newVector = new Vector<Section>();
+		newVector.add(s);
+		sections.add(newVector);
 	}
 	
 	public void printInfo() {
 		System.out.println(name + ": " + title + " (" + units + ")");
 		for (int i = 0; i < sections.size(); i++) {
-			System.out.print("\t");
-			sections.get(i).printInfo();
+			System.out.println("\tSection Type: " + sections.get(i).get(0).sectionType);
+			for (int j = 0; j< sections.get(i).size(); j++)
+				sections.get(i).get(j).printInfo();
 		}
 	}
 	
@@ -68,15 +92,16 @@ public class Course implements Comparator<Course> {
 		
 	}
 	
-	public String getInfo(){
-		String complete = "";
-		complete += (name + ": " + title + " (" + units + ")");
-		for (int i = 0; i < sections.size(); i++) {
-			complete+=("\n");
-			complete+=(sections.get(i).getInfo());
-		}
-		return complete;
-	}
+//	public String getInfo(){
+//		String complete = "";
+//		complete += (name + ": " + title + " (" + units + ")");
+//		for (int i = 0; i < sections.size(); i++) {
+//			complete+=("\n");
+//			complete+=(sections.get(i).getInfo());
+//		}
+//		return complete;
+//	}
+	
 	public String getHeader(){
 		String header = name + ": " + title + " (" + units + ")";
 		return header;
@@ -99,5 +124,12 @@ public class Course implements Comparator<Course> {
 	public int compare(Course o1, Course o2) {
 		return courseComparator.compare(o1, o2);
 	}
+	
+	public static void main(String[] args) {
+		Data d = new Data();
+		Course c = d.findCourses("CSCI-201").get(0);
+		c.printInfo();
+	}
 
 }
+
