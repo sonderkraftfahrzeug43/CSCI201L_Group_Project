@@ -156,12 +156,12 @@
 								{
 
 								%>
-    								<tr><td><%=rs.getString("Time") %></td>
-								        <td><%=rs.getString("Monday") %></td>
-									    <td><%=rs.getString("Tuesday") %></td>
-									    <td><%=rs.getString("Wednesday") %></td>
-									    <td><%=rs.getString("Thursday") %></td>
-								        <td><%=rs.getString("Friday") %></td>
+    								<tr><td style="color: white;"><%=rs.getString("Time") %></td>
+								        <td style="color: white;"><%=rs.getString("Monday") %></td>
+									    <td style="color: white;"><%=rs.getString("Tuesday") %></td>
+									    <td style="color: white;"><%=rs.getString("Wednesday") %></td>
+									    <td style="color: white;"><%=rs.getString("Thursday") %></td>
+								        <td style="color: white;"><%=rs.getString("Friday") %></td>
 								   </tr>
         						<%
 
