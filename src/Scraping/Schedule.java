@@ -34,9 +34,7 @@ public class Schedule {
 		
 		Time t = s.time;
 		boolean[] days = s.days;
-//		System.out.println(t.militaryStart + ", " + t.militaryEnd);
-//		System.out.println(s.sectionType + " - " + s.sectionID);
-//		System.out.println(t.startTime + " ,  -" + t.endTime);
+
 		for (int i = t.militaryStart/10; i < t.militaryEnd/10; i++) {
 			for (int j = 0; j < days.length; j++) {
 				// If the class meets on that day and
@@ -53,7 +51,7 @@ public class Schedule {
 	
 	public void printSchedule() {
 		System.out.println("Times| M | T | W |Th | F | S |Su |");
-		for (int i = 70; i < 200; i++) {
+		for (int i = 70; i < 210; i++) {
 			if (i % 10 < 6) {
 				if (i/100 == 0)
 					System.out.print(0);
@@ -73,11 +71,12 @@ public class Schedule {
 		Time t = s.time;
 		boolean[] days = s.days;
 		
-		
+
 		
 		for (int i = t.militaryStart/10; i < t.militaryEnd/10; i++) {
 			for (int j = 0; j < days.length; j++) {
 				// If the class meets on that day and 
+//				System.out.println(i + ", " + j);
 				if (days[j] == true && times[i][j] == true) {
 //					System.out.println(s.sectionID + " conflicts on day " + j + " during time " + i);
 					return true;
