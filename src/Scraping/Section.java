@@ -21,7 +21,8 @@ public class Section {
 		time = new Time(parts[7]);
 		days = getDays(parts[8]);
 		professor = parts[12];
-		location = parts[13];		
+		location = parts[13];
+		motherCourse = _c;
 	}
 	
 	void printInfo() {
