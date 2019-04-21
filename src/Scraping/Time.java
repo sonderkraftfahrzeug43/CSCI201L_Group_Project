@@ -77,8 +77,10 @@ public class Time {
 			if (endTime.charAt(1) == ':')
 				militaryEnd += 1200;
 			
-			if (!jumps && (startTime.charAt(0) != '1' && (startTime.charAt(1) != '2' || startTime.charAt(1) != '1'))) 
+			if (!jumps && (startTime.charAt(1) == ':')) 
 				militaryStart += 1200;
+			
+			
 		}
 	}
 
@@ -89,4 +91,5 @@ public class Time {
 	}
 
 }
+
 
