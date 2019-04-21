@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.util.TimeZone" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +42,9 @@
 		function man(){
 			window.location.replace("main.jsp");
 		}
-	 
+	 	function loadSchedule(){
+	 		
+	 	}
 	 
 	</script>
 	<meta charset="UTF-8">
@@ -124,20 +130,61 @@
            <div class="col-lg-9">
            	<div id="nav">
            		<h1>Current Schedule</h1>
-           		<table class="schedule" border="1">
-           			<tr>
-           				<th align="center" valign="middle" width="80"><img src="Images/clock.png" alt="clock" height="50" width="50"></th>
-						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Monday</th>
-						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Tuesday</th>
-						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Wednesday</th>
-						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Thursday</th>
-						<th align="center" valign="middle" width="100" style="color: white; font-size: 30px">Friday</th>
-           			</tr>
-           		</table>
+           		<form method="post">
+           			<table class="schedule" border="1">
+           				<tr>
+           					<td align="center" valign="middle" width="80"><img src="Images/clock.png" alt="clock" height="50" width="50"></td>
+							<td align="center" valign="middle" width="100" style="color: white; font-size: 30px">Monday</td>
+							<td align="center" valign="middle" width="100" style="color: white; font-size: 30px">Tuesday</td>
+							<td align="center" valign="middle" width="100" style="color: white; font-size: 30px">Wednesday</td>
+							<td align="center" valign="middle" width="100" style="color: white; font-size: 30px">Thursday</td>
+							<td align="center" valign="middle" width="100" style="color: white; font-size: 30px">Friday</td>
+           				</tr>
+           			    <%
+							try
+							{
+								String userID = session.getAttribute("UserID").toString();
+								Class.forName("com.mysql.cj.jdbc.Driver");
+								String url="jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();;
+								String username="b8c39ba9e35da7";
+								String password="ebcfebb1";
+								String query="SELECT Time, Monday, Tuesday, Wednesday, Thursday, Friday FROM ScheduleSlot WHERE userID="+userID+" ORDER By Time ASC";
+								Connection conn = DriverManager.getConnection(url,username,password);
+								Statement st = conn.createStatement();
+								ResultSet rs = st.executeQuery(query);
+								while(rs.next())
+								{
+
+								%>
+    								<tr><td><%=rs.getString("Time") %></td>
+								        <td><%=rs.getString("Monday") %></td>
+									    <td><%=rs.getString("Tuesday") %></td>
+									    <td><%=rs.getString("Wednesday") %></td>
+									    <td><%=rs.getString("Thursday") %></td>
+								        <td><%=rs.getString("Friday") %></td>
+								   </tr>
+        						<%
+
+								}
+							
+						%>
+    						</table>
+    						<%
+    						rs.close();
+    						st.close();
+    						conn.close();
+    						}
+						catch(Exception e)
+						{
+    						e.printStackTrace();
+    						}
+
+						%>
+           			
+           		</form>
            	</div>
            </div>
         </div>
       </div>
     </body>
 </html>
-
