@@ -20,33 +20,30 @@ public class Scheduling {
 	
 	public static void testSchedule() {
 		Data d = new Data();
-		
-		// ITP 303
-		Course c1 = d.findCourses("ACCT-473").get(0);
-		
-		// ITP 435
-		Course c2 = d.findCourses("ACCT-372").get(0);
-		
-		// ITP 380
-		Course c3 = d.findCourses("CSCI-310").get(0);
-		
-		// CSCI 360
-		Course c4 = d.findCourses("PSYC-165").get(0);
-				
-		
+
+		Course c1 = d.findCourses("CTIN-488").get(0);
+		Course c2 = d.findCourses("CSCI-353").get(0);
+		Course c3 = d.findCourses("CSCI-420").get(0);
+		Course c4 = d.findCourses("ITP-250").get(0);
+		Course c5 = d.findCourses("CSCI-350").get(0);
+
 		Vector<Course> desiredCourses = new Vector<Course>();
 		desiredCourses.add(c1);
 		desiredCourses.add(c2);
 		desiredCourses.add(c3);
 		desiredCourses.add(c4);
-		
-		for (int i = 0; i < desiredCourses.size(); i++) {
-			desiredCourses.get(i).printInfo();
-		}
-		
-		Vector<Vector<Section>> all = schedule(desiredCourses);
+		desiredCourses.add(c5);
 		
 		
+		Vector<Vector<Section>> maybe = schedule(desiredCourses);
+//		for (int i = 0; i < maybe.size(); i++) {
+//			System.out.println("NEW SCHEDULE: ");
+//			for (int j = 0; j < maybe.get(i).size(); j++) {
+//				System.out.println("	" + maybe.get(i).get(j).sectionID);
+//			}
+//		}
+		
+		System.out.println(maybe.size());
 	}
 	
 	
@@ -55,28 +52,40 @@ public class Scheduling {
 	
 	public static void main(String[] args) {
 		testSchedule();
-		
-
 	}
 	
 	public static Vector<Vector<Section>> schedule(Vector<Course> _courses) {
-		courses = _courses;
+		courses.clear();
+		 
+		for (int i = 0; i < _courses.size(); i++) {
+			Vector<Vector<Section>> sectionType = _courses.get(i).sections;
+			for (int j = 0; j < sectionType.size(); j++) {
+				Course c = new Course(_courses.get(i), sectionType.get(j));
+				courses.add(c);
+			}
+		}
+
+
+//		for (int i = 0; i < courses.size(); i++) {
+//			System.out.println("Course: " + courses.get(i).name);
+//			for (int j = 0; j < courses.get(i).sections.size(); j++) {
+//				Vector<Section> differentSections = courses.get(i).allSections;
+//				System.out.println("Section Type: " + differentSections.get(0).sectionType);
+//				for (int k = 0; k < differentSections.size(); k++) {
+//					System.out.print("\t");
+//					differentSections.get(k).printInfo();	
+//				}
+//			}
+//		}
+
 		
 		Schedule schedule = new Schedule();
 		scheduleHelper(0, schedule);
 		
 		System.out.println("Final Possible Schedules:");
 		System.out.println("Count: " + all.size());
-		Vector<Vector<Section>> possible = new Vector<Vector<Section>>();
-		
-//		for (int i = 0; i < all.size(); i++) {
-//			System.out.println("NEW SCHEDULE: ");
-//			for (int j = 0; j < all.get(i).size(); j++) {
-//				System.out.println("	" + all.get(i).get(j).sectionID);
-//			}
-//		}
-		
-		Vector<Vector<Section>> actual = new Vector<Vector<Section>>();
+
+
 		return all;
 		
 		
@@ -103,20 +112,19 @@ public class Scheduling {
 //			System.out.println("Index: " + index);
 			all.add(schedule.sections);
 			Vector<Section> s = _schedule.sections;
-//			System.out.println("Schedule " + all.size());
-//			System.out.println("Number of sections: " + s.size());
-//			for (int i = 0; i < s.size(); i++) {
-//				System.out.println(s.get(i).sectionID);
-//			}
-//			_schedule.printSchedule();
-//			System.out.println("\n\n");
+			System.out.println("Schedule " + all.size());
+			System.out.println("Number of sections: " + s.size());
+			for (int i = 0; i < s.size(); i++) {
+				s.get(i).printInfo();
+			}
+			_schedule.printSchedule();
+			System.out.println("\n\n");
 			return;
 		}
 		
 		Schedule schedule = new Schedule();
 		
-		boolean allConflicts = true;
-		Vector<Section> sections = courses.get(index).sections;
+		Vector<Section> sections = courses.get(index).allSections;
 		for (int i = 0; i < sections.size(); i++) {
 			
 			copy(_schedule, schedule);
@@ -124,8 +132,6 @@ public class Scheduling {
 //			_schedule.printSchedule();
 			
 			if (!schedule.conflicts(sections.get(i))) {
-//				System.out.println("\nTrying " + sections.get(i).sectionID + ", size: " + schedule.sections.size());
-				allConflicts = false;
 				schedule.addSection(sections.get(i));
 //				System.out.println("Size after: " + schedule.sections.size());
 //				schedule.printSchedule();
