@@ -25,10 +25,12 @@ public class SettingsData extends HttpServlet {
         super();
     }
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("IN SETTING SERVLET");
 		String major = request.getParameter("major");
@@ -36,6 +38,12 @@ public class SettingsData extends HttpServlet {
 		String password = request.getParameter("password");
 		String gradYear = request.getParameter("class");
 		ResultSet rs = null;
+		Statement stMaj = null;
+		Statement stMin = null;
+		Statement stGrad = null;
+		ResultSet rsMaj = null;
+		ResultSet rsMin = null;
+		ResultSet rsGrad = null;
 		String nextPage = "/main.jsp";
 		Statement st = null;
 		Connection conn = null;
@@ -63,6 +71,12 @@ public class SettingsData extends HttpServlet {
 			}
 			else{
 				session.setAttribute("majorID", major);
+				rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + major + "'");
+				rsMaj.next();
+				String majorName = rsMaj.getString("name");
+				String majURL = rsMaj.getString("requirements");
+				session.setAttribute("majURL", majURL);
+				session.setAttribute("majorName", majorName);
 			}
 			ps.setString(2, major);
 			if (minor.equals("0")){
@@ -70,6 +84,12 @@ public class SettingsData extends HttpServlet {
 			}
 			else{
 				session.setAttribute("minorID", minor);
+				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + minor + "'");
+				rsMin.next();
+				String minorName = rsMin.getString("name");
+				String minURL = rsMin.getString("requirements");
+				session.setAttribute("minURL", minURL);
+				session.setAttribute("minorName", minorName);
 			}
 			ps.setString(3, minor);
 			if (gradYear.equals("0")){
@@ -77,6 +97,10 @@ public class SettingsData extends HttpServlet {
 			}
 			else{
 				session.setAttribute("gradYID", gradYear);
+				rsGrad = stGrad.executeQuery("SELECT * FROM gradyear WHERE GradYID='" + gradYear + "'");
+				rsGrad.next();
+				String gradYearName = rsGrad.getString("year");
+				session.setAttribute("gradYear", gradYearName);
 			}
 			ps.setString(4, gradYear);
 			ps.setString(5, username);
