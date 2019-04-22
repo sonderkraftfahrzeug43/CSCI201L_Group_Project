@@ -37,7 +37,7 @@
 			document.require.submit();
 		}
 		function prof(){
-			document.profile.submit();
+			window.location.replace("prof.jsp");
 		}
 		function man(){
 			window.location.replace("main.jsp");
@@ -62,7 +62,7 @@
                <ul class="nav nav-pills flex-row" style="justify-content:space-between; align-items:center; padding-top:15px; padding-bottom:15px;">
                  <li class="nav-item">
                    <a class="nav-link" href="profile.jsp">
-                     <img src="Images/profile.png" style="width:50px; height:50px">
+                     <img src="Images/profile.png" style="width:50px; height:50px" onclick= "prof()">
                    </a>
                  </li>
                  <li class="nav-item">
@@ -154,9 +154,45 @@
 								ResultSet rs = st.executeQuery(query);
 								while(rs.next())
 								{
-
+								String time = "";
+								int start = rs.getInt("startTime");
+								int end = rs.getInt("endTime");
+								if (start < 800 ||end < 800){
+									time = "Time not yet available";
+								}
+								else{
+									String ampm = "";
+									if (start > 1200){
+										start = start - 1200;
+									}
+									if (end > 1200){
+										end = end - 1200;
+										ampm = "PM";
+									}
+									else{
+										ampm = "AM";
+									}
+									String startTime = Integer.toString(start);
+									String endTime = Integer.toString(end);
+									String sTime = "";
+									String eTime = "";
+									if (startTime.length() == 3){
+										sTime = startTime.substring(0,1) + ":" + startTime.substring(1,3);
+									}
+									else{
+										sTime = startTime.substring(0,2) + ":" + startTime.substring(2,4);
+									}
+									if (endTime.length() == 3){
+										eTime = endTime.substring(0,1) + ":" + endTime.substring(1,3);
+									}
+									else{
+										eTime = endTime.substring(0,2) + ":" + endTime.substring(2,4);
+									}
+									time = sTime + "-" + eTime + " " + ampm;
+								}
+								
 								%>
-    								<tr><td style="color: white;"><%=rs.getString("startTime") %></td>
+    								<tr><td style="color: white;"><%= time %></td>
 								        <td style="color: white;"><%=rs.getString("Monday") %></td>
 									    <td style="color: white;"><%=rs.getString("Tuesday") %></td>
 									    <td style="color: white;"><%=rs.getString("Wednesday") %></td>
@@ -164,7 +200,6 @@
 								        <td style="color: white;"><%=rs.getString("Friday") %></td>
 								   </tr>
         						<%
-
 								}
 							
 						%>
@@ -178,7 +213,6 @@
 						{
     						e.printStackTrace();
     						}
-
 						%>
            			
            		</form>
