@@ -2,6 +2,7 @@ package Login_Register;
 
 import java.io.IOException;
 import Scraping.*;
+import Threading.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,8 @@ public class Index extends HttpServlet {
 		HttpSession session = request.getSession();
 		String nextPage = "/login.jsp";
 		Data data = new Data();
+		Client cc = new Client("localhost",6789);
+		session.setAttribute("client",cc);
 		session.setAttribute("data", data);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
