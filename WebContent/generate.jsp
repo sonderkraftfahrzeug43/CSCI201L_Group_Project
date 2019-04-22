@@ -63,7 +63,7 @@
 			<form name = "gen" method="POST" action="Generate">
 			<input type="button" value="Add Row" onclick="addRow('dataTable')" id="button1"/>
 			<input type="button" value="Delete Row" onclick="deleteRow('dataTable')" id="button2"/>
-			<input type="button" value = "Submit" onclick = "generate()"/>
+			<input type="button" value = "Submit" onclick = "generate()"id="button1"/>
             <center>
             <table class = table id="dataTable">
                 <tbody>
