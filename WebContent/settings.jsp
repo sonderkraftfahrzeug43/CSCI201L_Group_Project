@@ -35,8 +35,8 @@
           document.require.submit();
         }
         
-        function sett(){
-          document.settings.submit();
+        function moveOn(){
+          document.set.submit();
         }
       </script>
       <meta charset="UTF-8">
@@ -122,12 +122,12 @@
            <div class="col-lg-9">
              <div id="nav">
                <h1 style="font-size:45px">Profile Settings</h1>
-               <form method="POST" action="Settings" name="set">
+               <form name="set" method="POST" action="Settings" >
                      <table class="table" style="font-family:tableTitles" align="center">
                        <tr>
                          <td style="color:white; font-size:30px; text-align:left">Major:</td>
                          <td align="right">
-                              <select id="major" style="width:80%; font-size:25px; font-family:tableTitles;">
+                              <select id="major" name = "major" style="width:80%; font-size:25px; font-family:tableTitles;">
                                    <option value=0>Select a major</option>
                                           <option value=1>Accounting (BS)</option>
                                           <option value=2>Aerospace Engineering (BS)</option>
@@ -523,7 +523,7 @@
                        <tr>
                              <td style="color:white; font-size:30px; text-align:left">Expected Graduation:</td>
                              <td align="right">
-                                   <select id="eg" name="eg" style="width:80%; font-size:25px; font-family:tableTitles">
+                                   <select id="eg" name="gradYear" style="width:80%; font-size:25px; font-family:tableTitles">
                                          <option value=0>Select Expected Graduation </option>
                                           <option value=1>May 2019 </option>
                                           <option value=2>December 2019 </option>
