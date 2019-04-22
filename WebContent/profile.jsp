@@ -198,20 +198,14 @@
 					<table class="friends" rules="rows" align="right">
 						<tr style="color: white; align-self: center;">
 							<%
-								String parse = String.valueOf(session.getAttribute("friends"));
-								int parser = 0;
-								for (int index = 0; index < parse.length(); index++) {
-									if (parse.charAt(index) == '|') {
-										System.out.println(parser + " " + index);
-										String chunk = parse.substring(parser, index);
+								Vector<String> friends = (Vector<String>)session.getAttribute("friends");
+								for (int index = 0; index < friends.size(); index++) {
 							%>
 						
 						<tr>
-							<td align="center"><text id=<%=chunk%>><%=chunk%></text></td>
+							<td align="center"><text id=<%=friends.get(index)%>><%=friends.get(index)%></text></td>
 						</tr>
 						<%
-							parser = index + 1;
-								}
 							}
 						%>
 					</table>
