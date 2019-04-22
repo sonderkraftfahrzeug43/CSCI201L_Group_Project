@@ -33,8 +33,11 @@
 		function logout(){
 			window.location.replace("login.jsp");
 		}
+		function sett(){
+			window.location.replace("settings.jsp");
+		}
 		function req(){
-			document.require.submit();
+			window.location.replace("requirements.jsp");
 		}
 		function prof(){
 			window.location.replace("prof.jsp");
@@ -42,6 +45,9 @@
 		function man(){
 			window.location.replace("main.jsp");
 		}
+		function req(){
+	          document.require.submit();
+	    }
 	 	function loadSchedule(){
 	 		
 	 	}
@@ -66,11 +72,9 @@
                    </a>
                  </li>
                  <li class="nav-item">
-                   <form name="settings" method="POST" action="Settings">
                      <a class="nav-item" href="settings.jsp">
                        <img src="Images/setting.png" style="width:50px; height:50px" onclick="sett()">
                      </a>
-                   </form>
                  </li>
                  <li class="nav-item">
                   <a class="nav-item" href="main.jsp">
@@ -78,33 +82,33 @@
                   </a>
                  </li>
                  <li class="nav-item">
-                   <form name="require" method="POST" action="RequirementsSearch">
                      <a class="nav-item">
                        <img src="Images/requirements.png" style="width:50px; height:50px" onclick="req()">
                      </a>
-                   </form>
                  </li>
                </ul>
                <div id="logout" style="text-align:center">
                  <input type="button" name="submit" id="logoutButton" value="Logout" onclick="logout()">
                </div>
-               <div id="showClassSearch" class="showClassSearch">
-                 <input type="text" name="class" placeholder="Search Class....">
-                 <button type="submit" name="classSearch"></button>
-               </div>
-               <div id="showFriendSearch" class="showFriendSearch">
-                 <input type="text" name="friend" placeholder="Search Friend...">
-                 <button type="submit" name="friendSearch"></button>
-               </div>
-               <div id="showProfessorSearch" class="showProfessorSearch">
-                 <input type="text" name="professor" placeholder="Search Professor...">
-                 <button type="submit" name="professorSearch"></button>
-               </div>
-               <div class="radio-button-div">
-                 <input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class
-                 <input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend
-                 <input type="radio" name="option" id="Professor" value="Professor" onclick="myFunction()">Professor
-               </div>
+               <form name = "rButton" method = "POST" action = "Results">
+						<div id="showClassSearch" class="showClassSearch">
+							<input type="text" name="classText" placeholder="Search Class....">
+							<button type="submit" name="classSearch"></button>
+						</div>
+						<div id="showFriendSearch" class="showFriendSearch">
+							<input type="text" name="friendText" placeholder="Search Friend...">
+							<button type="submit" name="friendSearch"></button>
+						</div>
+						<div id="showProfessorSearch" class="showProfessorSearch">
+							<input type="text" name="professorText" placeholder="Search Professor...">
+							<button type="submit" name="professorSearch"></button>
+						</div>
+						<div class="radio-button-div">
+							<input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class 
+							<input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend 
+							<input type="radio" name="option" id="Professor" value="Professor" onclick="myFunction()">Professor
+						</div>
+					</form>
                <div class="User" style="font-family:tableTitles; text-align:center">
                  <h3 style="color:white; font-size:28px;">Welcome <%= session.getAttribute("userName") %></h3>
                </div>
@@ -143,6 +147,7 @@
            			    <%
 							try
 							{
+								System.out.println(session.getAttribute("majorID"));
 								String userID = session.getAttribute("UserID").toString();
 								Class.forName("com.mysql.cj.jdbc.Driver");
 								String url="jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();;
