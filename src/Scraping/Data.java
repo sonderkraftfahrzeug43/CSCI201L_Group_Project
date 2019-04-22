@@ -65,7 +65,7 @@ public class Data {
 			Vector<Course> courses = departments.get(j).courses;
 			for (int i = 0; i < courses.size(); i++) {
 				if (validCourses.get(courses.get(i).name) == null && 
-						(courses.get(i).name.toLowerCase().contains(searchString) || courses.get(i).title.toLowerCase().contains(searchString))) {
+						(courses.get(i).name.toLowerCase().contains(searchString) || courses.get(i).title.toLowerCase().contains(searchString) || courses.get(i).getHeader().toLowerCase().contains(searchString))) {
 					validCourses.put(courses.get(i).name, courses.get(i));
 				}
 			}
