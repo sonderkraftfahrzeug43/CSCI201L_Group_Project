@@ -1,5 +1,5 @@
 index.jsp:
-
+ - test
 login.jsp:
 - todo:
   - test
@@ -10,25 +10,23 @@ registration.jsp
 
 main.jsp:
 -todo:
-  - display schedule of user if not display noschedule
-  - complete sidebar
-    - display user info
-    - notifications
+  - test
 
 profile.jsp:
 -todo:
-  - get user info and display
+  - test
 
 settings.jsp:
 -todo:
-  - enable backend of form
+  - test
 requirements.jsp:
 -todo:
-  - get user major requirements
-  - show minor if user has one
+  - test
   
 friend search
+- test
 
 class search
+-test
 
-professor search
+
