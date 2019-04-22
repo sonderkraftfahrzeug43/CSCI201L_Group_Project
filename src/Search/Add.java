@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.TimeZone;
+import java.util.Vector;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,7 +68,11 @@ public class Add extends HttpServlet {
 					ps.setString(2, f2ID);
 					ps.executeUpdate();
 					System.out.println("EXECUTED SUCCESSFULLY");
-					nextPage = "/results.jsp";					
+					nextPage = "/results.jsp";	
+					Vector<String> friends = (Vector<String>)session.getAttribute("friends");
+					friends.add(f2User);
+					Collections.sort(friends);
+					session.setAttribute("friends", friends);
 				}
 			} catch (ClassNotFoundException e) {
 				System.out.println("cnf: " + e.getMessage());
