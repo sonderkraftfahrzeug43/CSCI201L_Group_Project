@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TimeZone;
-import java.util.Vector;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import Scraping.Section;
 
 /**
  * Servlet implementation class Add
@@ -29,9 +25,11 @@ public class Add extends HttpServlet {
     public Add() {
         super();
     }
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String nextPage = null;
@@ -94,6 +92,11 @@ public class Add extends HttpServlet {
 				rs = st.executeQuery("SELECT * FROM currentclass WHERE name='" + classToAdd + "'");
 				if (rs.next()){
 					System.out.println("Already have this class");
+				}
+				else{
+					nextPage = "/Generate";
+					session.setAttribute("classToAdd",classToAdd);
+					session.setAttribute("rerout", "true");
 				}
 			} catch (ClassNotFoundException e) {
 				System.out.println("cnf: " + e.getMessage());
