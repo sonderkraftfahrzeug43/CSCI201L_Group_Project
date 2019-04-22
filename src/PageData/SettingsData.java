@@ -36,7 +36,7 @@ public class SettingsData extends HttpServlet {
 		String major = request.getParameter("major");
 		String minor = request.getParameter("minor");
 		String password = request.getParameter("password");
-		String gradYear = request.getParameter("class");
+		String gradYear = request.getParameter("gradYear");
 		ResultSet rs = null;
 		Statement stMaj = null;
 		Statement stMin = null;
@@ -71,6 +71,7 @@ public class SettingsData extends HttpServlet {
 			}
 			else{
 				session.setAttribute("majorID", major);
+				stMaj = conn.createStatement();
 				rsMaj = stMaj.executeQuery("SELECT * FROM Major WHERE MajorID='" + major + "'");
 				rsMaj.next();
 				String majorName = rsMaj.getString("name");
@@ -84,6 +85,7 @@ public class SettingsData extends HttpServlet {
 			}
 			else{
 				session.setAttribute("minorID", minor);
+				stMin = conn.createStatement();
 				rsMin = stMin.executeQuery("SELECT * FROM Minor WHERE MinorID='" + minor + "'");
 				rsMin.next();
 				String minorName = rsMin.getString("name");
@@ -93,10 +95,11 @@ public class SettingsData extends HttpServlet {
 			}
 			ps.setString(3, minor);
 			if (gradYear.equals("0")){
-				gradYear = session.getAttribute("gradyear").toString();
+				gradYear = session.getAttribute("gradYID").toString();
 			}
 			else{
 				session.setAttribute("gradYID", gradYear);
+				stGrad = conn.createStatement();
 				rsGrad = stGrad.executeQuery("SELECT * FROM gradyear WHERE GradYID='" + gradYear + "'");
 				rsGrad.next();
 				String gradYearName = rsGrad.getString("year");
