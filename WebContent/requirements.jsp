@@ -141,10 +141,10 @@
            <div class="col-lg-9">
            	<div id="nav" style="overflow:scroll;">
            		<div id="major">
-           			<object id="majorWebPage" type="text/html" data=<%= session.getAttribute("majorURL") %> width="110px" height="600px;" style="overflow:auto"></object>
+           			<object id="majorWebPage" type="text/html" data=<%= session.getAttribute("majURL") %> width="110px" height="600px;" style="overflow:auto"></object>
            		</div>
            		<div id="minor">
-           			<object id="minorWebPage" type="text/html" data=<%= session.getAttribute("minorURL") %> width="110px" height="600px;" style="overflow:auto"></object>
+           			<object id="minorWebPage" type="text/html" data=<%= session.getAttribute("minURL") %> width="110px" height="600px;" style="overflow:auto"></object>
            		</div>
            	</div>
            </div>
