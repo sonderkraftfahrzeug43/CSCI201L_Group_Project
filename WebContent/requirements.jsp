@@ -131,8 +131,16 @@
                    </tbody>
                  </table>
                </div>
-               <div class="Updates" style="font-family:tableTitles; text-align:center; margin-top: 25px;">
-                 <h6 style="color:white; font-size:28px;">Updates:</h6>
+               <div class="Updates" id="updates" style="font-family:tableTitles; text-align:center; margin-top: 25px;">
+               	 <script type="text/javascript" src = "assets/js/jquery-1.11.1.min.js"></script>
+               	 <script type="text/javascript">
+    					$(document).ready(function() {
+    						setInterval(function() {
+    							$("#updates").load('data.jsp #UpdatesTable')
+    						}, 3000);
+    					});
+	  			 </script>
+                  
                </div>
              </div>
            </div>
