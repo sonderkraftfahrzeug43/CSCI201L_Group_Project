@@ -35,8 +35,9 @@ public class Register extends HttpServlet {
      * minURL = minor url
      * minorName = minor's name
      * majorName = major's name
-     * currClasses = array of user's current Sections
-     * prevClasses = array 
+     * currClasses = Vector of user's current Sections
+     * prevClasses = Vector 
+     * friends = Vector of friends
      * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String major = request.getParameter("major");
@@ -122,6 +123,8 @@ public class Register extends HttpServlet {
 				String gradYearName = rsGrad.getString("year");
 				Vector<Section> currClasses = new Vector<Section>();
 				Vector<Section> prevClasses = new Vector<Section>();
+				Vector<String> friends = new Vector<String>();
+				session.setAttribute("friends", friends);
 				session.setAttribute("majURL", majURL);
 				session.setAttribute("minURL",minURL);
 				System.out.println("Curr classes" + currClasses);
