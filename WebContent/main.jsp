@@ -148,7 +148,7 @@
 								String url="jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();;
 								String username="b8c39ba9e35da7";
 								String password="ebcfebb1";
-								String query="SELECT Time, Monday, Tuesday, Wednesday, Thursday, Friday FROM ScheduleSlot WHERE userID="+userID+" ORDER By Time ASC";
+								String query="SELECT Time, Monday, Tuesday, Wednesday, Thursday, Friday FROM ScheduleSlot WHERE userID="+userID+" ORDER By startTime ASC";
 								Connection conn = DriverManager.getConnection(url,username,password);
 								Statement st = conn.createStatement();
 								ResultSet rs = st.executeQuery(query);
@@ -156,7 +156,7 @@
 								{
 
 								%>
-    								<tr><td style="color: white;"><%=rs.getString("Time") %></td>
+    								<tr><td style="color: white;"><%=rs.getString("startTime") %></td>
 								        <td style="color: white;"><%=rs.getString("Monday") %></td>
 									    <td style="color: white;"><%=rs.getString("Tuesday") %></td>
 									    <td style="color: white;"><%=rs.getString("Wednesday") %></td>
