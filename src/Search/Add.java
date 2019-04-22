@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.Collections;
 import java.util.TimeZone;
 import java.util.Vector;
+import java.util.concurrent.locks.Lock;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,9 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class Add
- */
 @WebServlet("/Add")
 public class Add extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -68,6 +66,7 @@ public class Add extends HttpServlet {
 					ps.setString(2, f2ID);
 					ps.executeUpdate();
 					Client cc = (Client)session.getAttribute("client");
+					cc.setBoolean(true);
 					System.out.println("EXECUTED SUCCESSFULLY");
 					nextPage = "/results.jsp";	
 					Vector<String> friends = (Vector<String>)session.getAttribute("friends");
@@ -102,7 +101,12 @@ public class Add extends HttpServlet {
 					System.out.println("Already have this class");
 				}
 				else{
-					Client cc = (Client)session.getAttribute("client");
+					String sql = "INSERT INTO updates(userID,content) values(?,?)";
+					PreparedStatement ps = conn.prepareStatement(sql);
+					ps.setString(1, userID);
+					String content = "Added class " + classToAdd;
+					ps.setString(2, content);
+					ps.execute();
 					nextPage = "/Generate";
 					session.setAttribute("classToAdd",classToAdd);
 					session.setAttribute("rerout", "true");
