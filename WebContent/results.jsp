@@ -30,17 +30,20 @@
         	document.getElementById("addValue").value = a;
         	document.tableform.submit();
         }
-        	
+		function sett(){
+			window.location.replace("settings.jsp");
+		}
+		function req(){
+			window.location.replace("requirements.jsp");
+		}
+		function prof(){
+			window.location.replace("prof.jsp");
+		}
+		function man(){
+			window.location.replace("main.jsp");
+		}	
         function logout(){
           window.location.replace("login.jsp");
-        }
-
-        function req(){
-          document.require.submit();
-        }
-        
-        function sett(){
-          document.settings.submit();
         }
       </script>
       <meta charset="UTF-8">
@@ -58,27 +61,23 @@
                <ul class="nav nav-pills flex-row" style="justify-content:space-between; align-items:center; padding-top:15px; padding-bottom:15px;">
                  <li class="nav-item">
                    <a class="nav-link" href="profile.jsp">
-                     <img src="Images/profile.png" style="width:50px; height:50px">
+                     <img src="Images/profile.png" style="width:50px; height:50px" onclick= "prof()">
                    </a>
                  </li>
                  <li class="nav-item">
-                   <form name="settings" method="POST" action="Settings">
                      <a class="nav-item" href="settings.jsp">
                        <img src="Images/setting.png" style="width:50px; height:50px" onclick="sett()">
                      </a>
-                   </form>
                  </li>
                  <li class="nav-item">
                   <a class="nav-item" href="main.jsp">
-                    <img src="Images/schedule.png" style="width:50px; height:50px">
+                    <img src="Images/schedule.png" style="width:50px; height:50px" onclick = "man()">
                   </a>
                  </li>
                  <li class="nav-item">
-                   <form name="require" method="POST" action="RequirementsSearch">
                      <a class="nav-item">
                        <img src="Images/requirements.png" style="width:50px; height:50px" onclick="req()">
                      </a>
-                   </form>
                  </li>
                </ul>
                <div id="logout" style="text-align:center">
