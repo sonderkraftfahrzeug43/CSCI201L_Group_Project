@@ -15,12 +15,15 @@
 			if (document.getElementById("Class").checked == true) {
 				document.getElementById("showClassSearch").style.display = "block";
 				document.getElementById("showFriendSearch").style.display = "none";
+				document.getElementById("showProfessorSearch").style.display = "none";
 			}
 			// show Friend search bar
 			else if (document.getElementById("Friend").checked == true) {
 				document.getElementById("showClassSearch").style.display = "none";
 				document.getElementById("showFriendSearch").style.display = "block";
+				document.getElementById("showProfessorSearch").style.display = "none";
 			}
+			// show Professor search bar
 		} 
 		function logout(){
 			window.location.replace("login.jsp");
@@ -37,9 +40,6 @@
 		function man(){
 			window.location.replace("main.jsp");
 		}
-		function req(){
-	          document.require.submit();
-	    }
 	 	function loadSchedule(){
 	 		
 	 	}
@@ -113,16 +113,8 @@
                    </tbody>
                  </table>
                </div>
-               <div class="Updates" id="updates" style="font-family:tableTitles; text-align:center; margin-top: 25px;">
-               	 <script type="text/javascript" src = "assets/js/jquery-1.11.1.min.js"></script>
-               	 <script type="text/javascript">
-    					$(document).ready(function() {
-    						setInterval(function() {
-    							$("#updates").load('data.jsp #UpdatesTable')
-    						}, 3000);
-    					});
-	  			 </script>
-                  
+               <div class="Updates" style="font-family:tableTitles; text-align:center; margin-top: 25px;">
+                 <h6 style="color:white; font-size:28px;">Updates:</h6>
                </div>
              </div>
            </div>
