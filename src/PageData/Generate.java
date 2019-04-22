@@ -86,22 +86,59 @@ public class Generate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String nextPage = "/main.jsp";
-		String arr[] = request.getParameterValues("txtbox[]");
-		for (int index = 0; index < arr.length; index++){
-			System.out.println(arr[index]);
-		}
-		Scheduling scheduling = new Scheduling();
 		Vector<Course> courses = new Vector<Course>();
 		Data data = (Data)session.getAttribute("data");
-		for (int index = 0; index < arr.length; index++){
-			Vector<Course> inner = Data.findCourses(arr[index]);
-			if (inner.size()==0){
-				System.out.println("INVALID COURSE");
-				nextPage = "/generate.jsp";
-				break;
+		Scheduling scheduling = new Scheduling();
+		if (session.getAttribute("rerout")==null || (!session.getAttribute("rerout").toString().equals("true"))){
+			String arr[] = request.getParameterValues("txtbox[]");
+			for (int index = 0; index < arr.length; index++){
+				System.out.println(arr[index]);
 			}
-			else{
-				courses.add(inner.get(0));
+			for (int index = 0; index < arr.length; index++){
+				Vector<Course> inner = Data.findCourses(arr[index]);
+				if (inner.size()==0){
+					System.out.println("INVALID COURSE");
+					nextPage = "/generate.jsp";
+					break;
+				}
+				else{
+					courses.add(inner.get(0));
+				}
+			}
+		}
+		else{
+			try{
+				Vector<String> sCourses = new Vector<String>();
+				ResultSet rs = null;
+				Statement st = null;
+				Connection conn = null;
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
+				conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+				st = conn.createStatement();
+				rs = st.executeQuery("SELECT * FROM currentclass WHERE userID='" + session.getAttribute("UserID") + "'");
+				while (rs.next()){
+					sCourses.add(rs.getString("name"));
+				}
+				sCourses.add(session.getAttribute("classToAdd").toString());
+				for (int index = 0; index < sCourses.size(); index++){
+					Vector<Course> inner = Data.findCourses(sCourses.get(index));
+					if (inner.size()==0){
+						System.out.println("INVALID COURSE");
+						nextPage = "/generate.jsp";
+						break;
+					}
+					else{
+						courses.add(inner.get(0));
+					}
+				}
+				session.setAttribute("rerout", "false");
+			} catch (ClassNotFoundException e) {
+				System.out.println("cnf: " + e.getMessage());
+				e.printStackTrace();
+			} catch (SQLException e) {
+				System.out.println("sqle: " + e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		for (int index = 0; index < courses.size();index++){
@@ -143,7 +180,7 @@ public class Generate extends HttpServlet {
 			}
 			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
 			st = conn.createStatement();
-			rs = st.executeQuery("SELECT * FROM currentclass WHERE userID='" + session.getAttribute("UserID") + "'");
+			int rows = st.executeUpdate("DELETE FROM currentclass WHERE userID='" + session.getAttribute("UserID") + "'");
 			for (int index = 0; index < helpus.get(maxIndex).size();index++){
 				String sql = "insert into currentclass(name,section,location,days,hrs,professor,userID) values(?,?,?,?,?,?,?)";
 				boolean[] days = helpus.get(maxIndex).get(index).days;
@@ -169,6 +206,31 @@ public class Generate extends HttpServlet {
 				ps.setString(7, session.getAttribute("UserID").toString());
 				ps.executeUpdate();
 			}
+		    st = conn.createStatement();
+		    rs = st.executeQuery("SELECT * FROM currentclass WHERE userID ='" + session.getAttribute("UserID") + "'");
+		    Vector<String> week = new Vector<String>();
+		    week.add("Monday");
+		    week.add("Tuesday");
+		    week.add("Wednesday");
+		    week.add("Thursday");
+		    week.add("Friday");
+		    String sql = "insert into scheduleslot(Time,Monday,Tuesday,Wednesday,Thursday,Friday,userID) values(?,?,?,?,?,?,?)";
+		    while (rs.next()){
+		    	String time = rs.getString("hrs");
+		    	String days = rs.getString("days");
+		    	String name = rs.getString("name");
+		    	PreparedStatement ps = conn.prepareStatement(sql);
+		    	ps.setString(1,time);
+		    	for (int index = 0; index < 5; index++){
+		    		if (days.substring(index,index+1).equals("0")){
+		    			ps.setString(index+2,null);
+		    		}
+		    		else{
+		    			ps.setString(index+2,name);
+		    		}	
+		    	} 
+		    	ps.setString(7,session.getAttribute("UserID").toString());
+		    }
 		} catch (ClassNotFoundException e) {
 			System.out.println("cnf: " + e.getMessage());
 			e.printStackTrace();
