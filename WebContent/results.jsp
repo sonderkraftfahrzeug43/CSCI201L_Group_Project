@@ -11,20 +11,12 @@
           if (document.getElementById("Class").checked == true) {
             document.getElementById("showClassSearch").style.display = "block";
             document.getElementById("showFriendSearch").style.display = "none";
-            document.getElementById("showProfessorSearch").style.display = "none";
           }
           // show Friend search bar
           else if (document.getElementById("Friend").checked == true) {
             document.getElementById("showClassSearch").style.display = "none";
             document.getElementById("showFriendSearch").style.display = "block";
-            document.getElementById("showProfessorSearch").style.display = "none";
-          }
-          // show Professor search bar
-          else if (document.getElementById("Professor").checked == true){
-            document.getElementById("showClassSearch").style.display = "none";
-            document.getElementById("showFriendSearch").style.display = "none";
-            document.getElementById("showProfessorSearch").style.display = "block";
-          }
+	  }
         }
         function add(a) {
         	document.getElementById("addValue").value = a;
@@ -92,20 +84,14 @@
 				<input type="text" name="friendText" placeholder="Search Friend...">
 				<button type="submit" name="friendSearch"></button>
 			</div>
-			<div id="showProfessorSearch" class="showProfessorSearch">
-				<input type="text" name="professorText" placeholder="Search Professor...">
-				<button type="submit" name="professorSearch"></button>
-			</div>
 			<div class="radio-button-div">
 				<input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class 
 				<input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend 
-				<input type="radio" name="option" id="Professor" value="Professor" onclick="myFunction()">Professor
 			</div>
 	       </form>
                <div class="radio-button-div">
                  <input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class
                  <input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend
-                 <input type="radio" name="option" id="Professor" value="Professor" onclick="myFunction()">Professor
                </div>
                <div class="User" style="font-family:tableTitles; text-align:center">
                  <h3 style="color:white; font-size:28px;">Welcome <%= session.getAttribute("userName") %></h3>
