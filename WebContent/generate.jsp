@@ -23,6 +23,8 @@
 			var element2 = document.createElement("input");
 			element2.type = "text";
 			element2.name = "txtbox[]";
+			element2.style = "width:90%; font-size:16px; font-family:tableTitles";
+			element2.placeholder = "Add a Class (e.g CSCI-201)....";
 			cell3.appendChild(element2);
 		}
 
