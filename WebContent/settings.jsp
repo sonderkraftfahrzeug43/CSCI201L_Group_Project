@@ -84,18 +84,25 @@
                <div id="logout" style="text-align:center">
                  <input type="button" name="submit" id="logoutButton" value="Logout" onclick="logout()">
                </div>
-               <div id="showClassSearch" class="showClassSearch">
-                 <input type="text" name="class" placeholder="Search Class....">
-                 <button type="submit" name="classSearch"></button>
-               </div>
-               <div id="showFriendSearch" class="showFriendSearch">
-                 <input type="text" name="friend" placeholder="Search Friend...">
-                 <button type="submit" name="friendSearch"></button>
-               </div>
-               <div id="showProfessorSearch" class="showProfessorSearch">
-                 <input type="text" name="professor" placeholder="Search Professor...">
-                 <button type="submit" name="professorSearch"></button>
-               </div>
+               <form name = "rButton" method = "POST" action = "Results">
+						<div id="showClassSearch" class="showClassSearch">
+							<input type="text" name="classText" placeholder="Search Class....">
+							<button type="submit" name="classSearch"></button>
+						</div>
+						<div id="showFriendSearch" class="showFriendSearch">
+							<input type="text" name="friendText" placeholder="Search Friend...">
+							<button type="submit" name="friendSearch"></button>
+						</div>
+						<div id="showProfessorSearch" class="showProfessorSearch">
+							<input type="text" name="professorText" placeholder="Search Professor...">
+							<button type="submit" name="professorSearch"></button>
+						</div>
+						<div class="radio-button-div">
+							<input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class 
+							<input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend 
+							<input type="radio" name="option" id="Professor" value="Professor" onclick="myFunction()">Professor
+						</div>
+					</form>
                <div class="radio-button-div">
                  <input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class
                  <input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend
