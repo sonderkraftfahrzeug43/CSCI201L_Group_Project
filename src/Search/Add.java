@@ -1,5 +1,5 @@
 package Search;
-
+import Threading.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -67,6 +67,7 @@ public class Add extends HttpServlet {
 					ps.setString(1, userID);
 					ps.setString(2, f2ID);
 					ps.executeUpdate();
+					Client cc = (Client)session.getAttribute("client");
 					System.out.println("EXECUTED SUCCESSFULLY");
 					nextPage = "/results.jsp";	
 					Vector<String> friends = (Vector<String>)session.getAttribute("friends");
@@ -101,6 +102,7 @@ public class Add extends HttpServlet {
 					System.out.println("Already have this class");
 				}
 				else{
+					Client cc = (Client)session.getAttribute("client");
 					nextPage = "/Generate";
 					session.setAttribute("classToAdd",classToAdd);
 					session.setAttribute("rerout", "true");
