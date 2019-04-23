@@ -1,8 +1,6 @@
 package Login_Register;
-
 import java.io.IOException;
 import Scraping.*;
-import Threading.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,17 +15,18 @@ public class Index extends HttpServlet {
         super();
     }
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String nextPage = "/login.jsp";
 		Data data = new Data();
-		Client cc = new Client("localhost",6789);
-		session.setAttribute("client",cc);
-		session.setAttribute("data", data);
+		Scheduling scheduly = new Scheduling();
+		session.setAttribute("schedule", scheduly);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextPage);
 		dispatcher.forward(request, response);
 	}
