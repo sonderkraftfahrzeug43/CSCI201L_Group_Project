@@ -38,8 +38,10 @@ public class Add extends HttpServlet {
 		String userID = session.getAttribute("UserID").toString();
 		ResultSet rs = null;
 		ResultSet rs2 = null;
+		ResultSet rsI = null;
 		Statement st = null;
 		Statement st2 = null;
+		Statement stI = null;
 		Connection conn = null;
 		if (searchType.equals("Friend")){
 			String f2User = request.getParameter("addValue");
@@ -60,13 +62,22 @@ public class Add extends HttpServlet {
 					nextPage ="/results.jsp";
 				}
 				else{
+					stI = conn.createStatement();
+					rsI = stI.executeQuery("SELECT * FROM follow WHERE user2ID='" + userID + "'");
+					while (rsI.next()){
+						String user = rsI.getString("user1ID");
+						String sql = "INSERT INTO updates(userID,content) values(?,?)";
+						PreparedStatement ps = conn.prepareStatement(sql);
+						ps.setString(1, userID);
+						String content = "Added friend " + f2User;
+						ps.setString(2, content);
+						ps.execute();
+					}
 					String sql = "INSERT INTO follow(user1ID,user2ID) values(?,?)";
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, userID);
 					ps.setString(2, f2ID);
 					ps.executeUpdate();
-					Client cc = (Client)session.getAttribute("client");
-					cc.setBoolean(true);
 					System.out.println("EXECUTED SUCCESSFULLY");
 					nextPage = "/results.jsp";	
 					Vector<String> friends = (Vector<String>)session.getAttribute("friends");
@@ -101,12 +112,17 @@ public class Add extends HttpServlet {
 					System.out.println("Already have this class");
 				}
 				else{
-					String sql = "INSERT INTO updates(userID,content) values(?,?)";
-					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, userID);
-					String content = "Added class " + classToAdd;
-					ps.setString(2, content);
-					ps.execute();
+					stI = conn.createStatement();
+					rsI = stI.executeQuery("SELECT * FROM follow WHERE user2ID='" + userID + "'");
+					while (rsI.next()){
+						String user = rsI.getString("user1ID");
+						String sql = "INSERT INTO updates(userID,content) values(?,?)";
+						PreparedStatement ps = conn.prepareStatement(sql);
+						ps.setString(1, user);
+						String content = "Added class " + classToAdd;
+						ps.setString(2, content);
+						ps.execute();
+					}
 					nextPage = "/Generate";
 					session.setAttribute("classToAdd",classToAdd);
 					session.setAttribute("rerout", "true");
