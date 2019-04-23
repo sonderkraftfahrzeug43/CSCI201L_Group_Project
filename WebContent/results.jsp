@@ -48,7 +48,7 @@
       <div class="container-fluid">
         <div class="row">
            <div class="col-lg-3">
-             <div id="sidenav">
+             <div id="sidenav" style="overflow-y:scroll">
                <h2>Schedule Builder</h2>
                <ul class="nav nav-pills flex-row" style="justify-content:space-between; align-items:center; padding-top:15px; padding-bottom:15px;">
                  <li class="nav-item">
