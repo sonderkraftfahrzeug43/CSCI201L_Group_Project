@@ -94,9 +94,9 @@
                  <input type="radio" name="option" id="Friend" value="Friend" onclick="myFunction()">Friend
                </div>
                <div class="User" style="font-family:tableTitles; text-align:center">
-                 <h3 style="color:white; font-size:28px;">Welcome <%= session.getAttribute("userName") %></h3>
+                 <h3 style="color:white; font-size:20px;">Welcome <%= session.getAttribute("userName") %></h3>
                </div>
-               <div class="MM" style="font-family:tableTitles; font-size:28px; color:white">
+               <div class="MM" style="font-family:tableTitles; font-size:20px; color:white">
                  <table class="sidenavtable" align="center">
                    <tbody>
                      <tr>
@@ -110,7 +110,8 @@
                    </tbody>
                  </table>
                </div>
-               <div class="Updates" id="updates" style="font-family:tableTitles; text-align:center; margin-top: 25px;">
+		     <h2 style="font-size:20px; text-align:center; font-family:tableTitles">Updates:</h2>
+               <div class="Updates" id="updates" style="font-size:20px; font-family:tableTitles; text-align:center; margin-top: 25px;">
                	 <script type="text/javascript" src = "assets/js/jquery-1.11.1.min.js"></script>
                	 <script type="text/javascript">
     					$(document).ready(function() {
