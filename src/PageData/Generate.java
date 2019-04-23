@@ -36,7 +36,7 @@ public class Generate extends HttpServlet {
 		ResultSet rs1 = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			ps = conn.prepareStatement("SELECT * FROM follow WHERE user1ID=?");
+			ps = conn.prepareStatement("SELECT * FROM Follow WHERE user1ID=?");
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			Vector<String> friends = new Vector<String>();
@@ -47,7 +47,7 @@ public class Generate extends HttpServlet {
 			for (int index = 0; index < friends.size(); index++){
 				ps1 = null;
 				rs1 = null;
-				ps1 = conn.prepareStatement("SELECT * FROM currentclass WHERE userID=?");
+				ps1 = conn.prepareStatement("SELECT * FROM CurrentClass WHERE userID=?");
 				ps1.setString(1, friends.get(index));
 				rs1 = ps1.executeQuery();
 				while(rs1.next()){
@@ -88,8 +88,7 @@ public class Generate extends HttpServlet {
 		String nextPage = "/main.jsp";
 		Vector<Course> courses = new Vector<Course>();
 		Data data = (Data)session.getAttribute("data");
-		Scheduling scheduling = new Scheduling();
-		if (session.getAttribute("rerout")==null || (!session.getAttribute("rerout").toString().equals("true"))){
+		if (session.getAttribute("rerout").toString().equals("false")){
 			String arr[] = request.getParameterValues("txtbox[]");
 			for (int index = 0; index < arr.length; index++){
 				System.out.println(arr[index]);
@@ -113,14 +112,16 @@ public class Generate extends HttpServlet {
 				Statement st = null;
 				Connection conn = null;
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
-				conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+				String url = "jdbc:mysql://ev5gu2qwztrbud6e:lq8tf7wmlnvp1an4@iwqrvsv8e5fz4uni.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zljr4eqwwsxhhvay?serverTimezone=" + TimeZone.getDefault().getID();
+				conn = DriverManager.getConnection(url , "ev5gu2qwztrbud6e" , "lq8tf7wmlnvp1an4");
 				st = conn.createStatement();
-				rs = st.executeQuery("SELECT * FROM currentclass WHERE userID='" + session.getAttribute("UserID") + "'");
+				rs = st.executeQuery("SELECT * FROM CurrentClass WHERE userID='" + session.getAttribute("UserID") + "'");
 				while (rs.next()){
 					sCourses.add(rs.getString("name"));
 				}
-				sCourses.add(session.getAttribute("classToAdd").toString());
+				if (!session.getAttribute("classToAdd").toString().equals("-")){
+					sCourses.add(session.getAttribute("classToAdd").toString());
+				}
 				for (int index = 0; index < sCourses.size(); index++){
 					Vector<Course> inner = Data.findCourses(sCourses.get(index));
 					if (inner.size()==0){
@@ -132,6 +133,7 @@ public class Generate extends HttpServlet {
 						courses.add(inner.get(0));
 					}
 				}
+				session.setAttribute("classToAdd", "-");
 				session.setAttribute("rerout", "false");
 			} catch (ClassNotFoundException e) {
 				System.out.println("cnf: " + e.getMessage());
@@ -141,21 +143,36 @@ public class Generate extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		Vector<String> classes = new Vector<String>();
 		for (int index = 0; index < courses.size();index++){
-			System.out.println(courses.get(index).getHeader());
+			classes.add(courses.get(index).getHeader());
+			System.out.println("*" + courses.get(index).getHeader());
 		}
-		Vector<Vector<Section>> helpus = Scheduling.schedule(courses);
-		Map<Section, Integer> validCourses = new HashMap<Section,Integer>();
+		session.setAttribute("currClasses", classes);
+		Vector<Vector<Section>> helpus = new Vector<Vector<Section>>();
+		Scheduling scheduling = (Scheduling)session.getAttribute("schedule");
+		
+		for (int index = courses.size()-2;index >= 0; index--){
+			if (courses.get(index).name.equals(courses.get(index+1).name)){
+				courses.remove(index+1);
+			}
+		}
+		for (int index = 0; index< courses.size();index++){
+			System.out.println(courses.get(index).name);
+		}
+		helpus = scheduling.schedule(courses);
+		HashMap<Section, Integer> validCourses = new HashMap<Section,Integer>();
 		try{
 			ResultSet rs = null;
 			Statement st = null;
+			Statement stDel = null;
 			Connection conn = null;
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_f034524e641ba65?serverTimezone=" + TimeZone.getDefault().getID();
-			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+			String url = "jdbc:mysql://ev5gu2qwztrbud6e:lq8tf7wmlnvp1an4@iwqrvsv8e5fz4uni.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zljr4eqwwsxhhvay?serverTimezone=" + TimeZone.getDefault().getID();
+			conn = DriverManager.getConnection(url , "ev5gu2qwztrbud6e" , "lq8tf7wmlnvp1an4");
 			for (int index = 0; index < helpus.size();index++){
 				for (int inner = 0; inner < helpus.get(index).size();inner++){
-					if(!validCourses.containsKey(helpus.get(index).get(inner))){
+					if(!validCourses.containsKey(helpus.get(index).get(inner))){					
 						helpus.get(index).get(inner).printInfo();
 						int sharedFriends = getNumFriends(helpus.get(index).get(inner).getInfo(),session,conn,url);
 						validCourses.put(helpus.get(index).get(inner),sharedFriends);
@@ -178,16 +195,13 @@ public class Generate extends HttpServlet {
 					max = classNumbers.get(index);
 				}
 			}
-			conn = DriverManager.getConnection(url , "b8c39ba9e35da7" , "ebcfebb1");
+			conn = DriverManager.getConnection(url , "ev5gu2qwztrbud6e" , "lq8tf7wmlnvp1an4");
 			st = conn.createStatement();
-			int rows = st.executeUpdate("DELETE FROM currentclass WHERE userID='" + session.getAttribute("UserID") + "'");
+			int rows = st.executeUpdate("DELETE FROM CurrentClass WHERE userID='" + session.getAttribute("UserID") + "'");
 			for (int index = 0; index < helpus.get(maxIndex).size();index++){
-				String sql = "insert into currentclass(name,section,location,days,hrs,professor,userID) values(?,?,?,?,?,?,?)";
+				String sql = "insert into CurrentClass(name,section,location,days,startTime,endTime,professor,userID) values(?,?,?,?,?,?,?,?)";
 				boolean[] days = helpus.get(maxIndex).get(index).days;
 				String daysAsString = "";
-				for (int test = 0; test < days.length;test++){
-					System.out.println(days[test]);
-				}
 				for (int daysI = 0; daysI < days.length; daysI++){
 					if (days[daysI]==false){
 						daysAsString += "0";
@@ -198,38 +212,54 @@ public class Generate extends HttpServlet {
 				}
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, helpus.get(maxIndex).get(index).motherCourse.getHeader());
+				System.out.println(helpus.get(maxIndex).get(index).motherCourse.getHeader());
 				ps.setString(2, helpus.get(maxIndex).get(index).sectionID.toString());
 				ps.setString(3, helpus.get(maxIndex).get(index).location.toString());
 				ps.setString(4, daysAsString);
-				ps.setString(5, helpus.get(maxIndex).get(index).time.getFormattedTime());
-				ps.setString(6, helpus.get(maxIndex).get(index).professor.toString());
-				ps.setString(7, session.getAttribute("UserID").toString());
+				ps.setString(5, (Integer.toString(helpus.get(maxIndex).get(index).time.militaryStart)));
+				ps.setString(6, (Integer.toString(helpus.get(maxIndex).get(index).time.militaryEnd)));
+				ps.setString(7, helpus.get(maxIndex).get(index).professor.toString());
+				ps.setString(8, session.getAttribute("UserID").toString());
 				ps.executeUpdate();
 			}
 		    st = conn.createStatement();
-		    rs = st.executeQuery("SELECT * FROM currentclass WHERE userID ='" + session.getAttribute("UserID") + "'");
+		    rs = st.executeQuery("SELECT * FROM CurrentClass WHERE userID ='" + session.getAttribute("UserID") + "'");
 		    Vector<String> week = new Vector<String>();
 		    week.add("Monday");
 		    week.add("Tuesday");
 		    week.add("Wednesday");
 		    week.add("Thursday");
 		    week.add("Friday");
-		    String sql = "insert into scheduleslot(Time,Monday,Tuesday,Wednesday,Thursday,Friday,userID) values(?,?,?,?,?,?,?)";
+		    stDel = conn.createStatement();
+		    int rows2 = stDel.executeUpdate("DELETE FROM ScheduleSlot WHERE userID='" + session.getAttribute("UserID") + "'");
+		    String sql = "insert into ScheduleSlot(startTime,endTime,Monday,Tuesday,Wednesday,Thursday,Friday,userID) values(?,?,?,?,?,?,?,?)";
 		    while (rs.next()){
-		    	String time = rs.getString("hrs");
+		    	String startTime = rs.getString("startTime");
+		    	String endTime = rs.getString("endTime");
+		    	if(startTime == null){
+		    		startTime = "0";
+		    	}
+		    	if(endTime == null){
+		    		endTime = "0";
+		    	}
 		    	String days = rs.getString("days");
 		    	String name = rs.getString("name");
+		    	System.out.println(1);
+		    	String nameUpdate = name.substring(0,8);
+		    	System.out.println(2);
 		    	PreparedStatement ps = conn.prepareStatement(sql);
-		    	ps.setString(1,time);
-		    	for (int index = 0; index < 5; index++){
-		    		if (days.substring(index,index+1).equals("0")){
-		    			ps.setString(index+2,null);
+		    	ps.setString(1,startTime);
+		    	ps.setString(2,endTime);
+		    	for (int index = 1; index < 6; index++){
+		    		if (days.substring(index,index+1).equals("1")){
+		    			ps.setString(index+2,nameUpdate);
 		    		}
 		    		else{
-		    			ps.setString(index+2,name);
-		    		}	
+		    			ps.setString(index+2,"");
+		    		}
 		    	} 
-		    	ps.setString(7,session.getAttribute("UserID").toString());
+		    	ps.setString(8,session.getAttribute("UserID").toString());
+		    	ps.execute();
 		    }
 		} catch (ClassNotFoundException e) {
 			System.out.println("cnf: " + e.getMessage());
