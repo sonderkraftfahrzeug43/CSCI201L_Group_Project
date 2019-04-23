@@ -52,7 +52,7 @@
       <div class="container-fluid">
         <div class="row">
            <div class="col-lg-3">
-             <div id="sidenav">
+             <div id="sidenav" style="overflow-y:scroll">
                <h2>Schedule Builder</h2>
                <ul class="nav nav-pills flex-row" style="justify-content:space-between; align-items:center; padding-top:15px; padding-bottom:15px;">
                  <li class="nav-item">
@@ -87,10 +87,6 @@
 						<div id="showFriendSearch" class="showFriendSearch">
 							<input type="text" name="friendText" placeholder="Search Friend...">
 							<button type="submit" name="friendSearch"></button>
-						</div>
-						<div id="showProfessorSearch" class="showProfessorSearch">
-							<input type="text" name="professorText" placeholder="Search Professor...">
-							<button type="submit" name="professorSearch"></button>
 						</div>
 						<div class="radio-button-div">
 							<input type="radio" name="option" id="Class" value="Class" checked="checked" onclick="myFunction()">Class 
