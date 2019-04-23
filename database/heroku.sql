@@ -191,7 +191,7 @@ CREATE TABLE Minor (
     name VARCHAR(200) NOT NULL,
     requirements VARCHAR(200) NOT NULL
 );
-/*INSERT MINORS - MARK*/
+/*INSERT MINORS */
 INSERT INTO Minor 
 VALUES ('1','2-D Art for Games Minor','http://catalogue.usc.edu/preview_program.php?catoid=6&poid=5075'),
 ('2','3-D Animations in Cinematic Arts Minor','http://catalogue.usc.edu/preview_program.php?catoid=6&poid=6089'),
